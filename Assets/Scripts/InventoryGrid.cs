@@ -6,11 +6,11 @@ public class InventoryGrid : MonoBehaviour
     [Header("Slot Settings")]
     public GameObject slotPrefab; // Prefab do slot
     public int slotCount = 5; // Número de slots
-    public float spacing = 10f; // Espaçamento entre os slots
+    public float spacing = -5f; // Espaçamento entre os slots
 
     [Header("Slot Size")]
-    public float slotWidth = 50f; // Largura do slot
-    public float slotHeight = 50f; // Altura do slot
+    public float slotWidth = 30f; // Largura do slot
+    public float slotHeight = 25f; // Altura do slot
 
     private void Start()
     {

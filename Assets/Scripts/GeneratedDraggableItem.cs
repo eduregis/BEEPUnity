@@ -7,12 +7,14 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     public Transform parentToReturnTo = null;
+    private CommandItem commandItem; // Referência ao CommandItem
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
+        commandItem = GetComponent<CommandItem>(); // Obtém o CommandItem
     }
 
     public void OnBeginDrag(PointerEventData eventData)

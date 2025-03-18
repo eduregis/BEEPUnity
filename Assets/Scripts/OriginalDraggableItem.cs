@@ -6,10 +6,12 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     public GameObject generatedDraggableItemPrefab; // Prefab da cópia gerada
     private GameObject draggedItem; // Cópia que está sendo arrastada
     private Canvas canvas;
+    private CommandItem commandItem; // Referência ao CommandItem
 
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
+        commandItem = GetComponent<CommandItem>(); // Obtém o CommandItem
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -17,6 +19,13 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
         // Gera uma cópia do bloco original
         draggedItem = Instantiate(generatedDraggableItemPrefab, canvas.transform);
         draggedItem.transform.position = transform.position;
+
+        // Configura a cópia com o mesmo tipo e ícone do original
+        CommandItem draggedCommandItem = draggedItem.GetComponent<CommandItem>();
+        if (draggedCommandItem != null && commandItem != null)
+        {
+            draggedCommandItem.SetCommand(commandItem.commandType, commandItem.iconImage.sprite);
+        }
 
         // Configura a cópia para seguir o cursor
         GeneratedDraggableItem draggableItem = draggedItem.GetComponent<GeneratedDraggableItem>();
