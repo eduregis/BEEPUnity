@@ -110,4 +110,17 @@ public class InventoryGrid : MonoBehaviour
             }
         }
     }
+
+    public void ShiftItems()
+    {
+        for (int i = 0; i + 1 < slotCount; i++)
+        {
+            if (slots[i].IsEmpty() && !slots[i + 1].IsEmpty()) 
+            {
+                Transform child = slots[i + 1].transform.GetChild(0);
+                child.SetParent(slots[i].transform);
+                child.localPosition = Vector3.zero;
+            }
+        }
+    }
 }

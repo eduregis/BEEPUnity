@@ -40,6 +40,8 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
             if (currentGrid != null) 
             {
                 currentGrid.HighlightAvailableSlot(false);
+                currentGrid.ShiftItems();
+                currentGrid = null;
             }
         }
     }
