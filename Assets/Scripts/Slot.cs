@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
     public InventoryGrid grid;
+    public Image targetImage; // Referência para a imagem que você quer modificar
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -12,11 +14,13 @@ public class Slot : MonoBehaviour, IDropHandler
         grid.CheckAvailableSlot(dropped);
     }
 
-    public bool IsEmpty() {
+    public bool IsEmpty() 
+    {
         return transform.childCount == 0;
     }
 
-    public void FillSlot(GameObject dropped) {
+    public void FillSlot(GameObject dropped) 
+    {
         Debug.Log(gameObject.name);
         GeneratedDraggableItem draggableItem = dropped.GetComponent<GeneratedDraggableItem>();
         if (draggableItem == null) return; // Verifica se o componente é nulo
@@ -33,6 +37,20 @@ public class Slot : MonoBehaviour, IDropHandler
             existingBlock.SetParent(draggableItem.parentToReturnTo);
             existingBlock.localPosition = Vector3.zero;
             draggableItem.parentToReturnTo = transform;
+        }
+    }
+
+    public void Highlight(bool enabled)
+    {
+        if (targetImage != null)
+        {
+            Color currentColor = targetImage.color;
+            currentColor.a = enabled ? 0.5f : 1f; // 1f para totalmente opaco, 0.5f para semi-transparente
+            targetImage.color = currentColor;
+        }
+        else
+        {
+            Debug.LogWarning("Target Image não foi atribuída no Inspector.");
         }
     }
 }

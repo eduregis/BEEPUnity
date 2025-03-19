@@ -8,6 +8,7 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
     private CanvasGroup canvasGroup;
     public Transform parentToReturnTo = null;
     private CommandItem commandItem; // Referência ao CommandItem
+    private InventoryGrid currentGrid;
 
     private void Awake()
     {
@@ -27,6 +28,20 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        InventoryGrid grid = eventData.pointerEnter.GetComponentInParent<InventoryGrid>();
+        
+        if (grid != null)
+        {
+            currentGrid = grid;
+            grid.HighlightAvailableSlot(true);
+        } 
+        else 
+        {
+            if (currentGrid != null) 
+            {
+                currentGrid.HighlightAvailableSlot(false);
+            }
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)

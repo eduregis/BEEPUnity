@@ -92,4 +92,22 @@ public class InventoryGrid : MonoBehaviour
 
         Debug.Log("Nenhum slot vazio disponível.");
     }
+
+    public void HighlightAvailableSlot(bool enabled)
+    {
+        bool firstEnabled = false;
+        // Procura o primeiro slot vazio disponível
+        for (int i = 0; i < slotCount; i++)
+        {
+            if (slots[i].IsEmpty() && !firstEnabled)
+            {
+                slots[i].Highlight(enabled);
+                firstEnabled = true;
+            } 
+            else 
+            {
+                slots[i].Highlight(false);
+            }
+        }
+    }
 }
