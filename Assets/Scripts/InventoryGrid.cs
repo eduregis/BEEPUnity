@@ -11,6 +11,7 @@ public class InventoryGrid : MonoBehaviour
     [Header("Slot Size")]
     public float slotWidth = 30f; // Largura do slot
     public float slotHeight = 25f; // Altura do slot
+    private Slot[] slots;
 
     private void Start()
     {
@@ -35,6 +36,8 @@ public class InventoryGrid : MonoBehaviour
             return;
         }
 
+        slots = new Slot[slotCount];
+
         for (int i = 0; i < slotCount; i++)
         {
             // Instancia o slot
@@ -49,6 +52,19 @@ public class InventoryGrid : MonoBehaviour
 
             // Define o tamanho do slot
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(slotWidth, slotHeight);
+
+            // Obtém o componente Slot do objeto instanciado
+            Slot slotComponent = slot.GetComponent<Slot>();
+            if (slotComponent != null)
+            {
+                // Atribui a referência do InventoryGrid ao Slot
+                slotComponent.grid = this;
+                slots[i] = slotComponent;
+            }
+            else
+            {
+                Debug.LogError("Componente Slot não encontrado no prefab.");
+            }
         }
     }
 
@@ -60,5 +76,20 @@ public class InventoryGrid : MonoBehaviour
         {
             DestroyImmediate(transform.GetChild(i).gameObject);
         }
+    }
+
+    public void CheckAvailableSlot(GameObject dropped)
+    {
+        // Procura o primeiro slot vazio disponível
+        for (int i = 0; i < slotCount; i++)
+        {
+            if (slots[i].IsEmpty())
+            {
+                slots[i].FillSlot(dropped);
+                return;
+            }
+        }
+
+        Debug.Log("Nenhum slot vazio disponível.");
     }
 }

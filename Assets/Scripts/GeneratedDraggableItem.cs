@@ -37,7 +37,7 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("Slot"))
         {
             // Se foi solto em um slot válido, define o novo parent
-            transform.SetParent(eventData.pointerEnter.transform);
+            transform.SetParent(parentToReturnTo);
             transform.localPosition = Vector3.zero; // Centraliza no slot
         }
         else

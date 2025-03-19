@@ -48,6 +48,19 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
         if (draggedItem != null)
         {
             GeneratedDraggableItem draggableItem = draggedItem.GetComponent<GeneratedDraggableItem>();
+            
+            // Verifica se a cópia foi solta em um slot válido
+            if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("Slot"))
+            {
+                // Obtém o InventoryGrid do slot sobreposto
+                InventoryGrid grid = eventData.pointerEnter.GetComponentInParent<InventoryGrid>();
+                if (grid != null)
+                {
+                    // Notifica o InventoryGrid sobre o item solto
+                    grid.CheckAvailableSlot(draggedItem);
+                }
+            }
+            
             draggableItem.OnEndDrag(eventData);
 
             // Verifica se a cópia foi solta em um slot válido
