@@ -10,6 +10,7 @@ public class RobotController : MonoBehaviour
     private Animator animator;
     private bool isMoving = false; // Verifica se o robô está se movendo ou virando
     private string currentDirection = "Right"; // Direção inicial do robô
+    private Vector2Int currentPosition; // Posição atual do robô na matriz
 
     // Velocidade de execução dos comandos (quanto maior, mais rápido)
     public float commandSpeed = 1.0f;
@@ -25,6 +26,10 @@ public class RobotController : MonoBehaviour
 
     // Ordem das direções ao virar para a esquerda ou direita
     private List<string> directionOrder = new List<string> { "Right", "Down", "Left", "Up" };
+
+    // Dimensões dos tiles (deve ser igual ao IsometricMapGenerator)
+    public float tileWidth = 64f;
+    public float tileHeight = 48f;
 
     private void Awake()
     {
@@ -49,10 +54,41 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    void Start()
+    // Define a posição inicial do robô na matriz e o posiciona no mundo isométrico
+    public void SetInitialPosition(Vector2Int position)
     {
-        // Inicializa a animação com a direção atual
-        UpdateAnimator(currentDirection);
+        currentPosition = position;
+        UpdatePositionInWorld();
+    }
+
+    // Atualiza a posição do robô no mundo isométrico com base na posição na matriz
+    private void UpdatePositionInWorld()
+    {
+        // Obtém a posição do GameObject que contém o script
+        Vector3 originPosition = IsometricMapGenerator.Instance.transform.position;
+
+        // Calcula o deslocamento para centralizar o robô
+        int mapWidth = IsometricMapGenerator.Instance.mapMatrix.GetLength(1);
+        int mapHeight = IsometricMapGenerator.Instance.mapMatrix.GetLength(0);
+        Vector3 offset = new Vector3(
+            (mapWidth - mapHeight) * ((tileWidth / 2) - 2),
+            -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
+            0
+        );
+
+        // Calcula a posição isométrica relativa ao centro
+        Vector3 tilePosition = new Vector3(
+            (currentPosition.x - currentPosition.y) * ((tileWidth / 2) - 2),
+            -(currentPosition.x + currentPosition.y) * ((tileHeight / 2) - 9),
+            0
+        );
+
+        Debug.Log("offset: " + offset + "/noriginPosition: " + originPosition);
+        // Ajusta a posição para considerar o centro do mapa
+        tilePosition += originPosition - offset;
+
+        // Define a posição do robô no mundo
+        transform.position = tilePosition;
     }
 
     // Função para iniciar a sequência de comandos
@@ -74,10 +110,17 @@ public class RobotController : MonoBehaviour
             switch (command)
             {
                 case "Move":
-                    // Atualiza a animação antes de mover
-                    UpdateAnimator(currentDirection);
-                    // Move o robô na direção atual
-                    yield return MoveToDirection(currentDirection);
+                    // Verifica se o movimento é possível
+                    if (CanMove(currentDirection))
+                    {
+                        // Move o robô na direção atual
+                        yield return MoveToDirection(currentDirection);
+                    }
+                    else
+                    {
+                        // Gasta o tempo de movimento sem se mover
+                        yield return new WaitForSeconds(1.0f / commandSpeed);
+                    }
                     break;
 
                 case "TurnLeft":
@@ -101,12 +144,43 @@ public class RobotController : MonoBehaviour
         isMoving = false;
     }
 
+    // Verifica se o movimento é possível
+    private bool CanMove(string direction)
+    {
+        Vector2Int newPosition = currentPosition + DirectionToVector(direction);
+        int[,] mapMatrix = IsometricMapGenerator.Instance.mapMatrix;
+
+        // Verifica se a nova posição está dentro dos limites da matriz e é um tile válido (1)
+        return newPosition.x >= 0 && newPosition.x < mapMatrix.GetLength(1) &&
+               newPosition.y >= 0 && newPosition.y < mapMatrix.GetLength(0) &&
+               mapMatrix[newPosition.y, newPosition.x] == 1;
+    }
+
+    // Converte a direção atual para um vetor de movimento na matriz
+    private Vector2Int DirectionToVector(string direction)
+    {
+        switch (direction)
+        {
+            case "Right": return new Vector2Int(1, 0);
+            case "Down": return new Vector2Int(0, 1);
+            case "Left": return new Vector2Int(-1, 0);
+            case "Up": return new Vector2Int(0, -1);
+            default: return Vector2Int.zero;
+        }
+    }
+
     // Move o robô na direção especificada
     private IEnumerator MoveToDirection(string direction)
     {
-        // Calcula a posição de destino
-        Vector2 startPosition = transform.position;
-        Vector2 targetPosition = startPosition + moveDirections[direction];
+        // Atualiza a animação antes de mover
+        UpdateAnimator(direction);
+
+        // Calcula a nova posição na matriz
+        Vector2Int newPosition = currentPosition + DirectionToVector(direction);
+
+        // Calcula a posição de destino no mundo isométrico
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = CalculateWorldPosition(newPosition);
 
         // Move o robô suavemente até a posição de destino
         float elapsedTime = 0f;
@@ -114,13 +188,44 @@ public class RobotController : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            transform.position = Vector2.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Garante que o robô chegue exatamente na posição de destino
         transform.position = targetPosition;
+
+        // Atualiza a posição atual na matriz
+        currentPosition = newPosition;
+    }
+
+    // Calcula a posição no mundo isométrico com base na posição na matriz
+    private Vector3 CalculateWorldPosition(Vector2Int position)
+    {
+        // Obtém a posição do GameObject que contém o script
+        Vector3 originPosition = IsometricMapGenerator.Instance.transform.position;
+
+        // Calcula o deslocamento para centralizar o robô
+        int mapWidth = IsometricMapGenerator.Instance.mapMatrix.GetLength(1);
+        int mapHeight = IsometricMapGenerator.Instance.mapMatrix.GetLength(0);
+        Vector3 offset = new Vector3(
+            (mapWidth - mapHeight) * ((tileWidth / 2) - 2),
+            -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
+            0
+        );
+
+        // Calcula a posição isométrica relativa ao centro
+        Vector3 tilePosition = new Vector3(
+            (position.x - position.y) * ((tileWidth / 2) - 2),
+            -(position.x + position.y) * ((tileHeight / 2) - 9),
+            0
+        );
+
+        // Ajusta a posição para considerar o centro do mapa
+        tilePosition += originPosition - offset;
+
+        return tilePosition;
     }
 
     // Vira o robô para a esquerda ou direita

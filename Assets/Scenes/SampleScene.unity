@@ -471,7 +471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 64}
   m_SizeDelta: {x: 64, y: 128}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245060223
@@ -525,6 +525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commandSpeed: 2
+  tileWidth: 64
+  tileHeight: 48
 --- !u!95 &245060226
 Animator:
   serializedVersion: 7
@@ -1093,7 +1095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6fa1fc0af20b27488a076ae09e61c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  robotController: {fileID: 245060225}
 --- !u!224 &3865891542879732876 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7068764955709493745, guid: ba57e71e5a7a29f46a5d9d52a15ce67b, type: 3}
