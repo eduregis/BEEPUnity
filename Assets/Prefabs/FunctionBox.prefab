@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 8986669524180774703}
   - component: {fileID: 4556851973758528012}
   - component: {fileID: 3128076473616143001}
+  - component: {fileID: 5544354125922529568}
   m_Layer: 5
   m_Name: FunctionBox
   m_TagString: Untagged
@@ -211,8 +212,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d5d7366545d9f4eb7cf6a56e092ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 4540334459081564695}
-  title: {fileID: 5148248874532563589}
+--- !u!114 &5544354125922529568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2684743068608559618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9efbf2a3ccec30e439d344381b5cc0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleButton: {fileID: 4540334459081564695}
+  panelRectTransform: {fileID: 7762313812845033505}
+  animationDuration: 0.5
 --- !u!1 &4240724692714393046
 GameObject:
   m_ObjectHideFlags: 0

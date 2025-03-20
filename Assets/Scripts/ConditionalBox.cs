@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class ConditionalBox : MonoBehaviour
 {
-    public Button button;
-    public TextMeshProUGUI title;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -613,6 +613,7 @@ GameObject:
   - component: {fileID: 7068764955709493745}
   - component: {fileID: 3350791722985065377}
   - component: {fileID: 3786153999144359097}
+  - component: {fileID: 3448348755336592310}
   - component: {fileID: 4214194950899909143}
   m_Layer: 5
   m_Name: ConditionalBox
@@ -666,8 +667,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda66fc6caf09343bf2a1ad766a5953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
-  title: {fileID: 0}
+--- !u!114 &3448348755336592310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6427135554717457315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9efbf2a3ccec30e439d344381b5cc0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleButton: {fileID: 973221036962875223}
+  panelRectTransform: {fileID: 7068764955709493745}
+  animationDuration: 0.5
 --- !u!114 &4214194950899909143
 MonoBehaviour:
   m_ObjectHideFlags: 0
