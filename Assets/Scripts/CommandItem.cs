@@ -3,7 +3,13 @@ using UnityEngine.UI;
 
 public class CommandItem : MonoBehaviour
 {
+    [Header("Images")]
     public Image iconImage; // Referência ao componente de imagem do ícone
+    public Image bkgImage; // Referência ao componente de background do ícone
+
+    [Header("Sprites")]
+    public Sprite bkgActive;
+    public Sprite bkgInactive;
     public CommandGrid.CommandType commandType; // Tipo do comando
 
     // Define o tipo e o ícone do comando
@@ -15,4 +21,9 @@ public class CommandItem : MonoBehaviour
             iconImage.sprite = icon;
         }
     }
+
+    public void HighlightItem(bool active) 
+    {
+        bkgImage.sprite = active ? bkgActive : bkgInactive;
+    } 
 }

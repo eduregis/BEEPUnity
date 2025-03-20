@@ -21,7 +21,6 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void FillSlot(GameObject dropped) 
     {
-        Debug.Log(gameObject.name);
         GeneratedDraggableItem draggableItem = dropped.GetComponent<GeneratedDraggableItem>();
         if (draggableItem == null) return; // Verifica se o componente é nulo
 

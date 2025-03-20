@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteInEditMode] // Permite visualizar as mudanças no Editor
 public class CommandGrid : MonoBehaviour
 {
     [Header("Command Settings")]

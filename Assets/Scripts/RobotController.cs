@@ -7,6 +7,10 @@ public class RobotController : MonoBehaviour
     // Instância única do RobotController
     public static RobotController Instance { get; private set; }
 
+    // Delegate para notificar a conclusão de um passo
+    public delegate void StepCompletedHandler(string step);
+    public event StepCompletedHandler OnStepCompleted;
+
     private Animator animator;
     private bool isMoving = false; // Verifica se o robô está se movendo ou virando
     private string currentDirection = "Right"; // Direção inicial do robô
@@ -14,6 +18,7 @@ public class RobotController : MonoBehaviour
 
     // Velocidade de execução dos comandos (quanto maior, mais rápido)
     public float commandSpeed = 1.0f;
+    private float assetAjust = 38f;
 
     // Deslocamentos isométricos para cada direção
     private Dictionary<string, Vector2> moveDirections = new Dictionary<string, Vector2>
@@ -79,11 +84,10 @@ public class RobotController : MonoBehaviour
         // Calcula a posição isométrica relativa ao centro
         Vector3 tilePosition = new Vector3(
             (currentPosition.x - currentPosition.y) * ((tileWidth / 2) - 2),
-            -(currentPosition.x + currentPosition.y) * ((tileHeight / 2) - 9),
+            -(currentPosition.x + currentPosition.y) * ((tileHeight / 2) - 9) + assetAjust,
             0
         );
 
-        Debug.Log("offset: " + offset + "/noriginPosition: " + originPosition);
         // Ajusta a posição para considerar o centro do mapa
         tilePosition += originPosition - offset;
 
@@ -109,7 +113,7 @@ public class RobotController : MonoBehaviour
         {
             switch (command)
             {
-                case "Move":
+                case "Run":
                     // Verifica se o movimento é possível
                     if (CanMove(currentDirection))
                     {
@@ -137,10 +141,11 @@ public class RobotController : MonoBehaviour
                     Debug.LogWarning("Comando inválido: " + command);
                     break;
             }
+             OnStepCompleted?.Invoke(command);
         }
 
         // Fallback: Notifica que a locomoção terminou
-        Debug.Log("Locomoção concluída.");
+        OnStepCompleted?.Invoke("Concluded");
         isMoving = false;
     }
 
@@ -218,7 +223,7 @@ public class RobotController : MonoBehaviour
         // Calcula a posição isométrica relativa ao centro
         Vector3 tilePosition = new Vector3(
             (position.x - position.y) * ((tileWidth / 2) - 2),
-            -(position.x + position.y) * ((tileHeight / 2) - 9),
+            -(position.x + position.y) * ((tileHeight / 2) - 9) + assetAjust,
             0
         );
 

@@ -51,7 +51,7 @@ public class IsometricMapGenerator : MonoBehaviour
             -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
             0
         );
-
+        
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)

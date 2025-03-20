@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode] // Permite visualizar as mudanças no Editor
@@ -12,6 +13,9 @@ public class InventoryGrid : MonoBehaviour
     public float slotWidth = 30f; // Largura do slot
     public float slotHeight = 25f; // Altura do slot
     private Slot[] slots;
+
+
+    private List<CommandItem> commandItems = new List<CommandItem>();
 
     private void Start()
     {
@@ -122,5 +126,32 @@ public class InventoryGrid : MonoBehaviour
                 child.localPosition = Vector3.zero;
             }
         }
+    }
+
+    public List<string> GetCommandList() 
+    {
+        List<string> commandList = new List<string>();
+        commandItems.Clear();
+        
+        // Itera sobre todos os slots
+        for (int i = 0; i < slotCount; i++)
+        {
+            // Verifica se o slot não está vazio
+            if (!slots[i].IsEmpty())
+            {
+                // Obtém o primeiro filho do slot (que deve ser o CommandItem)
+                Transform child = slots[i].transform.GetChild(0);
+                CommandItem commandItem = child.GetComponent<CommandItem>();
+                commandItems.Add(commandItem);
+
+                // Se o CommandItem existir, adiciona o tipo de comando à lista
+                if (commandItem != null)
+                {
+                    commandList.Add(commandItem.commandType.ToString());
+                }
+            }
+        }
+
+        return commandList;
     }
 }
