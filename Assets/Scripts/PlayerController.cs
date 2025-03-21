@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleStepCompleted(string step)
     {
+        playerGrid.HighlightCurrentStep();
         Debug.Log("Passo concluído: " + step);
     }
 

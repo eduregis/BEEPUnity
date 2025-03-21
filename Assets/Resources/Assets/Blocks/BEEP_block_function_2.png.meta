@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 0904cfb4d386fac4298f05948750d2e3
+guid: 7c390a8c3de844247a675422740299f6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -562411521456914411
-    second: BEEP_turn_left_0
+      213: 6115255175167238364
+    second: BEEP_block_function_2_0
+  - first:
+      213: -150860080896555082
+    second: BEEP_block_function_2_1
+  - first:
+      213: 8851578683836613336
+    second: BEEP_block_function_2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_turn_left_0
+      name: BEEP_block_function_2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 30
-        height: 25
+        x: 6
+        y: 3
+        width: 8
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51049f573b9e138f0800000000000000
-      internalID: -562411521456914411
+      spriteID: cd066ba8e20cdd450800000000000000
+      internalID: 6115255175167238364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BEEP_block_function_2_1
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 8
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b7cf534e8908edf0800000000000000
+      internalID: -150860080896555082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BEEP_block_function_2_2
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 3
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d2408f4aef17da70800000000000000
+      internalID: 8851578683836613336
       vertices: []
       indices: 
       edges: []
@@ -151,7 +201,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_turn_left_0: -562411521456914411
+      BEEP_block_function_2_0: 6115255175167238364
+      BEEP_block_function_2_1: -150860080896555082
+      BEEP_block_function_2_2: 8851578683836613336
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

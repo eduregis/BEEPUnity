@@ -8,8 +8,8 @@ public class CommandItem : MonoBehaviour
     public Image bkgImage; // Referência ao componente de background do ícone
 
     [Header("Sprites")]
-    public Sprite bkgActive;
-    public Sprite bkgInactive;
+    public Sprite bkgHighlighted;
+    public Sprite bkgNormal;
     public CommandGrid.CommandType commandType; // Tipo do comando
 
     // Define o tipo e o ícone do comando
@@ -24,6 +24,6 @@ public class CommandItem : MonoBehaviour
 
     public void HighlightItem(bool active) 
     {
-        bkgImage.sprite = active ? bkgActive : bkgInactive;
+        bkgImage.sprite = active ? bkgHighlighted : bkgNormal;
     } 
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b1baab29f5b0015489c96c6adf81133a
+guid: 7596a959a9575c245bf3a7d5e1abbfc0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8776719767972003865
-    second: BEEP_conditional_0
+      213: -2318808246992445249
+    second: BEEP_block_normal_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_conditional_0
+      name: BEEP_block_normal_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ef31e04fd3d23680800000000000000
-      internalID: -8776719767972003865
+      spriteID: fb0e4c75f20f1dfd0800000000000000
+      internalID: -2318808246992445249
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_conditional_0: -8776719767972003865
+      BEEP_block_normal_0: -2318808246992445249
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

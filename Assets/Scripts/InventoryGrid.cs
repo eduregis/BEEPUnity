@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode] // Permite visualizar as mudanças no Editor
@@ -13,6 +14,7 @@ public class InventoryGrid : MonoBehaviour
     public float slotWidth = 30f; // Largura do slot
     public float slotHeight = 25f; // Altura do slot
     private Slot[] slots;
+    private int currentItem = -1;
 
 
     private List<CommandItem> commandItems = new List<CommandItem>();
@@ -132,7 +134,8 @@ public class InventoryGrid : MonoBehaviour
     {
         List<string> commandList = new List<string>();
         commandItems.Clear();
-        
+        currentItem = -1;
+
         // Itera sobre todos os slots
         for (int i = 0; i < slotCount; i++)
         {
@@ -151,7 +154,16 @@ public class InventoryGrid : MonoBehaviour
                 }
             }
         }
-
+        HighlightCurrentStep();
         return commandList;
+    }
+
+    public void HighlightCurrentStep() 
+    {
+        currentItem++;
+        for (int i = 0; i < commandItems.Count; i++) 
+        {
+            commandItems[i].HighlightItem(i == currentItem);
+        }
     }
 }

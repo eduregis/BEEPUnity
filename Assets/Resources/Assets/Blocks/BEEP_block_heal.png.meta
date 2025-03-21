@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2bdfcb6fd9276e14088ceeee94c3cbab
+guid: 40f69af5628549a4a887bf4d04df9f41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5247768858981953507
-    second: BEEP_hit_0
+      213: -7587716873731062102
+    second: BEEP_block_heal_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_hit_0
+      name: BEEP_block_heal_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 30
-        height: 25
+        x: 7
+        y: 4
+        width: 17
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3efe9fe29f1d3d840800000000000000
-      internalID: 5247768858981953507
+      spriteID: aa6c50d64b303b690800000000000000
+      internalID: -7587716873731062102
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_hit_0: 5247768858981953507
+      BEEP_block_heal_0: -7587716873731062102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
