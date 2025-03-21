@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid;
+    private bool isObjectiveCompleted = false; // Flag para verificar se o objetivo foi concluído
 
     void Start()
     {
@@ -27,13 +28,52 @@ public class PlayerController : MonoBehaviour
         RobotController.Instance.OnStepCompleted += HandleStepCompleted;
     }
 
-    private IEnumerator ExecuteCommands() 
+    private IEnumerator ExecuteCommands()
     {
-        // Exemplo de sequência de comandos
-        List<string> commands = playerGrid.GetCommandList();
-        
-        yield return new WaitForSeconds(1f);
-        RobotController.Instance.ExecuteCommands(commands);
+        // Obtém as sequências de comandos da "main" e da "função"
+        List<string> playerCommands = playerGrid.GetCommandList();
+        List<string> function1Commands = function1Grid.GetCommandList();
+
+        yield return new WaitForSeconds(1f); // Espera inicial
+
+        // Executa os comandos da "main"
+        yield return ExecuteCommandList(playerCommands, function1Commands);
+    }
+
+    private IEnumerator ExecuteCommandList(List<string> commands, List<string> functionCommands)
+    {
+        for (int i = 0; i < commands.Count; i++)
+        {
+            string command = commands[i];
+
+            // Verifica se o comando é "Function1"
+            if (command == "Function1")
+            {
+                Debug.Log("Executando Function1...");
+
+                // Executa os comandos da função
+                yield return ExecuteCommandList(functionCommands, null); // Passa null para evitar recursão infinita
+
+                Debug.Log("Function1 concluída. Retomando main...");
+            }
+            else
+            {
+                // Executa outros comandos normalmente
+                yield return ExecuteSingleCommand(command);
+            }
+        }
+    }
+
+    private IEnumerator ExecuteSingleCommand(string command)
+    {
+        // Executa um único comando no RobotController
+        RobotController.Instance.ExecuteSingleCommand(command);
+
+        // Espera até que o comando seja concluído
+        while (RobotController.Instance.isMoving)
+        {
+            yield return null;
+        }
     }
 
     public void OnPlayerPressed()
@@ -45,6 +85,19 @@ public class PlayerController : MonoBehaviour
     {
         playerGrid.HighlightCurrentStep();
         Debug.Log("Passo concluído: " + step);
+
+        // Verifica se o objetivo foi concluído após cada passo
+        if (CheckObjective())
+        {
+            Debug.Log("Objetivo concluído! Parando execução.");
+            isObjectiveCompleted = true;
+            RobotController.Instance.StopExecution(); // Para a execução dos comandos
+        }
+    }
+
+    private bool CheckObjective()
+    {
+        return false;
     }
 
     void OnDestroy()

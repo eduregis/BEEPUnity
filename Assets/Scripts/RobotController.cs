@@ -12,13 +12,14 @@ public class RobotController : MonoBehaviour
     public event StepCompletedHandler OnStepCompleted;
 
     private Animator animator;
-    private bool isMoving = false; // Verifica se o robô está se movendo ou virando
+    public bool isMoving = false; // Verifica se o robô está se movendo ou virando
     private string currentDirection = "Right"; // Direção inicial do robô
     private Vector2Int currentPosition; // Posição atual do robô na matriz
 
     // Velocidade de execução dos comandos (quanto maior, mais rápido)
     public float commandSpeed = 1.0f;
     private float assetAjust = 38f;
+    private bool shouldStopExecution = false; // Flag para controlar a interrupção
 
     // Deslocamentos isométricos para cada direção
     private Dictionary<string, Vector2> moveDirections = new Dictionary<string, Vector2>
@@ -95,57 +96,54 @@ public class RobotController : MonoBehaviour
         transform.position = tilePosition;
     }
 
-    // Função para iniciar a sequência de comandos
-    public void ExecuteCommands(List<string> commands)
+    public void StopExecution()
     {
-        if (!isMoving)
-        {
-            StartCoroutine(RunCommands(commands));
-        }
+        shouldStopExecution = true; // Sinaliza para a corrotina parar
     }
 
     // Corrotina para executar os comandos sequencialmente
-    private IEnumerator RunCommands(List<string> commands)
+    public void ExecuteSingleCommand(string command)
+    {
+        if (!isMoving)
+        {
+            StartCoroutine(RunSingleCommand(command));
+        }
+    }
+
+    private IEnumerator RunSingleCommand(string command)
     {
         isMoving = true;
 
-        foreach (string command in commands)
+        switch (command)
         {
-            switch (command)
-            {
-                case "Run":
-                    // Verifica se o movimento é possível
-                    if (CanMove(currentDirection))
-                    {
-                        // Move o robô na direção atual
-                        yield return MoveToDirection(currentDirection);
-                    }
-                    else
-                    {
-                        // Gasta o tempo de movimento sem se mover
-                        yield return new WaitForSeconds(1.0f / commandSpeed);
-                    }
-                    break;
+            case "Run":
+                if (CanMove(currentDirection))
+                {
+                    yield return MoveToDirection(currentDirection);
+                    OnStepCompleted?.Invoke("Run");
+                }
+                else
+                {
+                    yield return new WaitForSeconds(1.0f / commandSpeed);
+                    OnStepCompleted?.Invoke("Run blocked");
+                }
+                break;
 
-                case "TurnLeft":
-                    // Vira 90 graus para a esquerda
-                    yield return Turn("Left");
-                    break;
+            case "TurnLeft":
+                yield return Turn("Left");
+                OnStepCompleted?.Invoke("TurnLeft");
+                break;
 
-                case "TurnRight":
-                    // Vira 90 graus para a direita
-                    yield return Turn("Right");
-                    break;
+            case "TurnRight":
+                yield return Turn("Right");
+                OnStepCompleted?.Invoke("TurnRight");
+                break;
 
-                default:
-                    Debug.LogWarning("Comando inválido: " + command);
-                    break;
-            }
-             OnStepCompleted?.Invoke(command);
+            default:
+                Debug.LogWarning("Comando inválido: " + command);
+                break;
         }
 
-        // Fallback: Notifica que a locomoção terminou
-        OnStepCompleted?.Invoke("Concluded");
         isMoving = false;
     }
 
