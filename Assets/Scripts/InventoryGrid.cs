@@ -157,10 +157,18 @@ public class InventoryGrid : MonoBehaviour
         return commandList;
     }
 
+    public void ResetHighlights() 
+    {
+        currentItem = -1;
+        for (int i = 0; i < commandItems.Count; i++) 
+        {
+            commandItems[i].HighlightItem(false);
+        }
+    }
+
     public void HighlightCurrentStep() 
     {
         currentItem++;
-        Debug.Log("");
         for (int i = 0; i < commandItems.Count; i++) 
         {
             commandItems[i].HighlightItem(i == currentItem);

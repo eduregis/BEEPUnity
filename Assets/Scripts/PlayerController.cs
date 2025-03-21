@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 currentGrid.HighlightCurrentStep();
                 // Executa os comandos da function1, passando o function1Grid como grid atual
                 yield return ExecuteCommandList(function1Commands, null, null, function1Grid);
-
+                function1Grid.ResetHighlights();
                 Debug.Log("Function1 concluída. Retomando main...");
             }
             // Verifica se o comando é "Function2"
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
                 currentGrid.HighlightCurrentStep();
                 // Executa os comandos da function2, passando o function2Grid como grid atual
                 yield return ExecuteCommandList(function2Commands, null, null, function2Grid);
-
+                function2Grid.ResetHighlights();
                 Debug.Log("Function2 concluída. Retomando main...");
             }
             // Verifica se o comando é "Conditional"
@@ -77,11 +77,15 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("Condição verdadeira. Executando If...");
                     yield return ExecuteCommandList(conditionalIfGrid.GetCommandList(), null, null, conditionalIfGrid);
+                    Debug.Log("Conditional If concluída. Retomando main...");
+                    conditionalIfGrid.ResetHighlights();
                 }
                 else
                 {
                     Debug.Log("Condição falsa. Executando Else...");
                     yield return ExecuteCommandList(conditionalElseGrid.GetCommandList(), null, null, conditionalElseGrid);
+                    Debug.Log("Conditional Else concluída. Retomando main...");
+                    conditionalElseGrid.ResetHighlights();
                 }
 
                 Debug.Log("Conditional concluída. Retomando main...");
