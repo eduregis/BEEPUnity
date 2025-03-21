@@ -36,11 +36,11 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(1f); // Espera inicial
 
-        // Executa os comandos da "main"
-        yield return ExecuteCommandList(playerCommands, function1Commands);
+        // Executa os comandos da "main", passando o playerGrid como grid atual
+        yield return ExecuteCommandList(playerCommands, function1Commands, playerGrid);
     }
 
-    private IEnumerator ExecuteCommandList(List<string> commands, List<string> functionCommands)
+    private IEnumerator ExecuteCommandList(List<string> commands, List<string> functionCommands, InventoryGrid currentGrid)
     {
         for (int i = 0; i < commands.Count; i++)
         {
@@ -51,23 +51,23 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Executando Function1...");
 
-                // Executa os comandos da função
-                yield return ExecuteCommandList(functionCommands, null); // Passa null para evitar recursão infinita
+                // Executa os comandos da função, passando o function1Grid como grid atual
+                yield return ExecuteCommandList(functionCommands, null, function1Grid);
 
                 Debug.Log("Function1 concluída. Retomando main...");
             }
             else
             {
-                // Executa outros comandos normalmente
-                yield return ExecuteSingleCommand(command);
+                // Executa outros comandos normalmente, passando o grid atual
+                yield return ExecuteSingleCommand(command, currentGrid);
             }
         }
     }
 
-    private IEnumerator ExecuteSingleCommand(string command)
+    private IEnumerator ExecuteSingleCommand(string command, InventoryGrid currentGrid)
     {
-        // Executa um único comando no RobotController
-        RobotController.Instance.ExecuteSingleCommand(command);
+        // Executa um único comando no RobotController, passando o grid atual
+        RobotController.Instance.ExecuteSingleCommand(command, currentGrid);
 
         // Espera até que o comando seja concluído
         while (RobotController.Instance.isMoving)
@@ -81,9 +81,10 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ExecuteCommands());
     }
 
-    private void HandleStepCompleted(string step)
+    private void HandleStepCompleted(string step, InventoryGrid currentGrid)
     {
-        playerGrid.HighlightCurrentStep();
+        // Destaca o passo atual no grid correto
+        currentGrid.HighlightCurrentStep();
         Debug.Log("Passo concluído: " + step);
 
         // Verifica se o objetivo foi concluído após cada passo

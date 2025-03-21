@@ -8,7 +8,7 @@ public class RobotController : MonoBehaviour
     public static RobotController Instance { get; private set; }
 
     // Delegate para notificar a conclusão de um passo
-    public delegate void StepCompletedHandler(string step);
+    public delegate void StepCompletedHandler(string step, InventoryGrid currentGrid);
     public event StepCompletedHandler OnStepCompleted;
 
     private Animator animator;
@@ -102,15 +102,15 @@ public class RobotController : MonoBehaviour
     }
 
     // Corrotina para executar os comandos sequencialmente
-    public void ExecuteSingleCommand(string command)
+    public void ExecuteSingleCommand(string command, InventoryGrid currentGrid)
     {
         if (!isMoving)
         {
-            StartCoroutine(RunSingleCommand(command));
+            StartCoroutine(RunSingleCommand(command, currentGrid));
         }
     }
 
-    private IEnumerator RunSingleCommand(string command)
+   private IEnumerator RunSingleCommand(string command, InventoryGrid currentGrid)
     {
         isMoving = true;
 
@@ -120,23 +120,23 @@ public class RobotController : MonoBehaviour
                 if (CanMove(currentDirection))
                 {
                     yield return MoveToDirection(currentDirection);
-                    OnStepCompleted?.Invoke("Run");
+                    OnStepCompleted?.Invoke("Run", currentGrid); // Passa o grid atual
                 }
                 else
                 {
                     yield return new WaitForSeconds(1.0f / commandSpeed);
-                    OnStepCompleted?.Invoke("Run blocked");
+                    OnStepCompleted?.Invoke("Run blocked", currentGrid); // Passa o grid atual
                 }
                 break;
 
             case "TurnLeft":
                 yield return Turn("Left");
-                OnStepCompleted?.Invoke("TurnLeft");
+                OnStepCompleted?.Invoke("TurnLeft", currentGrid); // Passa o grid atual
                 break;
 
             case "TurnRight":
                 yield return Turn("Right");
-                OnStepCompleted?.Invoke("TurnRight");
+                OnStepCompleted?.Invoke("TurnRight", currentGrid); // Passa o grid atual
                 break;
 
             default:
