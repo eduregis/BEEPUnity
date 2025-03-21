@@ -114,37 +114,43 @@ public class RobotController : MonoBehaviour
     {
         isMoving = true;
 
-        switch (command)
+        if (shouldStopExecution)
         {
-            case "Run":
-                if (CanMove(currentDirection))
-                {
-                    yield return MoveToDirection(currentDirection);
-                    OnStepCompleted?.Invoke("Run", currentGrid); // Passa o grid atual
-                }
-                else
-                {
-                    yield return new WaitForSeconds(1.0f / commandSpeed);
-                    OnStepCompleted?.Invoke("Run blocked", currentGrid); // Passa o grid atual
-                }
-                break;
-
-            case "TurnLeft":
-                yield return Turn("Left");
-                OnStepCompleted?.Invoke("TurnLeft", currentGrid); // Passa o grid atual
-                break;
-
-            case "TurnRight":
-                yield return Turn("Right");
-                OnStepCompleted?.Invoke("TurnRight", currentGrid); // Passa o grid atual
-                break;
-
-            default:
-                Debug.LogWarning("Comando inválido: " + command);
-                break;
+            OnStepCompleted?.Invoke("Concluded", currentGrid);
         }
+        else 
+        {
+            switch (command)
+            {
+                case "Run":
+                    if (CanMove(currentDirection))
+                    {
+                        yield return MoveToDirection(currentDirection);
+                        OnStepCompleted?.Invoke("Run", currentGrid); // Passa o grid atual
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(1.0f / commandSpeed);
+                        OnStepCompleted?.Invoke("Run blocked", currentGrid); // Passa o grid atual
+                    }
+                    break;
 
+                case "TurnLeft":
+                    yield return Turn("Left");
+                    OnStepCompleted?.Invoke("TurnLeft", currentGrid); // Passa o grid atual
+                    break;
+
+                case "TurnRight":
+                    yield return Turn("Right");
+                    OnStepCompleted?.Invoke("TurnRight", currentGrid); // Passa o grid atual
+                    break;
+
+                default:
+                    Debug.LogWarning("Comando inválido: " + command);
+                    break;
+            }
         isMoving = false;
+        }
     }
 
     // Verifica se o movimento é possível

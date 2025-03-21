@@ -33,14 +33,15 @@ public class PlayerController : MonoBehaviour
         // Obtém as sequências de comandos da "main" e da "função"
         List<string> playerCommands = playerGrid.GetCommandList();
         List<string> function1Commands = function1Grid.GetCommandList();
+        List<string> function2Commands = function2Grid.GetCommandList();
 
         yield return new WaitForSeconds(1f); // Espera inicial
 
         // Executa os comandos da "main", passando o playerGrid como grid atual
-        yield return ExecuteCommandList(playerCommands, function1Commands, playerGrid);
+        yield return ExecuteCommandList(playerCommands, function1Commands, function2Commands, playerGrid);
     }
 
-    private IEnumerator ExecuteCommandList(List<string> commands, List<string> functionCommands, InventoryGrid currentGrid)
+    private IEnumerator ExecuteCommandList(List<string> commands, List<string> function1Commands, List<string> function2Commands, InventoryGrid currentGrid)
     {
         for (int i = 0; i < commands.Count; i++)
         {
@@ -50,11 +51,40 @@ public class PlayerController : MonoBehaviour
             if (command == "Function1")
             {
                 Debug.Log("Executando Function1...");
-
-                // Executa os comandos da função, passando o function1Grid como grid atual
-                yield return ExecuteCommandList(functionCommands, null, function1Grid);
+                currentGrid.HighlightCurrentStep();
+                // Executa os comandos da function1, passando o function1Grid como grid atual
+                yield return ExecuteCommandList(function1Commands, null, null, function1Grid);
 
                 Debug.Log("Function1 concluída. Retomando main...");
+            }
+            // Verifica se o comando é "Function2"
+            else if (command == "Function2")
+            {
+                Debug.Log("Executando Function2...");
+                currentGrid.HighlightCurrentStep();
+                // Executa os comandos da function2, passando o function2Grid como grid atual
+                yield return ExecuteCommandList(function2Commands, null, null, function2Grid);
+
+                Debug.Log("Function2 concluída. Retomando main...");
+            }
+            // Verifica se o comando é "Conditional"
+            else if (command == "Conditional")
+            {
+                Debug.Log("Executando Conditional...");
+                currentGrid.HighlightCurrentStep();
+                // Verifica a condição para decidir qual grid executar
+                if (CheckCondition())
+                {
+                    Debug.Log("Condição verdadeira. Executando If...");
+                    yield return ExecuteCommandList(conditionalIfGrid.GetCommandList(), null, null, conditionalIfGrid);
+                }
+                else
+                {
+                    Debug.Log("Condição falsa. Executando Else...");
+                    yield return ExecuteCommandList(conditionalElseGrid.GetCommandList(), null, null, conditionalElseGrid);
+                }
+
+                Debug.Log("Conditional concluída. Retomando main...");
             }
             else
             {
@@ -66,6 +96,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator ExecuteSingleCommand(string command, InventoryGrid currentGrid)
     {
+        // Ativa o highlight no grid atual
+        currentGrid.HighlightCurrentStep();
+        
         // Executa um único comando no RobotController, passando o grid atual
         RobotController.Instance.ExecuteSingleCommand(command, currentGrid);
 
@@ -84,7 +117,6 @@ public class PlayerController : MonoBehaviour
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)
     {
         // Destaca o passo atual no grid correto
-        currentGrid.HighlightCurrentStep();
         Debug.Log("Passo concluído: " + step);
 
         // Verifica se o objetivo foi concluído após cada passo
@@ -98,7 +130,12 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckObjective()
     {
-        return false;
+        return isObjectiveCompleted;
+    }
+
+    private bool CheckCondition()
+    {
+        return true;
     }
 
     void OnDestroy()
