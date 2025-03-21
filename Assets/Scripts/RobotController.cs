@@ -74,13 +74,7 @@ public class RobotController : MonoBehaviour
         Vector3 originPosition = IsometricMapGenerator.Instance.transform.position;
 
         // Calcula o deslocamento para centralizar o robô
-        int mapWidth = IsometricMapGenerator.Instance.mapMatrix.GetLength(1);
-        int mapHeight = IsometricMapGenerator.Instance.mapMatrix.GetLength(0);
-        Vector3 offset = new Vector3(
-            (mapWidth - mapHeight) * ((tileWidth / 2) - 2),
-            -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
-            0
-        );
+        Vector3 offset = Utils.CalculateOffset();
 
         // Calcula a posição isométrica relativa ao centro
         Vector3 tilePosition = new Vector3(
@@ -216,13 +210,7 @@ public class RobotController : MonoBehaviour
         Vector3 originPosition = IsometricMapGenerator.Instance.transform.position;
 
         // Calcula o deslocamento para centralizar o robô
-        int mapWidth = IsometricMapGenerator.Instance.mapMatrix.GetLength(1);
-        int mapHeight = IsometricMapGenerator.Instance.mapMatrix.GetLength(0);
-        Vector3 offset = new Vector3(
-            (mapWidth - mapHeight) * ((tileWidth / 2) - 2),
-            -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
-            0
-        );
+        Vector3 offset = Utils.CalculateOffset();
 
         // Calcula a posição isométrica relativa ao centro
         Vector3 tilePosition = new Vector3(

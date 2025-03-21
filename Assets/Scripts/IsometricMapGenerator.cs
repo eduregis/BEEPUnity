@@ -46,11 +46,7 @@ public class IsometricMapGenerator : MonoBehaviour
         // Calcula o deslocamento para centralizar o mapa
         int mapWidth = mapMatrix.GetLength(1);
         int mapHeight = mapMatrix.GetLength(0);
-        Vector3 offset = new Vector3(
-            (mapWidth - mapHeight) * ((tileWidth / 2) - 2),
-            -((mapWidth + mapHeight) / 2) * ((tileHeight / 2) - 9),
-            0
-        );
+        Vector3 offset = Utils.CalculateOffset();
         
         for (int y = 0; y < mapHeight; y++)
         {
