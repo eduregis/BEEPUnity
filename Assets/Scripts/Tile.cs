@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
+    public Image fittingBox;  // Imagem do encaixe da caixa
     public Image lightCenter; // Imagem central do tile (opcional)
     public Image lightTop;    // Imagem decorativa para o topo
     public Image lightDown;   // Imagem decorativa para a base
@@ -20,11 +21,12 @@ public class Tile : MonoBehaviour
     private float timeOffset;      // Offset de tempo para variar o efeito entre os tiles
 
     // Método para inicializar o tile com a matriz e sua posição
-    public void Initialize(int[,] map, int posX, int posY)
+    public void Initialize(int[,] map, int posX, int posY, bool hasFittingBox = false)
     {
         mapMatrix = map;
         x = posX;
         y = posY;
+        fittingBox.gameObject.SetActive(hasFittingBox);
 
         // Define um offset de tempo aleatório para variar o efeito de pulsação
         timeOffset = Random.Range(0f, 2f * Mathf.PI);
@@ -39,7 +41,7 @@ public class Tile : MonoBehaviour
         int mapWidth = mapMatrix.GetLength(1);
 
         // Verifica o vizinho acima (i, j - 1)
-        if (y > 0 && mapMatrix[y - 1, x] == 1)
+        if (y > 0 && mapMatrix[y - 1, x] != 0)
         {
             lightTop.gameObject.SetActive(true);
         }
@@ -49,7 +51,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho abaixo (i, j + 1)
-        if (y < mapHeight - 1 && mapMatrix[y + 1, x] == 1)
+        if (y < mapHeight - 1 && mapMatrix[y + 1, x] != 0)
         {
             lightDown.gameObject.SetActive(true);
         }
@@ -59,7 +61,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho à esquerda (i - 1, j)
-        if (x > 0 && mapMatrix[y, x - 1] == 1)
+        if (x > 0 && mapMatrix[y, x - 1] != 0)
         {
             lightLeft.gameObject.SetActive(true);
         }
@@ -69,7 +71,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho à direita (i + 1, j)
-        if (x < mapWidth - 1 && mapMatrix[y, x + 1] == 1)
+        if (x < mapWidth - 1 && mapMatrix[y, x + 1] != 0)
         {
             lightRight.gameObject.SetActive(true);
         }

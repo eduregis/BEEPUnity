@@ -162,7 +162,7 @@ public class RobotController : MonoBehaviour
         // Verifica se a nova posição está dentro dos limites da matriz e é um tile válido (1)
         return newPosition.x >= 0 && newPosition.x < mapMatrix.GetLength(1) &&
                newPosition.y >= 0 && newPosition.y < mapMatrix.GetLength(0) &&
-               mapMatrix[newPosition.y, newPosition.x] == 1;
+               mapMatrix[newPosition.y, newPosition.x] != 0;
     }
 
     // Converte a direção atual para um vetor de movimento na matriz

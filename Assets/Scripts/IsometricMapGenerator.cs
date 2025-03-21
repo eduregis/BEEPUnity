@@ -56,7 +56,7 @@ public class IsometricMapGenerator : MonoBehaviour
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                if (mapMatrix[y, x] == 1)
+                if (mapMatrix[y, x] != 0)
                 {
                     // Calcula a posição isométrica relativa ao centro
                     Vector3 tilePosition = new Vector3(
@@ -71,7 +71,7 @@ public class IsometricMapGenerator : MonoBehaviour
                     // Instancia o tile na posição calculada
                     GameObject tile = Instantiate(tilePrefab, tilePosition, Quaternion.identity, transform);
                     Tile tileScript = tile.GetComponent<Tile>();
-                    tileScript.Initialize(mapMatrix, x, y);
+                    tileScript.Initialize(mapMatrix, x, y, mapMatrix[y, x] == 2);
                 }
             }
         }

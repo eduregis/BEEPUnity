@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
         int[,] mapMatrix = new int[,]
         {
             {1, 1, 1, 1, 0},
-            {1, 1, 0, 1, 1},
+            {1, 2, 0, 1, 1},
         };
 
         // Define a posição inicial do robô
@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
             if (command == "Function1")
             {
                 Debug.Log("Executando Function1...");
-                currentGrid.HighlightCurrentStep();
+                currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
                 // Executa os comandos da function1, passando o function1Grid como grid atual
-                yield return ExecuteCommandList(function1Commands, null, null, function1Grid);
+                yield return ExecuteCommandList(function1Commands, function1Commands, function2Commands, function1Grid);
                 function1Grid.ResetHighlights();
                 Debug.Log("Function1 concluída. Retomando main...");
             }
@@ -61,9 +61,10 @@ public class PlayerController : MonoBehaviour
             else if (command == "Function2")
             {
                 Debug.Log("Executando Function2...");
-                currentGrid.HighlightCurrentStep();
+                currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
+
                 // Executa os comandos da function2, passando o function2Grid como grid atual
-                yield return ExecuteCommandList(function2Commands, null, null, function2Grid);
+                yield return ExecuteCommandList(function2Commands, function1Commands, function2Commands, function2Grid);
                 function2Grid.ResetHighlights();
                 Debug.Log("Function2 concluída. Retomando main...");
             }
@@ -71,20 +72,19 @@ public class PlayerController : MonoBehaviour
             else if (command == "Conditional")
             {
                 Debug.Log("Executando Conditional...");
-                currentGrid.HighlightCurrentStep();
+                currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
+
                 // Verifica a condição para decidir qual grid executar
                 if (CheckCondition())
                 {
                     Debug.Log("Condição verdadeira. Executando If...");
-                    yield return ExecuteCommandList(conditionalIfGrid.GetCommandList(), null, null, conditionalIfGrid);
-                    Debug.Log("Conditional If concluída. Retomando main...");
+                    yield return ExecuteCommandList(conditionalIfGrid.GetCommandList(), function1Commands, function2Commands, conditionalIfGrid);
                     conditionalIfGrid.ResetHighlights();
                 }
                 else
                 {
                     Debug.Log("Condição falsa. Executando Else...");
-                    yield return ExecuteCommandList(conditionalElseGrid.GetCommandList(), null, null, conditionalElseGrid);
-                    Debug.Log("Conditional Else concluída. Retomando main...");
+                    yield return ExecuteCommandList(conditionalElseGrid.GetCommandList(), function1Commands, function2Commands, conditionalElseGrid);
                     conditionalElseGrid.ResetHighlights();
                 }
 
