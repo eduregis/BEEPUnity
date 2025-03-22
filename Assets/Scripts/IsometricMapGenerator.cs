@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 public class IsometricMapGenerator : MonoBehaviour
@@ -43,7 +44,7 @@ public class IsometricMapGenerator : MonoBehaviour
         // Obtém a posição do GameObject que contém o script
         Vector3 originPosition = transform.position;
 
-        // Calcula o deslocamento para centralizar o mapa
+        // Calcula o deslocamento para centralizar o map
         int mapWidth = mapMatrix.GetLength(1);
         int mapHeight = mapMatrix.GetLength(0);
         Vector3 offset = Utils.CalculateOffset();
@@ -55,11 +56,7 @@ public class IsometricMapGenerator : MonoBehaviour
                 if (mapMatrix[y, x] != 0)
                 {
                     // Calcula a posição isométrica relativa ao centro
-                    Vector3 tilePosition = new Vector3(
-                        (x - y) * ((tileWidth / 2) - 2),
-                        -(x + y) * ((tileHeight / 2) - 9),
-                        0
-                    );
+                    Vector3 tilePosition = Utils.CalculateTilePosition(x, y);
 
                     // Ajusta a posição para considerar o centro do mapa
                     tilePosition += originPosition - offset;
