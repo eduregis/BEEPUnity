@@ -121,28 +121,25 @@ public class IsometricMapGenerator : MonoBehaviour
         return null;
     }
 
-    private void CreateBoxAtPosition(Vector2Int position)
+    public void CreateBoxAtPosition(Vector2Int position)
     {
-        if (boxesMatrix[position.y, position.x] == null)
+        if (CanPlaceBoxAt(position))
         {
             GameObject boxObj = Instantiate(boxPrefab, transform);
             Box box = boxObj.GetComponent<Box>();
             box.Initialize(position);
             boxesMatrix[position.y, position.x] = box;
+            
+            // Posiciona corretamente
+            RectTransform boxRect = boxObj.GetComponent<RectTransform>();
+            RectTransform tileRect = GetTileRect(position);
+            if (tileRect != null)
+            {
+                boxRect.anchoredPosition = tileRect.anchoredPosition;
+                boxRect.SetAsLastSibling();
+            }
             UpdateTileVisual(position.x, position.y);
         }
-    }
-
-    public bool AddBox(Vector2Int position, Box box)
-    {
-        if (mapMatrix[position.y, position.x] != 0 && boxesMatrix[position.y, position.x] == null)
-        {
-            boxesMatrix[position.y, position.x] = box;
-            box.MoveTo(position);
-            UpdateTileVisual(position.x, position.y);
-            return true;
-        }
-        return false;
     }
 
     public Box RemoveBox(Vector2Int position)
@@ -151,7 +148,7 @@ public class IsometricMapGenerator : MonoBehaviour
         if (box != null)
         {
             boxesMatrix[position.y, position.x] = null;
-            Destroy(box.gameObject); // Destrói o GameObject da caixa
+            Destroy(box.gameObject);
             UpdateTileVisual(position.x, position.y);
         }
         return box;
@@ -163,10 +160,30 @@ public class IsometricMapGenerator : MonoBehaviour
     }
 
     public bool CanPlaceBoxAt(Vector2Int position)
-{
-    return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
-           position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
-           mapMatrix[position.y, position.x] != 0 &&
-           boxesMatrix[position.y, position.x] == null;
-}
+    {
+        return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
+            position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
+            mapMatrix[position.y, position.x] != 0 &&
+            boxesMatrix[position.y, position.x] == null;
+    }
+
+    public RectTransform GetTileRect(Vector2Int position)
+    {
+        foreach (Transform child in transform)
+        {
+            Tile tile = child.GetComponent<Tile>();
+            if (tile != null && tile.x == position.x && tile.y == position.y)
+            {
+                return child.GetComponent<RectTransform>();
+            }
+        }
+        return null;
+    }
+
+    public bool IsValidPosition(Vector2Int position)
+    {
+        return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
+            position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
+            mapMatrix[position.y, position.x] != 0;
+    }
 }

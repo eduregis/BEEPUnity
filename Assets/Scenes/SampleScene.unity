@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
+  isHoldingBox: 0
   commandSpeed: 1
   tileWidth: 64
   tileHeight: 48
@@ -1121,6 +1122,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 4949493746449322075, guid: a3b5c566e1677014f842b2b54ea4921e, type: 3}
   tileWidth: 64
   tileHeight: 48
+  boxPrefab: {fileID: 6688646325623509367, guid: 93bf50c3719d5d94da876e4d330175bc, type: 3}
 --- !u!114 &1771989002 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2126409396067961943, guid: ba57e71e5a7a29f46a5d9d52a15ce67b, type: 3}

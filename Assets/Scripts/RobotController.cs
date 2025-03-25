@@ -239,51 +239,46 @@ public class RobotController : MonoBehaviour
     }
 
     private IEnumerator Grab()
+{
+    Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
+    
+    if (isHoldingBox)
     {
-        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
-        
-        if (isHoldingBox)
+        // SOLTAR CAIXA (Drop)
+        if (CanDropBox(frontPosition))
         {
-            // Tentando soltar a caixa
-            if (CanDropBox(frontPosition))
-            {
-                // Move a caixa que o robô está segurando para a nova posição
-                Box box = GetComponentInChildren<Box>();
-                if (box != null)
-                {
-                    box.transform.SetParent(null); // Remove do robô
-                    IsometricMapGenerator.Instance.AddBox(frontPosition, box);
-                    isHoldingBox = false;
-                    UpdateAnimator(currentDirection);
-                }
-            }
+            // Cria uma nova caixa no destino
+            IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition);
+            isHoldingBox = false;
+            UpdateAnimator(currentDirection);
         }
-        else
-        {
-            // Tentando pegar uma caixa
-            if (IsometricMapGenerator.Instance.HasBoxAt(frontPosition))
-            {
-                Box box = IsometricMapGenerator.Instance.RemoveBox(frontPosition);
-                if (box != null)
-                {
-                    box.transform.SetParent(transform); // Faz a caixa ser filha do robô
-                    box.transform.localPosition = Vector3.zero; // Centraliza no robô
-                    isHoldingBox = true;
-                    UpdateAnimator(currentDirection);
-                }
-            }
-        }
-        
-        yield return new WaitForSeconds(1.0f / commandSpeed);
     }
+    else
+    {
+        // PEGAR CAIXA (Grab)
+        if (IsometricMapGenerator.Instance.HasBoxAt(frontPosition))
+        {
+            // Remove e destrói a caixa do mapa
+            IsometricMapGenerator.Instance.RemoveBox(frontPosition);
+            isHoldingBox = true;
+            UpdateAnimator(currentDirection);
+        }
+    }
+    
+    yield return new WaitForSeconds(1.0f / commandSpeed);
+}
 
     private bool CanDropBox(Vector2Int position)
     {
-        // Verifica se a posição está dentro dos limites e é um tile válido (não vazio)
-        return position.x >= 0 && position.x < IsometricMapGenerator.Instance.mapMatrix.GetLength(1) &&
-            position.y >= 0 && position.y < IsometricMapGenerator.Instance.mapMatrix.GetLength(0) &&
-            IsometricMapGenerator.Instance.mapMatrix[position.y, position.x] != 0 &&
-            !IsometricMapGenerator.Instance.HasBoxAt(position); // Não pode ter outra caixa no local
+        // Verifica se a posição está dentro dos limites e é um tile válido
+        if (!IsometricMapGenerator.Instance.IsValidPosition(position))
+            return false;
+        
+        // Verifica se já tem uma caixa no destino
+        if (IsometricMapGenerator.Instance.HasBoxAt(position))
+            return false;
+        
+        return true;
     }
 
     private bool HasBoxInFront()
