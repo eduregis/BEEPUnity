@@ -11,7 +11,8 @@ public class Tile : MonoBehaviour
     public Image lightRight;  // Imagem decorativa para a direita
 
     private int[,] mapMatrix; // Referência para a matriz do mapa
-    private int x, y;         // Posição do tile na matriz
+    public int x { get; private set; }
+    public int y { get; private set; }
 
     // Cores para a pulsação
     private Color color1 = new Color(0.89f, 0.20f, 0.67f); // #e332aa

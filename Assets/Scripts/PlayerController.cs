@@ -22,8 +22,14 @@ public class PlayerController : MonoBehaviour
         // Define a posição inicial do robô
         Vector2Int initialPosition = new Vector2Int(0, 0);
 
+        // Define as posições iniciais das caixas
+        List<Vector2Int> initialBoxes = new List<Vector2Int>
+        {
+            new Vector2Int(3, 0), // Caixa na posição (1,0)
+        };
+
         // Configura o mapa e a posição inicial do robô
-        IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix);
+        IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, initialBoxes);
         RobotController.Instance.SetInitialPosition(initialPosition);
         RobotController.Instance.OnStepCompleted += HandleStepCompleted;
     }
@@ -134,7 +140,24 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckObjective()
     {
-        return isObjectiveCompleted;
+        // Verifica se todas as caixas estão nos encaixes (valores 2)
+    int[,] map = IsometricMapGenerator.Instance.mapMatrix;
+    Box[,] boxes = IsometricMapGenerator.Instance.boxesMatrix;
+    
+    for (int y = 0; y < map.GetLength(0); y++)
+    {
+        for (int x = 0; x < map.GetLength(1); x++)
+        {
+            if (map[y, x] == 2) // É um encaixe
+            {
+                if (boxes[y, x] == null) // Não tem caixa
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
     }
 
     private bool CheckCondition()

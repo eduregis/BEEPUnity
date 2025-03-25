@@ -153,23 +153,25 @@ public class RobotController : MonoBehaviour
         Vector2Int newPosition = currentPosition + DirectionToVector(direction);
         int[,] mapMatrix = IsometricMapGenerator.Instance.mapMatrix;
 
+
         // Verifica se a nova posição está dentro dos limites da matriz e é um tile válido (1)
         return newPosition.x >= 0 && newPosition.x < mapMatrix.GetLength(1) &&
                newPosition.y >= 0 && newPosition.y < mapMatrix.GetLength(0) &&
-               mapMatrix[newPosition.y, newPosition.x] != 0;
+               mapMatrix[newPosition.y, newPosition.x] != 0 && 
+               !IsometricMapGenerator.Instance.HasBoxAt(newPosition);
     }
 
     // Converte a direção atual para um vetor de movimento na matriz
     private Vector2Int DirectionToVector(string direction)
     {
-        switch (direction)
+        return direction switch
         {
-            case "Right": return new Vector2Int(1, 0);
-            case "Down": return new Vector2Int(0, 1);
-            case "Left": return new Vector2Int(-1, 0);
-            case "Up": return new Vector2Int(0, -1);
-            default: return Vector2Int.zero;
-        }
+            "Right" => new Vector2Int(1, 0),
+            "Down" => new Vector2Int(0, 1),
+            "Left" => new Vector2Int(-1, 0),
+            "Up" => new Vector2Int(0, -1),
+            _ => Vector2Int.zero,
+        };
     }
 
     // Move o robô na direção especificada
@@ -238,10 +240,66 @@ public class RobotController : MonoBehaviour
 
     private IEnumerator Grab()
     {
-        isHoldingBox = !isHoldingBox;
-        UpdateAnimator(currentDirection);
+        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
+        
+        if (isHoldingBox)
+        {
+            // Tentando soltar a caixa
+            if (CanDropBox(frontPosition))
+            {
+                // Move a caixa que o robô está segurando para a nova posição
+                Box box = GetComponentInChildren<Box>();
+                if (box != null)
+                {
+                    box.transform.SetParent(null); // Remove do robô
+                    IsometricMapGenerator.Instance.AddBox(frontPosition, box);
+                    isHoldingBox = false;
+                    UpdateAnimator(currentDirection);
+                }
+            }
+        }
+        else
+        {
+            // Tentando pegar uma caixa
+            if (IsometricMapGenerator.Instance.HasBoxAt(frontPosition))
+            {
+                Box box = IsometricMapGenerator.Instance.RemoveBox(frontPosition);
+                if (box != null)
+                {
+                    box.transform.SetParent(transform); // Faz a caixa ser filha do robô
+                    box.transform.localPosition = Vector3.zero; // Centraliza no robô
+                    isHoldingBox = true;
+                    UpdateAnimator(currentDirection);
+                }
+            }
+        }
         
         yield return new WaitForSeconds(1.0f / commandSpeed);
+    }
+
+    private bool CanDropBox(Vector2Int position)
+    {
+        // Verifica se a posição está dentro dos limites e é um tile válido (não vazio)
+        return position.x >= 0 && position.x < IsometricMapGenerator.Instance.mapMatrix.GetLength(1) &&
+            position.y >= 0 && position.y < IsometricMapGenerator.Instance.mapMatrix.GetLength(0) &&
+            IsometricMapGenerator.Instance.mapMatrix[position.y, position.x] != 0 &&
+            !IsometricMapGenerator.Instance.HasBoxAt(position); // Não pode ter outra caixa no local
+    }
+
+    private bool HasBoxInFront()
+    {
+        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
+        int[,] mapMatrix = IsometricMapGenerator.Instance.mapMatrix;
+        
+        // Verifica se a posição à frente está dentro dos limites do mapa
+        if (frontPosition.x >= 0 && frontPosition.x < mapMatrix.GetLength(1) &&
+            frontPosition.y >= 0 && frontPosition.y < mapMatrix.GetLength(0))
+        {
+            // Verifica se há uma caixa na posição à frente (valor 2 no mapa)
+            return mapMatrix[frontPosition.y, frontPosition.x] == 2;
+        }
+        
+        return false;
     }
 
     // Atualiza os parâmetros do Animator com base na direção
