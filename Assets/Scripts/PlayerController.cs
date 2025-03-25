@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid;
-    private bool isObjectiveCompleted = false; // Flag para verificar se o objetivo foi concluído
+    public PlayerButton playerButton;
 
     void Start()
     {
@@ -121,7 +121,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnPlayerPressed()
     {
-        StartCoroutine(ExecuteCommands());
+        playerButton.ToggleButton();
+        if (playerButton.isPlaying) 
+        {
+
+        }
+        else 
+        {
+            StartCoroutine(ExecuteCommands());
+        }
+        
     }
 
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)
@@ -133,7 +142,6 @@ public class PlayerController : MonoBehaviour
         if (CheckObjective())
         {
             Debug.Log("Objetivo concluído! Parando execução.");
-            isObjectiveCompleted = true;
             RobotController.Instance.StopExecution(); // Para a execução dos comandos
         }
     }

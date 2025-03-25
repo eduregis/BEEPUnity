@@ -54,10 +54,6 @@ public class RobotController : MonoBehaviour
 
     void Start() 
     {
-        Debug.Log("Valores iniciais do Animator:");
-        Debug.Log($"DirX: {animator.GetFloat("DirectionX")}");
-        Debug.Log($"DirY: {animator.GetFloat("DirectionY")}");
-        
         // Força direção inicial para Right
         UpdateAnimator("Right");
     }

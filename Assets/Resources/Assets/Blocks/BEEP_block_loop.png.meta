@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 0e9633ce2e184ed4e8ee27212c4765c8
+guid: 6d82a90bc18f8344980dc3781b6e046a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6761803360707489127
-    second: BEEP_player_Button_0
+      213: -4386655030158907681
+    second: BEEP_block_loop_0
+  - first:
+      213: 5757656716301866528
+    second: BEEP_block_loop_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_player_Button_0
+      name: BEEP_block_loop_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 14
-        height: 27
+        x: 6
+        y: 13
+        width: 18
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76d230cb450c6dd50800000000000000
-      internalID: 6761803360707489127
+      spriteID: fd6a237dd787f13c0800000000000000
+      internalID: -4386655030158907681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BEEP_block_loop_1
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 2
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02690d1374e47ef40800000000000000
+      internalID: 5757656716301866528
       vertices: []
       indices: 
       edges: []
@@ -151,7 +176,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_player_Button_0: 6761803360707489127
+      BEEP_block_loop_0: -4386655030158907681
+      BEEP_block_loop_1: 5757656716301866528
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
