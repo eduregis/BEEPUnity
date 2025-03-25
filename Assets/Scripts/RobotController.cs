@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -54,8 +55,7 @@ public class RobotController : MonoBehaviour
 
     void Start() 
     {
-        // Força direção inicial para Right
-        UpdateAnimator("Right");
+        ResetStages();
     }
 
     // Define a posição inicial do robô na matriz e o posiciona no mundo isométrico
@@ -277,22 +277,6 @@ public class RobotController : MonoBehaviour
         return true;
     }
 
-    private bool HasBoxInFront()
-    {
-        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
-        int[,] mapMatrix = IsometricMapGenerator.Instance.mapMatrix;
-        
-        // Verifica se a posição à frente está dentro dos limites do mapa
-        if (frontPosition.x >= 0 && frontPosition.x < mapMatrix.GetLength(1) &&
-            frontPosition.y >= 0 && frontPosition.y < mapMatrix.GetLength(0))
-        {
-            // Verifica se há uma caixa na posição à frente (valor 2 no mapa)
-            return mapMatrix[frontPosition.y, frontPosition.x] == 2;
-        }
-        
-        return false;
-    }
-
     // Atualiza os parâmetros do Animator com base na direção
     private void UpdateAnimator(string direction) {
         Vector2 dir = direction switch {
@@ -310,5 +294,11 @@ public class RobotController : MonoBehaviour
         Debug.Log(dir);
         // Força atualização imediata (opcional, mas recomendado para viradas)
         animator.Update(0);
+    }
+
+    public void ResetStages() 
+    {
+        isHoldingBox = false;
+        UpdateAnimator("Right");
     }
 }

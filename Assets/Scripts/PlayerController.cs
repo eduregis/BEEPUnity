@@ -12,6 +12,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        SetupPhase();
+    }
+
+    private void SetupPhase()
+    {
         // Define a matriz do mapa
         int[,] mapMatrix = new int[,]
         {
@@ -32,6 +37,17 @@ public class PlayerController : MonoBehaviour
         IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, initialBoxes);
         RobotController.Instance.SetInitialPosition(initialPosition);
         RobotController.Instance.OnStepCompleted += HandleStepCompleted;
+
+        ResetUI();
+    }
+
+    private void ResetUI() 
+    {
+        playerGrid.ResetHighlights();
+        function1Grid.ResetHighlights(); 
+        function2Grid.ResetHighlights();
+        conditionalIfGrid.ResetHighlights();
+        conditionalElseGrid.ResetHighlights();
     }
 
     private IEnumerator ExecuteCommands()
@@ -124,13 +140,12 @@ public class PlayerController : MonoBehaviour
         playerButton.ToggleButton();
         if (playerButton.isPlaying) 
         {
-
+            StartCoroutine(ExecuteCommands());  
         }
         else 
         {
-            StartCoroutine(ExecuteCommands());
+            SetupPhase();
         }
-        
     }
 
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)
