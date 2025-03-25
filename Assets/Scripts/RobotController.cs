@@ -21,17 +21,8 @@ public class RobotController : MonoBehaviour
     private float assetAdjust = 48f;
     private bool shouldStopExecution = false; // Flag para controlar a interrupção
 
-    // Deslocamentos isométricos para cada direção
-    private Dictionary<string, Vector2> moveDirections = new Dictionary<string, Vector2>
-    {
-        { "Right", new Vector2(30, -15) },
-        { "Down", new Vector2(-30, -15) },
-        { "Left", new Vector2(-30, 15) },
-        { "Up", new Vector2(30, 15) }
-    };
-
     // Ordem das direções ao virar para a esquerda ou direita
-    private List<string> directionOrder = new List<string> { "Right", "Down", "Left", "Up" };
+    private List<string> directionOrder = new() { "Right", "Down", "Left", "Up" };
 
     // Dimensões dos tiles (deve ser igual ao IsometricMapGenerator)
     public float tileWidth = 64f;
@@ -58,6 +49,16 @@ public class RobotController : MonoBehaviour
         {
             Debug.LogError("Animator não encontrado no objeto!");
         }
+    }
+
+    void Start() 
+    {
+        Debug.Log("Valores iniciais do Animator:");
+        Debug.Log($"DirX: {animator.GetFloat("DirectionX")}");
+        Debug.Log($"DirY: {animator.GetFloat("DirectionY")}");
+        
+        // Força direção inicial para Right
+        UpdateAnimator("Right");
     }
 
     // Define a posição inicial do robô na matriz e o posiciona no mundo isométrico
@@ -217,75 +218,37 @@ public class RobotController : MonoBehaviour
         return tilePosition;
     }
 
-    // Vira o robô para a esquerda ou direita
     private IEnumerator Turn(string turnDirection)
     {
-        // Calcula a nova direção
         int currentIndex = directionOrder.IndexOf(currentDirection);
-        int newIndex;
-
-        if (turnDirection == "Left")
-        {
-            newIndex = (currentIndex - 1 + directionOrder.Count) % directionOrder.Count;
-        }
-        else // "Right"
-        {
-            newIndex = (currentIndex + 1) % directionOrder.Count;
-        }
+        int newIndex = turnDirection == "Left" 
+            ? (currentIndex - 1 + directionOrder.Count) % directionOrder.Count
+            : (currentIndex + 1) % directionOrder.Count;
 
         string newDirection = directionOrder[newIndex];
-
-        // Atualiza a animação imediatamente
+        currentDirection = newDirection; // Atualiza primeiro a direção
+        
         UpdateAnimator(newDirection);
-
-        // Força a atualização do Animator no primeiro frame
-        animator.Update(0);
-
-        // Aguarda o tempo de virada ajustado pela velocidade
-        float elapsedTime = 0f;
-        float duration = 1.0f / commandSpeed; // Ajusta a duração com base na velocidade
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // Atualiza a direção atual
-        currentDirection = newDirection;
+        
+        yield return new WaitForSeconds(1.0f / commandSpeed);
     }
 
     // Atualiza os parâmetros do Animator com base na direção
-    private void UpdateAnimator(string direction)
-    {
-        if (animator == null)
-        {
-            Debug.LogError("Animator não foi atribuído!");
-            return;
-        }
+    private void UpdateAnimator(string direction) {
+        Vector2 dir = direction switch {
+            "Right" => new Vector2(1, 0),
+            "Left"  => new Vector2(-1, 0),
+            "Up"    => new Vector2(0, 1),
+            "Down"  => new Vector2(0, -1),
+            _ => Vector2.zero
+        };
 
-        // Atualiza os parâmetros do Animator com base na direção
-        switch (direction)
-        {
-            case "Right":
-                animator.SetFloat("DirectionX", 1);
-                animator.SetFloat("DirectionY", 0);
-                break;
-            case "Down":
-                animator.SetFloat("DirectionX", 0);
-                animator.SetFloat("DirectionY", -1);
-                break;
-            case "Left":
-                animator.SetFloat("DirectionX", -1);
-                animator.SetFloat("DirectionY", 0);
-                break;
-            case "Up":
-                animator.SetFloat("DirectionX", 0);
-                animator.SetFloat("DirectionY", 1);
-                break;
-        }
+        animator.SetFloat("DirectionX", dir.x);
+        animator.SetFloat("DirectionY", dir.y);
+        
+        Debug.Log(dir);
+        // Força atualização imediata (opcional, mas recomendado para viradas)
+        animator.Update(0);
 
-        // Indica que o robô está se movendo (opcional)
-        animator.SetBool("IsMoving", true);
     }
 }
