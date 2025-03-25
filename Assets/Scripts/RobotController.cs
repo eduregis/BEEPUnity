@@ -13,6 +13,7 @@ public class RobotController : MonoBehaviour
 
     private Animator animator;
     public bool isMoving = false; // Verifica se o robô está se movendo ou virando
+    public bool isHoldingBox = false; // Verifica se o robô está segurando uma caixa
     private string currentDirection = "Right"; // Direção inicial do robô
     private Vector2Int currentPosition; // Posição atual do robô na matriz
 
@@ -117,7 +118,6 @@ public class RobotController : MonoBehaviour
                     if (CanMove(currentDirection))
                     {
                         yield return MoveToDirection(currentDirection);
-                        OnStepCompleted?.Invoke("Run", currentGrid); // Passa o grid atual
                     }
                     else
                     {
@@ -128,18 +128,21 @@ public class RobotController : MonoBehaviour
 
                 case "TurnLeft":
                     yield return Turn("Left");
-                    OnStepCompleted?.Invoke("TurnLeft", currentGrid); // Passa o grid atual
                     break;
 
                 case "TurnRight":
                     yield return Turn("Right");
-                    OnStepCompleted?.Invoke("TurnRight", currentGrid); // Passa o grid atual
+                    break;
+
+                case "Grab":
+                    yield return Grab();
                     break;
 
                 default:
                     Debug.LogWarning("Comando inválido: " + command);
                     break;
             }
+            OnStepCompleted?.Invoke(command, currentGrid);
         isMoving = false;
         }
     }
@@ -233,6 +236,14 @@ public class RobotController : MonoBehaviour
         yield return new WaitForSeconds(1.0f / commandSpeed);
     }
 
+    private IEnumerator Grab()
+    {
+        isHoldingBox = !isHoldingBox;
+        UpdateAnimator(currentDirection);
+        
+        yield return new WaitForSeconds(1.0f / commandSpeed);
+    }
+
     // Atualiza os parâmetros do Animator com base na direção
     private void UpdateAnimator(string direction) {
         Vector2 dir = direction switch {
@@ -245,10 +256,10 @@ public class RobotController : MonoBehaviour
 
         animator.SetFloat("DirectionX", dir.x);
         animator.SetFloat("DirectionY", dir.y);
+        animator.SetBool("IsHoldingBox", isHoldingBox);
         
         Debug.Log(dir);
         // Força atualização imediata (opcional, mas recomendado para viradas)
         animator.Update(0);
-
     }
 }
