@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 565f084b94830a841870191506701e55
+guid: 1e656cf4cb40d574e8ee4b419b4be2e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1104798850158176048
-    second: BEEP_Box_Blocks 1_0
+      213: -4880293388167115200
+    second: BEEP_loop_back_button_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_Box_Blocks 1_0
+      name: BEEP_loop_back_button_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 50
-        height: 301
+        width: 16
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 03720f363b8055f00800000000000000
-      internalID: 1104798850158176048
+      spriteID: 04e8c963507b54cb0800000000000000
+      internalID: -4880293388167115200
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_Box_Blocks 1_0: 1104798850158176048
+      BEEP_loop_back_button_0: -4880293388167115200
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

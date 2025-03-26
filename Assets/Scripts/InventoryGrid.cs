@@ -84,6 +84,18 @@ public class InventoryGrid : MonoBehaviour
         }
     }
 
+    public void ResetSlots()
+    {
+        for (int i = 0; i < slotCount; i++)
+        {
+           for (int j = slots[i].transform.childCount - 1; j >= 0; j--)
+            {
+                DestroyImmediate(slots[i].transform.GetChild(j).gameObject);
+            }
+            slots[i].Highlight(false);
+        }
+    }
+
     public void CheckAvailableSlot(GameObject dropped)
     {
         // Procura o primeiro slot vazio disponível

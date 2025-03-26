@@ -23,6 +23,7 @@ public class CommandGrid : MonoBehaviour
         Grab,
         Hit,
         Heal,
+        Loop,
         Function1,
         Function2,
         Conditional

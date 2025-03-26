@@ -73,21 +73,20 @@ public class PlayerController : MonoBehaviour
             if (command == "Function1")
             {
                 Debug.Log("Executando Function1...");
+                function1Grid.ResetHighlights();
                 currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
                 // Executa os comandos da function1, passando o function1Grid como grid atual
                 yield return ExecuteCommandList(function1Commands, function1Commands, function2Commands, function1Grid);
-                function1Grid.ResetHighlights();
                 Debug.Log("Function1 concluída. Retomando main...");
             }
             // Verifica se o comando é "Function2"
             else if (command == "Function2")
             {
                 Debug.Log("Executando Function2...");
-                currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
-
-                // Executa os comandos da function2, passando o function2Grid como grid atual
-                yield return ExecuteCommandList(function2Commands, function1Commands, function2Commands, function2Grid);
                 function2Grid.ResetHighlights();
+                currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
+                // Executa os comandos da function2, passando o function2Grid como grid atual
+                yield return ExecuteCommandList(function2Commands, function1Commands, function2Commands, function2Grid);               
                 Debug.Log("Function2 concluída. Retomando main...");
             }
             // Verifica se o comando é "Conditional"

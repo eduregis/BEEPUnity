@@ -4,15 +4,11 @@ using UnityEngine.UI;
 
 public class ConditionalBox : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public InventoryGrid inventoryIfGrid, inventoryElseGrid;
 
-    // Update is called once per frame
-    void Update()
+    public void TrashPressed() 
     {
-        
+        inventoryIfGrid.ResetSlots();
+        inventoryElseGrid.ResetSlots();
     }
 }

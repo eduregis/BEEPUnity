@@ -4,15 +4,11 @@ using UnityEngine.UI;
 
 public class FunctionBox : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public InventoryGrid inventoryGrid;
+    public TMP_Text counter;
 
-    // Update is called once per frame
-    void Update()
+    public void TrashPressed() 
     {
-        
+        inventoryGrid.ResetSlots();
     }
 }
