@@ -21,7 +21,6 @@ public class CommandGrid : MonoBehaviour
         TurnRight,
         TurnLeft,
         Grab,
-        Hit,
         Heal,
         Loop,
         Function1,

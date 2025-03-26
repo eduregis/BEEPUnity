@@ -20,6 +20,14 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log(AppSettings.IsPlaying);
+        if (AppSettings.IsPlaying)
+        {
+            canvasGroup.blocksRaycasts = true;
+            eventData.pointerDrag = null; // Cancela o drag
+            return;
+        }
+
         parentToReturnTo = transform.parent;
         transform.SetParent(canvas.transform);
         canvasGroup.blocksRaycasts = false;
@@ -27,6 +35,9 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnDrag(PointerEventData eventData)
     {
+        // Se IsPlaying for TRUE, não faz nada
+        if (AppSettings.IsPlaying) return;
+
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         InventoryGrid grid = eventData.pointerEnter.GetComponentInParent<InventoryGrid>();
         
@@ -48,6 +59,9 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Se IsPlaying for TRUE, não faz nada
+        if (AppSettings.IsPlaying) return;
+
         canvasGroup.blocksRaycasts = true;
 
         // Verifica se o objeto foi solto em um slot válido

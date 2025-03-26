@@ -16,6 +16,12 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (AppSettings.IsPlaying)
+        {
+            eventData.pointerDrag = null; // Cancela o drag
+            return;
+        }
+
         // Gera uma cópia do bloco original
         draggedItem = Instantiate(generatedDraggableItemPrefab, canvas.transform);
         draggedItem.transform.position = transform.position;
@@ -34,6 +40,9 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
 
     public void OnDrag(PointerEventData eventData)
     {
+        // Se IsPlaying for TRUE, não faz nada
+        if (AppSettings.IsPlaying) return;
+
         // Move a cópia gerada
         if (draggedItem != null)
         {
@@ -44,6 +53,9 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Se IsPlaying for TRUE, não faz nada
+        if (AppSettings.IsPlaying) return;
+
         // Finaliza o arrasto da cópia
         if (draggedItem != null)
         {

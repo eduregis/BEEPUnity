@@ -7,11 +7,13 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid;
+    public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid, loopGrid;
+    public LoopBox loopBox;
     public PlayerButton playerButton;
 
     void Start()
     {
+        AppSettings.IsPlaying = false;
         SetupPhase();
     }
 
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         function2Grid.ResetHighlights();
         conditionalIfGrid.ResetHighlights();
         conditionalElseGrid.ResetHighlights();
+        loopGrid.ResetHighlights();
     }
 
     private IEnumerator ExecuteCommands()
@@ -110,6 +113,18 @@ public class PlayerController : MonoBehaviour
                 }
 
                 Debug.Log("Conditional concluída. Retomando main...");
+            }
+            else if (command == "Loop")
+            {
+                Debug.Log("Executando Loop...");
+                for (int loopIndex = 1; loopIndex <= loopBox.counter; loopIndex++) 
+                {
+                    loopGrid.ResetHighlights();
+                    currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
+                    // Executa os comandos da function2, passando o function2Grid como grid atual
+                    yield return ExecuteCommandList(loopGrid.GetCommandList(), function1Commands, function2Commands, loopGrid);
+                }
+                Debug.Log("Loop concluído. Retomando main...");
             }
             else
             {

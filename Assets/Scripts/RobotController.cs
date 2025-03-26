@@ -62,6 +62,7 @@ public class RobotController : MonoBehaviour
     public void SetInitialPosition(Vector2Int position)
     {
         currentPosition = position;
+        ResetStages();
         UpdatePositionInWorld();
     }
 

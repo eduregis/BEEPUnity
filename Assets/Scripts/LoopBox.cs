@@ -9,7 +9,8 @@ public class LoopBox : MonoBehaviour
     public Sprite backEnabled, backDisabled, frontEnabled, frontDisabled;
     public TMP_Text counterText;
 
-    private int counter = 1, lowerLimit = 1, upperLimit = 9;
+    public int counter = 1;
+    private int lowerLimit = 1, upperLimit = 9;
 
     public void Start()
     {
