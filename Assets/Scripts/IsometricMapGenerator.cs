@@ -13,6 +13,7 @@ public class IsometricMapGenerator : MonoBehaviour
     public float tileHeight = 48f; // Altura do tile
 
     public GameObject boxPrefab; // Prefab da caixa
+    public GameObject infectedDataPrefab; // Prefab do dado infectado
     public Box[,] boxesMatrix; // Matriz para rastrear caixas
 
     private void Awake()
@@ -44,7 +45,7 @@ public class IsometricMapGenerator : MonoBehaviour
             {
                 if (position.y >= 0 && position.y < matrix.GetLength(0) &&
                     position.x >= 0 && position.x < matrix.GetLength(1) &&
-                    matrix[position.y, position.x] != 0) // Só coloca em tiles válidos
+                    matrix[position.y, position.x] != (int)Constants.TileType.Empty) // Só coloca em tiles válidos
                 {
                     CreateBoxAtPosition(position);
                 }
@@ -72,7 +73,7 @@ public class IsometricMapGenerator : MonoBehaviour
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                if (mapMatrix[y, x] != 0)
+                if (mapMatrix[y, x] != (int)Constants.TileType.Empty)
                 {
                     // Calcula a posição isométrica relativa ao centro
                     Vector3 tilePosition = Utils.CalculateTilePosition(x, y);
@@ -83,7 +84,15 @@ public class IsometricMapGenerator : MonoBehaviour
                     // Instancia o tile na posição calculada
                     GameObject tile = Instantiate(tilePrefab, tilePosition, Quaternion.identity, transform);
                     Tile tileScript = tile.GetComponent<Tile>();
-                    tileScript.Initialize(mapMatrix, x, y, mapMatrix[y, x] == 2);
+                    tileScript.Initialize(mapMatrix, x, y, mapMatrix[y, x] == (int)Constants.TileType.Fitting);
+
+                    // Instancia o dado infectado na posição calculada, se existir
+                    if (mapMatrix[y, x] == (int)Constants.TileType.InfectedData)
+                    {
+                        GameObject infectedData = Instantiate(infectedDataPrefab, tilePosition, Quaternion.identity, transform);
+                        InfectedData infectedDataScript = infectedData.GetComponent<InfectedData>();
+                        infectedDataScript.Initialize(new Vector2Int(x, y));
+                    }
                 }
             }
         }
@@ -95,13 +104,13 @@ public class IsometricMapGenerator : MonoBehaviour
         Tile tile = GetTileAtPosition(x, y);
         if (tile != null)
         {
-            tile.fittingBox.gameObject.SetActive(mapMatrix[y, x] == 2);
+            tile.fittingBox.gameObject.SetActive(mapMatrix[y, x] == (int)Constants.TileType.Fitting);
         }
 
         // Atualiza visual da caixa (se houver)
         if (boxesMatrix[y, x] != null)
         {
-            boxesMatrix[y, x].isInFittingSpot = mapMatrix[y, x] == 2;
+            boxesMatrix[y, x].isInFittingSpot = mapMatrix[y, x] == (int)Constants.TileType.Fitting;
             // Aqui você pode atualizar o visual da caixa (ex: mudar cor se estiver no encaixe)
         }
     }
@@ -163,7 +172,8 @@ public class IsometricMapGenerator : MonoBehaviour
     {
         return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
             position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
-            mapMatrix[position.y, position.x] != 0 &&
+            mapMatrix[position.y, position.x] != (int)Constants.TileType.Empty &&
+            mapMatrix[position.y, position.x] != (int)Constants.TileType.InfectedData &&
             boxesMatrix[position.y, position.x] == null;
     }
 
@@ -176,6 +186,7 @@ public class IsometricMapGenerator : MonoBehaviour
             {
                 return child.GetComponent<RectTransform>();
             }
+
         }
         return null;
     }
@@ -184,6 +195,6 @@ public class IsometricMapGenerator : MonoBehaviour
     {
         return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
             position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
-            mapMatrix[position.y, position.x] != 0;
+            mapMatrix[position.y, position.x] != (int)Constants.TileType.Empty;
     }
 }

@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
         // Define a matriz do mapa
         int[,] mapMatrix = new int[,]
         {
-            {1, 1, 1, 1, 0},
+            {1, 3, 1, 1, 0},
             {1, 2, 0, 1, 1},
         };
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         // Define as posições iniciais das caixas
         List<Vector2Int> initialBoxes = new List<Vector2Int>
         {
-            new Vector2Int(1, 0),
+            new Vector2Int(4, 1),
         };
 
         // Configura o mapa e a posição inicial do robô
@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int x = 0; x < map.GetLength(1); x++)
         {
-            if (map[y, x] == 2) // É um encaixe
+            if (map[y, x] == (int)Constants.TileType.Fitting) // É um encaixe
             {
                 if (boxes[y, x] == null) // Não tem caixa
                 {

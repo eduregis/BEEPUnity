@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
         int mapWidth = mapMatrix.GetLength(1);
 
         // Verifica o vizinho acima (i, j - 1)
-        if (y > 0 && mapMatrix[y - 1, x] != 0)
+        if (y > 0 && mapMatrix[y - 1, x] != (int)Constants.TileType.Empty)
         {
             lightTop.gameObject.SetActive(true);
         }
@@ -52,7 +52,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho abaixo (i, j + 1)
-        if (y < mapHeight - 1 && mapMatrix[y + 1, x] != 0)
+        if (y < mapHeight - 1 && mapMatrix[y + 1, x] != (int)Constants.TileType.Empty)
         {
             lightDown.gameObject.SetActive(true);
         }
@@ -62,7 +62,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho à esquerda (i - 1, j)
-        if (x > 0 && mapMatrix[y, x - 1] != 0)
+        if (x > 0 && mapMatrix[y, x - 1] != (int)Constants.TileType.Empty)
         {
             lightLeft.gameObject.SetActive(true);
         }
@@ -72,7 +72,7 @@ public class Tile : MonoBehaviour
         }
 
         // Verifica o vizinho à direita (i + 1, j)
-        if (x < mapWidth - 1 && mapMatrix[y, x + 1] != 0)
+        if (x < mapWidth - 1 && mapMatrix[y, x + 1] != (int)Constants.TileType.Empty)
         {
             lightRight.gameObject.SetActive(true);
         }
