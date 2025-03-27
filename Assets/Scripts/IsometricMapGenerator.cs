@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class IsometricMapGenerator : MonoBehaviour
@@ -182,6 +181,12 @@ public class IsometricMapGenerator : MonoBehaviour
     {
         return boxesMatrix[position.y, position.x] != null;
     }
+
+    public bool HasInfectedDataAt(Vector2Int position)
+    {
+        return mapMatrix[position.y, position.x] == (int)Constants.TileType.InfectedData;
+    }
+    
 
     public bool CanPlaceBoxAt(Vector2Int position)
     {

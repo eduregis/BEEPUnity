@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -143,6 +142,10 @@ public class RobotController : MonoBehaviour
                     yield return Grab();
                     break;
 
+                case "Heal":
+                    yield return Heal();
+                    break;
+
                 default:
                     Debug.LogWarning("Comando inválido: " + command);
                     break;
@@ -246,34 +249,48 @@ public class RobotController : MonoBehaviour
     }
 
     private IEnumerator Grab()
-{
-    Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
-    
-    if (isHoldingBox)
     {
-        // SOLTAR CAIXA (Drop)
-        if (CanDropBox(frontPosition))
+        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
+        
+        if (isHoldingBox)
         {
-            // Cria uma nova caixa no destino
-            IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition);
-            isHoldingBox = false;
+            // SOLTAR CAIXA (Drop)
+            if (CanDropBox(frontPosition))
+            {
+                // Cria uma nova caixa no destino
+                IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition);
+                isHoldingBox = false;
+                UpdateAnimator(currentDirection);
+            }
+        }
+        else
+        {
+            // PEGAR CAIXA (Grab)
+            if (IsometricMapGenerator.Instance.HasBoxAt(frontPosition))
+            {
+                // Remove e destrói a caixa do mapa
+                IsometricMapGenerator.Instance.RemoveBox(frontPosition);
+                isHoldingBox = true;
+                UpdateAnimator(currentDirection);
+            }
+        }
+        
+        yield return new WaitForSeconds(1.0f / commandSpeed);
+    }
+
+    private IEnumerator Heal()
+    {
+        Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
+
+        if (HasInfectedData(frontPosition) && !isHoldingBox)
+        {
+            animator.SetBool("IsHealing", true);
             UpdateAnimator(currentDirection);
         }
+        yield return new WaitForSeconds(1.0f / commandSpeed);
+        animator.SetBool("IsHealing", false);
+        UpdateAnimator(currentDirection);
     }
-    else
-    {
-        // PEGAR CAIXA (Grab)
-        if (IsometricMapGenerator.Instance.HasBoxAt(frontPosition))
-        {
-            // Remove e destrói a caixa do mapa
-            IsometricMapGenerator.Instance.RemoveBox(frontPosition);
-            isHoldingBox = true;
-            UpdateAnimator(currentDirection);
-        }
-    }
-    
-    yield return new WaitForSeconds(1.0f / commandSpeed);
-}
 
     private bool CanDropBox(Vector2Int position)
     {
@@ -286,6 +303,19 @@ public class RobotController : MonoBehaviour
             return false;
         
         return true;
+    }
+
+    private bool HasInfectedData(Vector2Int position)
+    {
+        // Verifica se a posição está dentro dos limites e é um tile válido
+        if (!IsometricMapGenerator.Instance.IsValidPosition(position))
+            return false;
+        
+        // Verifica se tem um dado infectado
+        if (IsometricMapGenerator.Instance.HasInfectedDataAt(position))
+            return true;
+        
+        return false;
     }
 
     // Atualiza os parâmetros do Animator com base na direção
