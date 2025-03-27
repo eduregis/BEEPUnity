@@ -62,8 +62,16 @@ public class RobotController : MonoBehaviour
     public void SetInitialPosition(Vector2Int position)
     {
         currentPosition = position;
+        UpdateDepth();
         ResetStages();
         UpdatePositionInWorld();
+    }
+
+    private void UpdateDepth() 
+    {
+        int depth = Utils.CalculateIsoDepth(currentPosition, 2);
+        transform.SetSiblingIndex(depth);
+        Canvas.ForceUpdateCanvases();
     }
 
     // Atualiza a posição do robô no mundo isométrico com base na posição na matriz
@@ -201,6 +209,7 @@ public class RobotController : MonoBehaviour
 
         // Atualiza a posição atual na matriz
         currentPosition = newPosition;
+        UpdateDepth();
     }
 
     // Calcula a posição no mundo isométrico com base na posição na matriz

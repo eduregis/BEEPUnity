@@ -29,6 +29,10 @@ public class Tile : MonoBehaviour
         y = posY;
         fittingBox.gameObject.SetActive(hasFittingBox);
 
+        // Definindo posição do eixo z
+        int depth = Utils.CalculateIsoDepth(new Vector2Int(x, y), 0);
+        transform.SetSiblingIndex(depth);
+
         // Define um offset de tempo aleatório para variar o efeito de pulsação
         timeOffset = Random.Range(0f, 2f * Mathf.PI);
 

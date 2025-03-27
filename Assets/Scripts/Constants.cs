@@ -8,6 +8,4 @@ public static class Constants
         Fitting = 2,
         InfectedData = 3
     }
-    
-    // Outros enums podem ser adicionados aqui
 }

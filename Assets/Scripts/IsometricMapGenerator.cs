@@ -58,7 +58,10 @@ public class IsometricMapGenerator : MonoBehaviour
         // Limpa o mapa anterior (se houver)
         foreach (Transform child in transform)
         {
-            Destroy(child.gameObject);
+            if (child.GetComponent<RobotController>() == null) 
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         // Obtém a posição do GameObject que contém o script
@@ -85,14 +88,26 @@ public class IsometricMapGenerator : MonoBehaviour
                     GameObject tile = Instantiate(tilePrefab, tilePosition, Quaternion.identity, transform);
                     Tile tileScript = tile.GetComponent<Tile>();
                     tileScript.Initialize(mapMatrix, x, y, mapMatrix[y, x] == (int)Constants.TileType.Fitting);
+                }
+            }
+        }
 
-                    // Instancia o dado infectado na posição calculada, se existir
-                    if (mapMatrix[y, x] == (int)Constants.TileType.InfectedData)
-                    {
-                        GameObject infectedData = Instantiate(infectedDataPrefab, tilePosition, Quaternion.identity, transform);
-                        InfectedData infectedDataScript = infectedData.GetComponent<InfectedData>();
-                        infectedDataScript.Initialize(new Vector2Int(x, y));
-                    }
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                // Calcula a posição isométrica relativa ao centro
+                Vector3 tilePosition = Utils.CalculateTilePosition(x, y);
+
+                // Ajusta a posição para considerar o centro do mapa
+                tilePosition += originPosition - offset;
+
+                // Instancia o dado infectado na posição calculada, se existir
+                if (mapMatrix[y, x] == (int)Constants.TileType.InfectedData)
+                {
+                    GameObject infectedData = Instantiate(infectedDataPrefab, tilePosition, Quaternion.identity, transform);
+                    InfectedData infectedDataScript = infectedData.GetComponent<InfectedData>();
+                    infectedDataScript.Initialize(new Vector2Int(x, y));
                 }
             }
         }
