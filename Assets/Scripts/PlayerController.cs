@@ -20,17 +20,17 @@ public class PlayerController : MonoBehaviour
         // Define a matriz do mapa
         int[,] mapMatrix = new int[,]
         {
-            {1, 3, 1, 1, 0},
-            {1, 2, 0, 1, 1},
+            {1, 1, 1, 1, 0},
+            {1, 3, 0, 1, 1},
         };
 
         // Define a posição inicial do robô
-        Vector2Int initialPosition = new Vector2Int(1, 1);
+        Vector2Int initialPosition = new Vector2Int(1, 0);
 
         // Define as posições iniciais das caixas
         List<Vector2Int> initialBoxes = new List<Vector2Int>
         {
-            new Vector2Int(4, 1),
+           // new Vector2Int(3, 1),
         };
 
         // Configura o mapa e a posição inicial do robô
@@ -176,23 +176,23 @@ public class PlayerController : MonoBehaviour
     private bool CheckObjective()
     {
         // Verifica se todas as caixas estão nos encaixes (valores 2)
-    int[,] map = IsometricMapGenerator.Instance.mapMatrix;
-    Box[,] boxes = IsometricMapGenerator.Instance.boxesMatrix;
-    
-    for (int y = 0; y < map.GetLength(0); y++)
-    {
-        for (int x = 0; x < map.GetLength(1); x++)
+        int[,] map = IsometricMapGenerator.Instance.mapMatrix;
+        Box[,] boxes = IsometricMapGenerator.Instance.boxesMatrix;
+        
+        for (int y = 0; y < map.GetLength(0); y++)
         {
-            if (map[y, x] == (int)Constants.TileType.Fitting) // É um encaixe
+            for (int x = 0; x < map.GetLength(1); x++)
             {
-                if (boxes[y, x] == null) // Não tem caixa
+                if (map[y, x] == (int)Constants.TileType.Fitting) // É um encaixe
                 {
-                    return false;
+                    if (boxes[y, x] == null) // Não tem caixa
+                    {
+                        return false;
+                    }
                 }
             }
         }
-    }
-    return true;
+        return IsometricMapGenerator.Instance.CheckRecoveredData();
     }
 
     private bool CheckCondition()

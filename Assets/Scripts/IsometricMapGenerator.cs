@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class IsometricMapGenerator : MonoBehaviour
@@ -14,6 +15,7 @@ public class IsometricMapGenerator : MonoBehaviour
     public GameObject boxPrefab; // Prefab da caixa
     public GameObject infectedDataPrefab; // Prefab do dado infectado
     public Box[,] boxesMatrix; // Matriz para rastrear caixas
+    public List<InfectedData> infectedDatas; // Vetor para armazenar Dados Infectados
 
     private void Awake()
     {
@@ -91,6 +93,8 @@ public class IsometricMapGenerator : MonoBehaviour
             }
         }
 
+        infectedDatas = new List<InfectedData>();
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
@@ -107,6 +111,7 @@ public class IsometricMapGenerator : MonoBehaviour
                     GameObject infectedData = Instantiate(infectedDataPrefab, tilePosition, Quaternion.identity, transform);
                     InfectedData infectedDataScript = infectedData.GetComponent<InfectedData>();
                     infectedDataScript.Initialize(new Vector2Int(x, y));
+                    infectedDatas.Add(infectedDataScript);
                 }
             }
         }
@@ -216,5 +221,27 @@ public class IsometricMapGenerator : MonoBehaviour
         return position.y >= 0 && position.y < mapMatrix.GetLength(0) &&
             position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
             mapMatrix[position.y, position.x] != (int)Constants.TileType.Empty;
+    }
+
+    public void RecoveringData(Vector2Int position)
+    {
+        foreach (InfectedData infectedData in infectedDatas)
+        {
+            if (position == infectedData.gridPosition && infectedData.isInfected)
+            {
+                infectedData.RecoveringData();
+            }
+        }
+    }
+
+    public bool CheckRecoveredData()
+    {
+
+        foreach (InfectedData infectedData in infectedDatas)
+        {
+            if (infectedData.isInfected)
+                return false;
+        }
+        return true;
     }
 }

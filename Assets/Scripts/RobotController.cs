@@ -284,6 +284,7 @@ public class RobotController : MonoBehaviour
 
         if (HasInfectedData(frontPosition) && !isHoldingBox)
         {
+            IsometricMapGenerator.Instance.RecoveringData(frontPosition);
             animator.SetBool("IsHealing", true);
             UpdateAnimator(currentDirection);
         }
@@ -332,7 +333,6 @@ public class RobotController : MonoBehaviour
         animator.SetFloat("DirectionY", dir.y);
         animator.SetBool("IsHoldingBox", isHoldingBox);
         
-        Debug.Log(dir);
         // Força atualização imediata (opcional, mas recomendado para viradas)
         animator.Update(0);
     }

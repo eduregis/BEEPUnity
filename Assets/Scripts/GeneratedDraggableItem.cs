@@ -20,7 +20,6 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log(AppSettings.IsPlaying);
         if (AppSettings.IsPlaying)
         {
             canvasGroup.blocksRaycasts = true;
