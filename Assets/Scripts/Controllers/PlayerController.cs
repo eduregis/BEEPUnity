@@ -150,14 +150,16 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerPressed()
     {
         playerButton.ToggleButton();
-        if (playerButton.isPlaying) 
+        CanvasFadeController.Instance.ShowDialogue("Intro_0");
+        
+        /*if (playerButton.isPlaying) 
         {
             StartCoroutine(ExecuteCommands());  
         }
         else 
         {
             SetupPhase();
-        }
+        }*/
     }
 
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)

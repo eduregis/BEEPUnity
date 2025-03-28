@@ -15,5 +15,5 @@ MonoBehaviour:
   descriptionTexts:
   - 1 Teste teste Teste teste Teste teste Teste teste Teste teste Teste teste Teste
     teste Teste teste Teste teste Teste teste
-  - 2 Teste teste Teste teste Teste teste <red>Teste</red> teste Teste teste Teste
-    teste Teste teste Teste teste Teste teste Teste teste
+  - 2 Teste teste Teste teste Teste teste <magenta>Teste</magenta> teste Teste teste
+    Teste teste Teste teste Teste teste Teste teste Teste teste

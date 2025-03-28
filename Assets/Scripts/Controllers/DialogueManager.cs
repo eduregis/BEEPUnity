@@ -6,24 +6,43 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public TMP_Text textDisplay;
-    public Dialogue dialogue;
     public float typingSpeed = 0.05f;
 
     private string fullText;
+    private Dialogue dialogue;
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
     private int index = 0;
     private Dictionary<string, string> customTags = new() 
     {
-        { "orange", "#FFA500" },
-        { "red", "#FF0000" },
-        { "blue", "#0000FF" },
-        { "green", "#006405" }
+        { "magenta", "#e332aa" },
+        { "blue", "#1479da" },
     };
 
     void Start()
     {
+        StartCoroutine(InitializeDialogue());
+    }
+
+    private IEnumerator InitializeDialogue()
+    {
+        // Espera um frame para garantir que tudo foi inicializado
+        yield return new WaitForSeconds(0.5f);
+        
+        if (string.IsNullOrEmpty(AppSettings.DialogueName))
+        {
+            Debug.LogError("Nome do diálogo não definido!");
+            yield break;
+        }
+
+        dialogue = Resources.Load<Dialogue>($"Dialogues/Dialogue_{AppSettings.DialogueName}");
+        if (dialogue == null)
+        {
+            Debug.LogError($"Diálogo não encontrado: Dialogue_{AppSettings.DialogueName}");
+            yield break;
+        }
+
         GoToNextDialogue();
     }
 
@@ -51,9 +70,20 @@ public class DialogueManager : MonoBehaviour
     }
     private void GoToNextDialogue() 
     {
+        if (dialogue == null || dialogue.descriptionTexts == null || dialogue.descriptionTexts.Count == 0)
+        {
+            Debug.LogError("Diálogo inválido ou sem textos!");
+            CanvasFadeController.Instance.HideCanvas();
+            return;
+        }
+
         if (dialogue.descriptionTexts.Count > index) 
         {
             TypeText(dialogue.descriptionTexts[index]);
+        }
+        else 
+        {
+            CanvasFadeController.Instance.HideCanvas();
         }
     }
 

@@ -9,6 +9,7 @@ public class CanvasFadeController : MonoBehaviour
     
     private CanvasGroup canvasGroup;
     private GameObject currentCanvasInstance;
+    public GameObject canvasPrefab;
     private static CanvasFadeController _instance;
 
     public static CanvasFadeController Instance
@@ -42,15 +43,20 @@ public class CanvasFadeController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// Mostra um novo canvas com efeito fade in
-    /// </summary>
-    /// <param name="canvasPrefab">Prefab do Canvas a ser mostrado</param>
-    public void ShowCanvas(GameObject canvasPrefab)
+    public void ShowDialogue(string name)
     {
+        AppSettings.DialogueName = name;
+        
+        // Carrega o diálogo primeiro para garantir que está disponível
+        Dialogue dialogue = Resources.Load<Dialogue>($"Dialogues/Dialogue_{name}");
+        if (dialogue == null)
+        {
+            Debug.LogError($"Diálogo não encontrado: Dialogue_{name}");
+            return;
+        }
+
         if (currentCanvasInstance != null)
         {
-            // Se já existe um canvas, faz fade out antes de mostrar o novo
             HideCanvas(() => InstantiateNewCanvas(canvasPrefab));
         }
         else
@@ -59,10 +65,6 @@ public class CanvasFadeController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Esconde o canvas atual com efeito fade out
-    /// </summary>
-    /// <param name="onComplete">Callback opcional quando a animação terminar</param>
     public void HideCanvas(System.Action onComplete = null)
     {
         if (currentCanvasInstance != null)

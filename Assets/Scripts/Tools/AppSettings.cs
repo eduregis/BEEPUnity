@@ -2,37 +2,24 @@ using UnityEngine;
 
 public class AppSettings : MonoBehaviour
 {
-    public static AppSettings Instance { get; private set; }
+    private static AppSettings _instance;
+    public static AppSettings Instance => _instance ??= FindAnyObjectByType<AppSettings>() ?? new GameObject("AppSettings").AddComponent<AppSettings>();
     
     public static bool IsPlaying
     {
-        get => Instance != null && Instance._isPlaying;
-        set 
-        {
-            if (Instance != null)
-            {
-                Instance._isPlaying = value;
-                PlayerPrefs.SetInt("IsPlaying", value ? 1 : 0);
-            }
-        }
+        get => PlayerPrefs.GetInt(nameof(IsPlaying)) == 1;
+        set => PlayerPrefs.SetInt(nameof(IsPlaying), value ? 1 : 0);
     }
 
-    private bool _isPlaying
+    public static string DialogueName
     {
-        get => PlayerPrefs.GetInt("IsPlaying", 0) == 1;
-        set => PlayerPrefs.SetInt("IsPlaying", value ? 1 : 0);
+        get => PlayerPrefs.GetString(nameof(DialogueName));
+        set => PlayerPrefs.SetString(nameof(DialogueName), value);
     }
-    
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (_instance != null && _instance != this) Destroy(gameObject);
+        else { _instance = this; DontDestroyOnLoad(gameObject); }
     }
 }
