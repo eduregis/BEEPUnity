@@ -6,6 +6,7 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     public TMP_Text textDisplay;
+    public InstructorController instructorController;
     public float typingSpeed = 0.05f;
 
     private string fullText;
@@ -18,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     {
         { "magenta", "#e332aa" },
         { "blue", "#1479da" },
+        {"green", "#aedb16"}
     };
 
     void Start()
@@ -65,6 +67,7 @@ public class DialogueManager : MonoBehaviour
             typingCoroutine = null;
         } else {
             index++;
+            instructorController.ChangeArmAnimation();
             GoToNextDialogue();
         }
     }

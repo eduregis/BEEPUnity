@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         };
 
         // Define a posição inicial do robô
-        Vector2Int initialPosition = new Vector2Int(1, 0);
+        Vector2Int initialPosition = new Vector2Int(0, 0);
 
         // Define as posições iniciais das caixas
         List<Vector2Int> initialBoxes = new List<Vector2Int>
