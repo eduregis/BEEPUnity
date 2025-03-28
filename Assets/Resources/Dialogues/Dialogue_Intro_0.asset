@@ -13,7 +13,27 @@ MonoBehaviour:
   m_Name: Dialogue_Intro_0
   m_EditorClassIdentifier: 
   descriptionTexts:
-  - 1 Teste teste Teste teste Teste teste Teste teste Teste teste Teste teste Teste
-    teste Teste teste Teste teste Teste teste
-  - 2 Teste teste Teste teste Teste teste <magenta>Teste</magenta> teste Teste teste
-    Teste teste Teste teste Teste teste Teste teste Teste teste
+  - "Ah, que bom que voc\xEA est\xE1 aqui!"
+  - "Nosso sistema foi invadido por um <magenta>v\xEDrus</magenta>. Ele causou a
+    maior bagun\xE7a..."
+  - "Perd\xE3o, esqueci de me apresentar! Me chamo <blue>B.E.E.P. (Bot de Estudo
+    e Ensino de Programa\xE7\xE3o)</blue>. Poderia nos ajudar?"
+  - "Como sou apenas uma <magenta>I.A. (Intelig\xEAncia Artificial)</magenta>, n\xE3o
+    consigo interagir diretamente com o sistema, mas posso te guiar sobre o que fazer."
+  - "Nosso amiguinho aqui, o <blue>B.O.P. (Bot Oper\xE1rio de Programa\xE7\xE3o)
+    </blue> ser\xE1 nossa chave para esse problema!"
+  - "Para operarmos com ele, usaremos <green>blocos de comando</green>, eles est\xE3o
+    \xE0 direita da sua tela."
+  - "Voc\xEA s\xF3 precisa arrast\xE1-los para a <green>zona de a\xE7\xE3o</green>
+    do B.O.P, que est\xE1 na parte de cima da tela. Simples. n\xE3o?"
+  - "Perdemos alguns blocos de comando por causa da bagun\xE7a do v\xEDrus, mas n\xE3o
+    criemos p\xE2nico! Podemos recuper\xE1-los a medida que formos consertando o
+    sistema."
+  - "Por agora, temos os seguintes comandos:  <green>Andar</green>, <green>Virar
+    \xE0 direita</green>, <green>Virar \xE0 esquerda</green> e <green>Agarrar</green>."
+  - "Podemos aprender como us\xE1-los praticando! Essa primeiros <green>n\xEDveis
+    de repara\xE7\xE3o</green> s\xE3o um bom ponto de partida."
+  - "Neles, temos <green>pacotes de dados</green> fora de suas <green>soquetes de
+    encaixe</green>. Use os comandos para fazer o B.O.P. chegar a at\xE9 eles e coloc\xE1-los
+    no lugar correto!"
+  - "Use o <green>Agarrar</green> para pegar os pacotes e solt\xE1-los nos soquetes."
