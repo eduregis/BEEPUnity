@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid, loopGrid;
     public LoopBox loopBox;
     public PlayerButton playerButton;
+    [SerializeField] private PhaseData currentPhaseData;
 
     void Start()
     {
@@ -17,28 +18,44 @@ public class PlayerController : MonoBehaviour
 
     private void SetupPhase()
     {
-        // Define a matriz do mapa
-        int[,] mapMatrix = new int[,]
+        if (currentPhaseData == null)
         {
-            {1, 1, 1, 1, 0},
-            {1, 3, 0, 1, 1},
-        };
+            Debug.LogError("PhaseData not assigned!");
+            return;
+        }
 
-        // Define a posição inicial do robô
-        Vector2Int initialPosition = new Vector2Int(0, 0);
+        // Obtém a matriz do mapa do ScriptableObject
+        int[,] mapMatrix = currentPhaseData.GetMapMatrix();
 
-        // Define as posições iniciais das caixas
-        List<Vector2Int> initialBoxes = new List<Vector2Int>
+        // Verifica se a posição inicial do robô está dentro dos limites
+        if (!IsPositionValid(currentPhaseData.robotInitialPosition, mapMatrix))
         {
-           // new Vector2Int(3, 1),
-        };
+            Debug.LogError("Robot initial position is invalid!");
+            return;
+        }
+
+        // Verifica as posições das caixas
+        foreach (var boxPos in currentPhaseData.boxesInitialPositions)
+        {
+            if (!IsPositionValid(boxPos, mapMatrix))
+            {
+                Debug.LogError($"Box position {boxPos} is invalid!");
+                return;
+            }
+        }
 
         // Configura o mapa e a posição inicial do robô
-        IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, initialBoxes);
-        RobotController.Instance.SetInitialPosition(initialPosition);
+        IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, currentPhaseData.boxesInitialPositions);
+        RobotController.Instance.SetInitialPosition(currentPhaseData.robotInitialPosition);
         RobotController.Instance.OnStepCompleted += HandleStepCompleted;
 
         ResetUI();
+    }
+
+    private bool IsPositionValid(Vector2Int position, int[,] mapMatrix)
+    {
+        return position.x >= 0 && position.x < mapMatrix.GetLength(1) &&
+            position.y >= 0 && position.y < mapMatrix.GetLength(0);
     }
 
     private void ResetUI() 
