@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     {
         { "magenta", "#e332aa" },
         { "blue", "#1479da" },
-        {"green", "#aedb16"}
+        { "green", "#aedb16"}
     };
 
     void Start()
