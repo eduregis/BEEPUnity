@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class GeneratedDraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -16,6 +16,12 @@ public class GeneratedDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHan
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
         commandItem = GetComponent<CommandItem>(); // Obtém o CommandItem
+    }
+
+    
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        AudioManager.Instance.Play("grabBlock");
     }
 
     public void OnBeginDrag(PointerEventData eventData)

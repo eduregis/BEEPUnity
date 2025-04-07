@@ -15,6 +15,7 @@ public class PlayerButton : MonoBehaviour
     public void ToggleButton() 
     {
         isPlaying = !isPlaying;
+        AudioManager.Instance.Play(isPlaying ? "playButton" : "stopButton");
         iconImage.sprite = isPlaying ? stop : play;
     }
 }

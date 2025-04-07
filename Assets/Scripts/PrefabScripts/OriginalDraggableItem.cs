@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class OriginalDraggableItem : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public GameObject generatedDraggableItemPrefab; // Prefab da cópia gerada
     private GameObject draggedItem; // Cópia que está sendo arrastada
@@ -12,6 +12,11 @@ public class OriginalDraggableItem : MonoBehaviour, IBeginDragHandler, IDragHand
     {
         canvas = GetComponentInParent<Canvas>();
         commandItem = GetComponent<CommandItem>(); // Obtém o CommandItem
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        AudioManager.Instance.Play("grabBlock");
     }
 
     public void OnBeginDrag(PointerEventData eventData)

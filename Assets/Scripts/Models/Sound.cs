@@ -1,7 +1,7 @@
 // AudioManager/Sound.cs
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Sound", menuName = "Audio/Sound")]
+[CreateAssetMenu(fileName = "Sound", menuName = "MyAudios/Sound")]
 public class Sound : ScriptableObject
 {
     public string soundName;

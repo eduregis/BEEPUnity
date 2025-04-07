@@ -103,6 +103,7 @@ public class InventoryGrid : MonoBehaviour
             if (slots[i].IsEmpty())
             {
                 slots[i].FillSlot(dropped);
+                 AudioManager.Instance.Play("dropBlock");
                 return;
             }
         }

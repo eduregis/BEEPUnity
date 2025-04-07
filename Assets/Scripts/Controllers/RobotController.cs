@@ -259,6 +259,7 @@ public class RobotController : MonoBehaviour
             {
                 // Cria uma nova caixa no destino
                 StartCoroutine(IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition));
+                AudioManager.Instance.Play("grabBox");
                 isHoldingBox = false;
                 UpdateAnimator(currentDirection);
             }
@@ -270,6 +271,7 @@ public class RobotController : MonoBehaviour
             {
                 // Remove e destrói a caixa do mapa
                 IsometricMapGenerator.Instance.RemoveBox(frontPosition);
+                AudioManager.Instance.Play("dropBox");
                 isHoldingBox = true;
                 UpdateAnimator(currentDirection);
             }

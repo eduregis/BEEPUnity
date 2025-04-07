@@ -224,6 +224,7 @@ public class PlayerController : MonoBehaviour
     public void ShowInstructorTip() 
     {
         CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
+        AudioManager.Instance.Play("defaultButton");
     }
 
     private bool CheckObjective()

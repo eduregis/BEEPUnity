@@ -22,6 +22,7 @@ public class ButtonController : MonoBehaviour
     private void OnButtonClicked()
     {
         GetComponent<Button>().interactable = false;
+        AudioManager.Instance.Play("defaultButton");
         
         switch(actionType)
         {
