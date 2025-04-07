@@ -258,7 +258,7 @@ public class RobotController : MonoBehaviour
             if (CanDropBox(frontPosition))
             {
                 // Cria uma nova caixa no destino
-                IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition);
+                StartCoroutine(IsometricMapGenerator.Instance.CreateBoxAtPosition(frontPosition));
                 isHoldingBox = false;
                 UpdateAnimator(currentDirection);
             }

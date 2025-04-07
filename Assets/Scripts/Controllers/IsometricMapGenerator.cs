@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class IsometricMapGenerator : MonoBehaviour
     public int[,] mapMatrix; // Matriz do mapa (será definida pelo PlayerController)
     public float tileWidth = 64f; // Largura do tile
     public float tileHeight = 48f; // Altura do tile
+    private float createAndDestroySpeed = 0.5f;
 
     public GameObject boxPrefab; // Prefab da caixa
     public GameObject infectedDataPrefab; // Prefab do dado infectado
@@ -49,7 +51,7 @@ public class IsometricMapGenerator : MonoBehaviour
                     position.x >= 0 && position.x < matrix.GetLength(1) &&
                     matrix[position.y, position.x] != (int)Constants.TileType.Empty) // Só coloca em tiles válidos
                 {
-                    CreateBoxAtPosition(position);
+                    StartCoroutine(CreateBoxAtPosition(position));
                 }
             }
         }
@@ -161,8 +163,9 @@ public class IsometricMapGenerator : MonoBehaviour
         return null;
     }
 
-    public void CreateBoxAtPosition(Vector2Int position)
+    public IEnumerator CreateBoxAtPosition(Vector2Int position)
     {
+        yield return new WaitForSeconds(createAndDestroySpeed);
         if (CanPlaceBoxAt(position))
         {
             GameObject boxObj = Instantiate(boxPrefab, transform);
@@ -188,10 +191,16 @@ public class IsometricMapGenerator : MonoBehaviour
         if (box != null)
         {
             boxesMatrix[position.y, position.x] = null;
-            Destroy(box.gameObject);
+            StartCoroutine(DestroyBox(box));
             UpdateTileVisual(position.x, position.y);
         }
         return box;
+    }
+
+    public IEnumerator DestroyBox(Box box)
+    {
+        yield return new WaitForSeconds(createAndDestroySpeed);
+        Destroy(box.gameObject);
     }
 
     public bool HasBoxAt(Vector2Int position)
@@ -223,7 +232,6 @@ public class IsometricMapGenerator : MonoBehaviour
             {
                 return child.GetComponent<RectTransform>();
             }
-
         }
         return null;
     }
@@ -248,7 +256,6 @@ public class IsometricMapGenerator : MonoBehaviour
 
     public bool CheckRecoveredData()
     {
-
         foreach (InfectedData infectedData in infectedDatas)
         {
             if (infectedData.isInfected)
