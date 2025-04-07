@@ -12,6 +12,7 @@ public class PhaseData : ScriptableObject
     [Header("Initial Positions")]
     public Vector2Int robotInitialPosition;
     public List<Vector2Int> boxesInitialPositions = new List<Vector2Int>();
+    public int availableCommands = 9;
 
     // Método para validar e ajustar os dados
     public void ValidateData()

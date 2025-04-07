@@ -28,14 +28,6 @@ public class CommandGrid : MonoBehaviour
         Conditional
     }
 
-    private void Start()
-    {
-        if (Application.isPlaying) // Gera comandos apenas durante a execução
-        {
-            GenerateCommands();
-        }
-    }
-
     private void OnDestroy()
     {
         // Limpa os comandos ao destruir o objeto (incluindo ao parar o jogo no Editor)
@@ -43,7 +35,7 @@ public class CommandGrid : MonoBehaviour
     }
 
     // Gera os comandos programaticamente
-    public void GenerateCommands()
+    public void GenerateCommands(int availableCommands)
     {
         if (commandPrefab == null)
         {
@@ -57,7 +49,7 @@ public class CommandGrid : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < commandCount; i++)
+        for (int i = 0; i < availableCommands; i++)
         {
             // Instancia o comando
             GameObject command = Instantiate(commandPrefab, transform);

@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid, loopGrid;
     public LoopBox loopBox;
     public PlayerButton playerButton;
+    public CommandGrid commandGrid;
+    public GameObject loopContainer, function1Container, function2Container, conditionalContainer;
     [SerializeField] private PhaseData currentPhaseData;
 
     void Start()
@@ -48,6 +50,13 @@ public class PlayerController : MonoBehaviour
         IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, currentPhaseData.boxesInitialPositions);
         RobotController.Instance.SetInitialPosition(currentPhaseData.robotInitialPosition);
         RobotController.Instance.OnStepCompleted += HandleStepCompleted;
+
+        commandGrid.GenerateCommands(currentPhaseData.availableCommands);
+        
+        loopContainer.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Loop);
+        function1Container.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Function1);
+        function2Container.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Function2);
+        conditionalContainer.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Conditional);
 
         ResetUI();
     }
@@ -167,16 +176,16 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerPressed()
     {
         playerButton.ToggleButton();
-        CanvasFadeController.Instance.ShowDialogue("Intro_0");
+        //CanvasFadeController.Instance.ShowDialogue("Intro_0");
         
-        /*if (playerButton.isPlaying) 
+        if (playerButton.isPlaying) 
         {
             StartCoroutine(ExecuteCommands());  
         }
         else 
         {
             SetupPhase();
-        }*/
+        }
     }
 
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)

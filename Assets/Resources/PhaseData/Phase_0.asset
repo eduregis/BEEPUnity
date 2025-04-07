@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b14676682aefb244a3d89ccfdf9fed9, type: 3}
   m_Name: Phase_0
   m_EditorClassIdentifier: 
-  mapWidth: 5
+  mapWidth: 3
   mapHeight: 2
-  mapData: 
+  mapData: 010000000100000002000000010000000000000001000000
   robotInitialPosition: {x: 0, y: 0}
-  boxesInitialPositions: []
+  boxesInitialPositions:
+  - {x: 1, y: 0}
+  availableCommands: 4

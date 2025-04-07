@@ -17,6 +17,24 @@ public class AppSettings : MonoBehaviour
         set => PlayerPrefs.SetString(nameof(DialogueName), value);
     }
 
+     public static string PhaseName
+    {
+        get => PlayerPrefs.GetString(nameof(PhaseName));
+        set => PlayerPrefs.SetString(nameof(PhaseName), value);
+    }
+
+    public static int HighestUnlockedLevel
+    {
+        get => PlayerPrefs.GetInt(nameof(HighestUnlockedLevel));
+        set => PlayerPrefs.SetInt(nameof(HighestUnlockedLevel), value);
+    }
+
+    public static int CurrentLevel
+    {
+        get => PlayerPrefs.GetInt(nameof(CurrentLevel));
+        set => PlayerPrefs.SetInt(nameof(CurrentLevel), value);
+    }
+
     private void Awake()
     {
         if (_instance != null && _instance != this) Destroy(gameObject);
