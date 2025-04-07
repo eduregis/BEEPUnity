@@ -16,6 +16,7 @@ public class IsometricMapGenerator : MonoBehaviour
     public GameObject infectedDataPrefab; // Prefab do dado infectado
     public Box[,] boxesMatrix; // Matriz para rastrear caixas
     public List<InfectedData> infectedDatas; // Vetor para armazenar Dados Infectados
+    private List<Tile> tiles;
 
     private void Awake()
     {
@@ -73,6 +74,8 @@ public class IsometricMapGenerator : MonoBehaviour
         int mapHeight = mapMatrix.GetLength(0);
         Vector3 offset = Utils.CalculateOffset();
         
+        tiles = new List<Tile>();
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
@@ -88,6 +91,7 @@ public class IsometricMapGenerator : MonoBehaviour
                     // Instancia o tile na posição calculada
                     GameObject tile = Instantiate(tilePrefab, tilePosition, Quaternion.identity, transform);
                     Tile tileScript = tile.GetComponent<Tile>();
+                    tiles.Add(tileScript);
                     tileScript.Initialize(mapMatrix, x, y, mapMatrix[y, x] == (int)Constants.TileType.Fitting);
                 }
             }
@@ -132,6 +136,14 @@ public class IsometricMapGenerator : MonoBehaviour
             boxesMatrix[y, x].isInFittingSpot = mapMatrix[y, x] == (int)Constants.TileType.Fitting;
             // Aqui você pode atualizar o visual da caixa (ex: mudar cor se estiver no encaixe)
         }
+    }
+
+    public void ConcludedPhase()
+    {
+        foreach (Tile tile in tiles)
+        {
+            tile.concluded = true;
+        } 
     }
 
     private Tile GetTileAtPosition(int x, int y)

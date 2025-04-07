@@ -214,6 +214,8 @@ public class PlayerController : MonoBehaviour
     {
         if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
             AppSettings.HighestUnlockedLevel++;
+
+        IsometricMapGenerator.Instance.ConcludedPhase();
         
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("ChooseLevelScene");

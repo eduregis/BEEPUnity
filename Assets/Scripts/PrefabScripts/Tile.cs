@@ -14,9 +14,12 @@ public class Tile : MonoBehaviour
     public int x { get; private set; }
     public int y { get; private set; }
 
+    public bool concluded = false;
+
     // Cores para a pulsação
     private Color color1 = new Color(0.89f, 0.20f, 0.67f); // #e332aa
     private Color color2 = new Color(0.08f, 0.47f, 0.85f); // #1479da
+    private Color colorConcluded = new Color(0.68f, 0.86f, 0.086f); // #aedb16
 
     private float pulseSpeed = 2f; // Velocidade da pulsação
     private float timeOffset;      // Offset de tempo para variar o efeito entre os tiles
@@ -90,8 +93,12 @@ public class Tile : MonoBehaviour
     void Update()
     {
         // Calcula a pulsação usando uma função senoidal
-        float t = Mathf.Sin(Time.time * pulseSpeed + timeOffset) * 0.5f + 0.5f;
-        Color currentColor = Color.Lerp(color1, color2, t);
+        Color currentColor = colorConcluded;
+        if (!concluded)
+        {
+            float t = Mathf.Sin(Time.time * pulseSpeed + timeOffset) * 0.5f + 0.5f;
+            currentColor = Color.Lerp(color1, color2, t);
+        }
 
         // Aplica a cor aos assets decorativos ativos
         if (lightCenter.gameObject.activeSelf)
