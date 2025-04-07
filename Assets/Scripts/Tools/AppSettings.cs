@@ -17,12 +17,6 @@ public class AppSettings : MonoBehaviour
         set => PlayerPrefs.SetString(nameof(DialogueName), value);
     }
 
-     public static string PhaseName
-    {
-        get => PlayerPrefs.GetString(nameof(PhaseName));
-        set => PlayerPrefs.SetString(nameof(PhaseName), value);
-    }
-
     public static int HighestUnlockedLevel
     {
         get => PlayerPrefs.GetInt(nameof(HighestUnlockedLevel));

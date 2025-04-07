@@ -20,11 +20,18 @@ public class PlayerController : MonoBehaviour
 
     private void SetupPhase()
     {
-        if (currentPhaseData == null)
+        if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
+            CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
+
+        PhaseData phaseData = Resources.Load<PhaseData>($"PhaseData/Phase_{AppSettings.CurrentLevel}");
+
+        if (phaseData == null)
         {
             Debug.LogError("PhaseData not assigned!");
             return;
         }
+
+        currentPhaseData = phaseData;
 
         // Obtém a matriz do mapa do ScriptableObject
         int[,] mapMatrix = currentPhaseData.GetMapMatrix();
@@ -37,7 +44,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Verifica as posições das caixas
-        foreach (var boxPos in currentPhaseData.boxesInitialPositions)
+        foreach (var boxPos in phaseData.boxesInitialPositions)
         {
             if (!IsPositionValid(boxPos, mapMatrix))
             {
@@ -176,7 +183,6 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerPressed()
     {
         playerButton.ToggleButton();
-        //CanvasFadeController.Instance.ShowDialogue("Intro_0");
         
         if (playerButton.isPlaying) 
         {

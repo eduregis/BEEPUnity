@@ -20,7 +20,11 @@ public class LevelSelectionManager : MonoBehaviour
 
     private void Start()
     {
-        AppSettings.HighestUnlockedLevel = 1;
+        if (AppSettings.HighestUnlockedLevel == 0)
+        {
+            CanvasFadeController.Instance.ShowDialogue("Intro");
+            AppSettings.HighestUnlockedLevel = 1;
+        }
         CreateLevelButtons();
     }
 
