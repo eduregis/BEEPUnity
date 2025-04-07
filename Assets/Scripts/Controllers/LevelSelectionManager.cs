@@ -40,7 +40,6 @@ public class LevelSelectionManager : MonoBehaviour
             if (levelText != null)
             {
                 levelText.text = i.ToString();
-                Debug.Log($"Texto do botão {i} definido como: {levelText.text}");
             }
             else
             {

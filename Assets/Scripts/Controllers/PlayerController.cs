@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -204,7 +205,23 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Objetivo concluído! Parando execução.");
             RobotController.Instance.StopExecution(); // Para a execução dos comandos
+
+            StartCoroutine(ConcludedPhase());
         }
+    }
+
+    private IEnumerator ConcludedPhase()
+    {
+        if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
+            AppSettings.HighestUnlockedLevel++;
+        
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("ChooseLevelScene");
+    }
+
+    public void ShowInstructorTip() 
+    {
+        CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
     }
 
     private bool CheckObjective()
