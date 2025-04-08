@@ -20,24 +20,49 @@ public class Slot : MonoBehaviour, IDropHandler
     }
 
     public void FillSlot(GameObject dropped) 
-    {
-        GeneratedDraggableItem draggableItem = dropped.GetComponent<GeneratedDraggableItem>();
-        if (draggableItem == null) return; // Verifica se o componente é nulo
+{
+    GeneratedDraggableItem draggableItem = dropped.GetComponent<GeneratedDraggableItem>();
+    
+    if (draggableItem == null) return;
 
-        if (IsEmpty())
+    bool validCommand = true;
+
+    if (grid.gridType != InventoryGrid.GridType.Main)
+    {
+        CommandGrid.CommandType commandType = draggableItem.commandItem.commandType;
+        switch(commandType)
         {
-            // Se o slot estiver vazio, aceita o bloco
-            draggableItem.parentToReturnTo = transform;
+            case CommandGrid.CommandType.Loop:
+            case CommandGrid.CommandType.Function1:
+            case CommandGrid.CommandType.Function2:
+            case CommandGrid.CommandType.Conditional:
+                validCommand = false;
+                break;
+            default:
+                break;
         }
-        else
-        {
-            // Se o slot já contém um bloco, troca os blocos de lugar
-            Transform existingBlock = transform.GetChild(0);
-            existingBlock.SetParent(draggableItem.parentToReturnTo);
-            existingBlock.localPosition = Vector3.zero;
-            draggableItem.parentToReturnTo = transform;
-        }
+        Debug.Log("Command Type: " + commandType.ToString() + ", Grid Type: " + grid.gridType.ToString());
     }
+
+    if (!validCommand)
+    {
+        Destroy(draggableItem.gameObject);
+        CanvasFadeController.Instance.ShowDialogue("InfiniteRecursion");
+        return;
+    }
+
+    if (IsEmpty())
+    {
+        draggableItem.parentToReturnTo = transform;
+    }
+    else
+    {
+        Transform existingBlock = transform.GetChild(0);
+        existingBlock.SetParent(draggableItem.parentToReturnTo);
+        existingBlock.localPosition = Vector3.zero;
+        draggableItem.parentToReturnTo = transform;
+    }
+}
 
     public void Highlight(bool enabled)
     {
