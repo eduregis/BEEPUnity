@@ -15,23 +15,30 @@ public class LearnButton : MonoBehaviour
     [SerializeField] private Image _decorationLine;
     [SerializeField] private TextMeshProUGUI _titleText;
 
-     private CanvasGroup _canvasGroup;
+    private CanvasGroup _canvasGroup;
     public CanvasGroup CanvasGroup => _canvasGroup ??= GetComponent<CanvasGroup>();
+    private LearnData _myData;
 
     public void Initialize(LearnData data)
     {
+        _myData = data;
         _titleText.text = data.title;
         _decorationLine.color = GetColorByTag(data.tag);
     }
-    
-    private Color GetColorByTag(LearnData.Tag tag)
+
+    private Color GetColorByTag(Constants.LearnTag tag)
     {
         return tag switch
         {
-            LearnData.Tag.Interface => interfaceColor,
-            LearnData.Tag.Concepts => conceptsColor,
-            LearnData.Tag.Characters => charactersColor,
+            Constants.LearnTag.Interface => interfaceColor,
+            Constants.LearnTag.Concepts => conceptsColor,
+            Constants.LearnTag.Characters => charactersColor,
             _ => Color.white
         };
+    }
+
+    public void OnClick()
+    {
+        LearnUIManager.Instance.DisplayLearnData(_myData);
     }
 }

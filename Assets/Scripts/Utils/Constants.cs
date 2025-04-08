@@ -8,4 +8,11 @@ public static class Constants
         Fitting = 2,
         InfectedData = 3
     }
+
+    public enum LearnTag { 
+        Interface, 
+        Concepts, 
+        Characters,
+        All,
+    }
 }

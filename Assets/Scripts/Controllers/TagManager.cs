@@ -5,7 +5,7 @@ public class TagManager : MonoBehaviour
 {
     [Header("Configurações")]
     [SerializeField] private RectTransform boxCentral;
-    [SerializeField] private List<LearnTag> tags = new List<LearnTag>();
+    [SerializeField] private List<LearnTag> tags = new();
     
     [Header("Otimização")]
     [SerializeField] private float clickCooldown = 0.3f;
@@ -22,7 +22,7 @@ public class TagManager : MonoBehaviour
         }
 
         LearnUIManager.Instance.ShowFilteredItems(
-            LearnDataManager.Instance.GetFilteredLearnData("All")
+            LearnDataManager.Instance.GetFilteredLearnData(Constants.LearnTag.All.ToString())
         );
     }
 
@@ -30,6 +30,10 @@ public class TagManager : MonoBehaviour
     {
         if (isProcessing || currentSelectedIndex == index) return;
         
+        LearnUIManager.Instance.ShowFilteredItems(
+            LearnDataManager.Instance.GetFilteredLearnData(tags[index].learnTag.ToString())
+        );
+
         StartCoroutine(ProcessTagSelection(index));
     }
 

@@ -2,15 +2,25 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.UI;
+using TMPro;
 
 public class LearnUIManager : MonoBehaviour
 {
     public static LearnUIManager Instance { get; private set; }
 
-    [Header("UI References")]
+    [Header("Button List References")]
     [SerializeField] private Transform _contentParent;
     [SerializeField] private LearnButton _learnButtonPrefab;
     [SerializeField] private ScrollRect _scrollRect;
+
+    [Header("Details References")]
+    [SerializeField] private GameObject _learnDisplayPanel;
+    [SerializeField] private RectTransform _titleContainer;
+    [SerializeField] private RectTransform _iconContainer;
+    [SerializeField] private RectTransform _descriptionContainer;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private TextMeshProUGUI _descriptionText;
+    [SerializeField] private Image _iconImage;
 
     [Header("Animation Settings")]
     [SerializeField] private float _buttonFadeInDuration = 0.3f;
@@ -72,5 +82,44 @@ public class LearnUIManager : MonoBehaviour
     private void ScrollToTop()
     {
         _scrollRect.verticalNormalizedPosition = 1;
+    }
+
+   public void DisplayLearnData(LearnData data)
+    {
+        _learnDisplayPanel.SetActive(true);
+        // Preenche os conteúdos
+        _titleText.text = data.title;
+        _descriptionText.text = data.description;
+
+        // Controle de visibilidade da imagem
+        bool hasIcon = data.icon != null;
+        _iconContainer.gameObject.SetActive(hasIcon);
+        
+        if (hasIcon)
+        {
+            _iconImage.sprite = data.icon;
+            _iconImage.preserveAspect = true;
+        }
+
+        // Configuração dinâmica dos layouts
+        ConfigureLayout(hasIcon);
+    }
+
+    private void ConfigureLayout(bool hasIcon)
+    {
+        // Ajusta os tamanhos preferidos
+        if (hasIcon)
+        {
+            _iconContainer.GetComponent<LayoutElement>().preferredHeight = 200; // Valor desejado quando visível
+            _descriptionContainer.GetComponent<LayoutElement>().flexibleHeight = 1;
+        }
+        else
+        {
+            _descriptionContainer.GetComponent<LayoutElement>().flexibleHeight = 1;
+        }
+
+        // Força reconstrução do layout
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_descriptionContainer);
+        Canvas.ForceUpdateCanvases();
     }
 }

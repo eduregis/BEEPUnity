@@ -23,12 +23,12 @@ public class LearnDataManager : MonoBehaviour
 
     public List<LearnData> GetFilteredLearnData(string filter)
     {
-        if (filter == "All")
+        if (filter == Constants.LearnTag.All.ToString())
         {
             return allLearnData.OrderBy(data => data.title).ToList();
         }
 
-        LearnData.Tag selectedTag = (LearnData.Tag)System.Enum.Parse(typeof(LearnData.Tag), filter);
+        Constants.LearnTag selectedTag = (Constants.LearnTag)System.Enum.Parse(typeof(Constants.LearnTag), filter);
         return allLearnData
             .Where(data => data.tag == selectedTag)
             .OrderBy(data => data.title)
@@ -37,8 +37,8 @@ public class LearnDataManager : MonoBehaviour
 
     public List<string> GetAllFilterOptions()
     {
-        List<string> options = new List<string> { "All" };
-        options.AddRange(System.Enum.GetNames(typeof(LearnData.Tag)));
+        List<string> options = new List<string> { Constants.LearnTag.All.ToString() };
+        options.AddRange(System.Enum.GetNames(typeof(Constants.LearnTag)));
         return options;
     }
 
