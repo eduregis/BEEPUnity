@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptionTexts:
   - "Vamos l\xE1! Est\xE1 vendo esse robozinho no centro da tela?"
-  - "Nosso amiguinho aqui, o <blue>B.O.P. (Bot Oper\xE1rio de Programa\xE7\xE3o)
-    </blue> ser\xE1 nossa chave para esse problema!"
+  - "Nosso amiguinho aqui, o <yellow>B.O.P. (Bot Oper\xE1rio de Programa\xE7\xE3o)
+    </yellow> ser\xE1 nossa chave para esse problema!"
   - "Para operarmos com ele, usaremos <green>blocos de comando</green>, eles est\xE3o
     \xE0 esquerda da sua tela."
   - "Voc\xEA s\xF3 precisa arrast\xE1-los para a <green>zona de a\xE7\xE3o</green>

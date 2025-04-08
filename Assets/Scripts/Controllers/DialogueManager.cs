@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<string, string> customTags = new() 
     {
         { "magenta", "#e332aa" },
-        { "blue", "#1479da" },
+        { "yellow", "#fe8305" },
         { "green", "#aedb16"}
     };
     private string[] voices = {"instructorVoice1", "instructorVoice2"};
