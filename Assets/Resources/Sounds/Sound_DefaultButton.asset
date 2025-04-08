@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7b794b935882745abac7a72c02fd64, type: 3}
   m_Name: Sound_DefaultButton
   m_EditorClassIdentifier: 
-  soundName: 
-  clip: {fileID: 0}
+  soundName: defaultButton
+  clip: {fileID: 8300000, guid: ee5daca93b427764796ed53d96968c73, type: 3}
   volume: 1
   pitch: 1
   loop: 0

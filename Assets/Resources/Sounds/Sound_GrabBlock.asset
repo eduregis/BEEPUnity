@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7b794b935882745abac7a72c02fd64, type: 3}
   m_Name: Sound_GrabBlock
   m_EditorClassIdentifier: 
-  soundName: 
+  soundName: grabBlock
   clip: {fileID: 8300000, guid: ee4d6bc8b396ed84e981b7873659eb86, type: 3}
   volume: 1
   pitch: 1

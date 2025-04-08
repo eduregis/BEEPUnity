@@ -7,6 +7,7 @@ public class ConditionalBox : MonoBehaviour
 
     public void TrashPressed() 
     {
+        AudioManager.Instance.Play("dump");
         inventoryIfGrid.ResetSlots();
         inventoryElseGrid.ResetSlots();
     }

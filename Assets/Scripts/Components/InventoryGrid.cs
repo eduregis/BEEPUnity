@@ -6,6 +6,7 @@ public class InventoryGrid : MonoBehaviour
 {
     [Header("Slot Settings")]
     public GameObject slotPrefab; // Prefab do slot
+    public GridType gridType; // identificador do grid
     public int slotCount = 5; // Número de slots
     public float spacing = -5f; // Espaçamento entre os slots
 
@@ -17,6 +18,15 @@ public class InventoryGrid : MonoBehaviour
 
 
     private List<CommandItem> commandItems = new List<CommandItem>();
+
+    public enum GridType
+    {
+        Main,
+        Loop,
+        Function1,
+        Function2,
+        Conditional,
+    }
 
     private void Start()
     {
@@ -103,7 +113,7 @@ public class InventoryGrid : MonoBehaviour
             if (slots[i].IsEmpty())
             {
                 slots[i].FillSlot(dropped);
-                 AudioManager.Instance.Play("dropBlock");
+                AudioManager.Instance.Play("dropBlock");
                 return;
             }
         }

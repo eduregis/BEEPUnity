@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b7b794b935882745abac7a72c02fd64, type: 3}
-  m_Name: Sound_PlayButton
+  m_Name: Sound_InstructorVoice1
   m_EditorClassIdentifier: 
-  soundName: playButton
-  clip: {fileID: 8300000, guid: 4dd510b5f3e5afa41b0f2740a547257c, type: 3}
-  volume: 1
-  pitch: 1
+  soundName: instructorVoice1
+  clip: {fileID: 8300000, guid: e631f587be354314488df41f6cf3cb96, type: 3}
+  volume: 0.028
+  pitch: 1.18
   loop: 0
   source: {fileID: 0}

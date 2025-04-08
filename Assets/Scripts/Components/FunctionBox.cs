@@ -8,6 +8,7 @@ public class FunctionBox : MonoBehaviour
 
     public void TrashPressed() 
     {
+        AudioManager.Instance.Play("dump");
         inventoryGrid.ResetSlots();
     }
 }

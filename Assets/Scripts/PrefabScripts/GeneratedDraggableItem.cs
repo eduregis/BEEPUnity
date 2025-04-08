@@ -7,7 +7,7 @@ public class GeneratedDraggableItem : MonoBehaviour, IPointerDownHandler, IBegin
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     public Transform parentToReturnTo = null;
-    private CommandItem commandItem; // Referência ao CommandItem
+    public CommandItem commandItem; // Referência ao CommandItem
     private InventoryGrid currentGrid;
 
     private void Awake()

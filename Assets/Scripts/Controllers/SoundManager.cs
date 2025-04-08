@@ -5,42 +5,54 @@ using System.Collections.Generic;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
-    
-    [SerializeField] private Sound[] sounds;
+
+    [SerializeField] private Sound[] globalSounds;
     private Dictionary<string, Sound> soundDictionary;
 
     private void Awake()
     {
+        // Implementação do Singleton persistente
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            InitializeAudioSources();
         }
         else
         {
             Destroy(gameObject);
-            return;
-        }
-
-        soundDictionary = new Dictionary<string, Sound>();
-        
-        foreach (Sound sound in sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-            // Configurações para reduzir latência:
-            sound.source.playOnAwake = false;
-            sound.source.ignoreListenerPause = true; // Opcional
-            sound.source.ignoreListenerVolume = true; // Opcional
-
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
-            sound.source.loop = sound.loop;
-            
-            soundDictionary.Add(sound.soundName, sound);
         }
     }
-    
+
+    private void InitializeAudioSources()
+    {
+        soundDictionary = new Dictionary<string, Sound>();
+        
+        foreach (Sound sound in globalSounds)
+        {
+            // Evita duplicação acidental de sons
+            if (!soundDictionary.ContainsKey(sound.soundName))
+            {
+                sound.source = gameObject.AddComponent<AudioSource>();
+                ConfigureAudioSource(sound);
+                soundDictionary.Add(sound.soundName, sound);
+            }
+            else
+            {
+                Debug.LogWarning($"Sound '{sound.soundName}' is duplicated in global sounds!");
+            }
+        }
+    }
+
+    private void ConfigureAudioSource(Sound sound)
+    {
+        sound.source.clip = sound.clip;
+        sound.source.volume = sound.volume;
+        sound.source.pitch = sound.pitch;
+        sound.source.loop = sound.loop;
+        sound.source.playOnAwake = false;
+    }
+
     public void Play(string soundName)
     {
         if (soundDictionary.TryGetValue(soundName, out Sound sound))
@@ -49,7 +61,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Sound: {soundName} not found!");
+            Debug.LogWarning($"Global sound '{soundName}' not found!");
         }
     }
     

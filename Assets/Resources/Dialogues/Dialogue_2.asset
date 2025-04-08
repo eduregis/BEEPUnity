@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
+  m_Name: Dialogue_2
+  m_EditorClassIdentifier: 
+  descriptionTexts:
+  - Hey, nada mal!
+  - "Nesse pr\xF3ximo, vamos precisar virar o B.O.P. algumas vezes, para isso, use
+    o <green>Virar \xE0 esquerda</green> e <green>Virar \xE0 direita</green>. O objetivo
+    continua sendo colocar o pacote no lugar certo."
+  - "Conto com voc\xEA!"

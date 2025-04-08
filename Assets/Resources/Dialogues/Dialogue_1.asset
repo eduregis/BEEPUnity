@@ -28,4 +28,9 @@ MonoBehaviour:
   - "Nesse n\xEDvel, temos um <green>pacote de dados</green> fora de seu <green>soquete
     de encaixe</green>. Use os comandos para fazer o B.O.P. chegar a at\xE9 o pacote
     e coloc\xE1-lo no lugar correto!"
+  - "Dessa maneira, constru\xEDmos nosso <magenta>algoritmo</magenta>!"
   - "Use o <green>Agarrar</green> para pegar os pacotes e solt\xE1-los nos soquetes."
+  - "Para testar, aperte  <green>bot\xE3o de a\xE7\xE3o</green>, que est\xE1 na <green>zona
+    de a\xE7\xE3o</green>"
+  - "Ah, se sentir que n\xE3o est\xE1 funcionando, aperte o <green>bot\xE3o de parar</green>,
+    que tamb\xE9m est\xE1 na <green>zona de a\xE7\xE3o</green>  e recomece, sem pressa!"

@@ -41,11 +41,13 @@ public class AuxiliarBox : MonoBehaviour
         if (isVisible)
         {
             // Move o painel para a posição escondida
+            AudioManager.Instance.Play("dropBlock");
             StartCoroutine(AnimatePanel(hiddenPosition));
         }
         else
         {
             // Move o painel para a posição visível
+            AudioManager.Instance.Play("grabBlock");
             StartCoroutine(AnimatePanel(visiblePosition));
         }
 

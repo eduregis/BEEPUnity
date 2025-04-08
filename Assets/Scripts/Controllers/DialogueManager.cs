@@ -21,6 +21,7 @@ public class DialogueManager : MonoBehaviour
         { "blue", "#1479da" },
         { "green", "#aedb16"}
     };
+    private string[] voices = {"instructorVoice1", "instructorVoice2"};
 
     void Start()
     {
@@ -110,6 +111,8 @@ public class DialogueManager : MonoBehaviour
             }
 
             if (!insideTag) {
+                int voiceIndex = Random.Range(0, voices.Length);
+                AudioManager.Instance.Play(voices[voiceIndex]);
                 yield return new WaitForSeconds(typingSpeed);  // Aguarda o tempo de digitação para o próximo caractere
             }
         }
