@@ -20,6 +20,10 @@ public class TagManager : MonoBehaviour
             int index = i;
             tags[i].button.onClick.AddListener(() => OnTagClicked(index));
         }
+
+        LearnUIManager.Instance.ShowFilteredItems(
+            LearnDataManager.Instance.GetFilteredLearnData("All")
+        );
     }
 
     private void OnTagClicked(int index)

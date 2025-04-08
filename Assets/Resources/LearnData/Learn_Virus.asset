@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: Learn_Virus
+  m_EditorClassIdentifier: 
+  id: 
+  tag: 1
+  title: "V\xEDrus"
+  description: "Um v\xEDrus de computador \xE9 um programa malicioso criado para
+    se espalhar e infectar sistemas, assim como um v\xEDrus biol\xF3gico. Ele se
+    replica inserindo c\xF3pias de si mesmo em outros arquivos ou programas leg\xEDtimos.
+    Quando o usu\xE1rio executa o arquivo infectado, o v\xEDrus \xE9 ativado e pode
+    causar danos, como corromper dados, roubar informa\xE7\xF5es ou at\xE9 controlar
+    o computador.\r\n\r\nOs v\xEDrus podem se espalhar por e-mails, pen drives, downloads
+    ou links suspeitos. Alguns ficam ocultos, enquanto outros exibem mensagens ou
+    travam o sistema. Para se proteger, \xE9 essencial usar antiv\xEDrus, evitar
+    arquivos desconhecidos e manter o sistema atualizado. Diferente de outros malwares,
+    como worms e trojans, um v\xEDrus precisa de um arquivo hospedeiro para funcionar,
+    mas todos representam riscos \xE0 seguran\xE7a digital."
+  icon: {fileID: 0}

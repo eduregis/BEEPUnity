@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 38f7013fa55b0ba4aa7e0eea708b5415
+guid: 7369d4e74b17f544c90a590db991d78e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8273641988920637087
-    second: BEEP_encyclopedia_button_0
+      213: -1659353750408179898
+    second: BEEP_encyclopedia_button 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BEEP_encyclopedia_button_0
+      name: BEEP_encyclopedia_button 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16901ab527e1e2d80800000000000000
-      internalID: -8273641988920637087
+      spriteID: 64f453e3e8ac8f8e0800000000000000
+      internalID: -1659353750408179898
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BEEP_encyclopedia_button_0: -8273641988920637087
+      BEEP_encyclopedia_button 1_0: -1659353750408179898
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

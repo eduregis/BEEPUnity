@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NewPhase", menuName = "MyPhases/Phase Data")]
+[CreateAssetMenu(fileName = "Phase", menuName = "MyPhases/Phase Data")]
 public class PhaseData : ScriptableObject
 {
     [Header("Map Configuration")]
