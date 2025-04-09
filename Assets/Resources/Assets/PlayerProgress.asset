@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db9f1be1ef706d41b9e961d7667ff96, type: 3}
   m_Name: PlayerProgress
   m_EditorClassIdentifier: 
-  unlockedLearnIds: []
+  unlockedLearnIds:
+  - virus
+  - beep
+  - ai
+  - repairLevel
+  - bop
+  - commandBlocks
+  - actionZone
+  - commandWalk
+  - commandTurnLeft
+  - commandTurnRight
+  - commandGrab
+  - dataPackage
+  - fittingSocket
+  - algorithm
+  - playButton
+  - stopButton

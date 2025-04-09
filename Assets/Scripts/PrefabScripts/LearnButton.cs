@@ -12,7 +12,6 @@ public class LearnButton : MonoBehaviour
     [SerializeField] private Color charactersColor = HexColorUtility.HexToColor("#fe8305");
 
     [Header("Assets")]
-    [SerializeField] private Image _decorationLine;
     [SerializeField] private TextMeshProUGUI _titleText;
 
     private CanvasGroup _canvasGroup;
@@ -23,7 +22,7 @@ public class LearnButton : MonoBehaviour
     {
         _myData = data;
         _titleText.text = data.title;
-        _decorationLine.color = GetColorByTag(data.tag);
+        _titleText.color = GetColorByTag(data.tag);
     }
 
     private Color GetColorByTag(Constants.LearnTag tag)

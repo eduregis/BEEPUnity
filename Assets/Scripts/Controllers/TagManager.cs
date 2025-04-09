@@ -52,6 +52,8 @@ public class TagManager : MonoBehaviour
         
         // Ajusta a ordem hierárquica
         UpdateHierarchyOrder(index);
+
+        AudioManager.Instance.Play("chooseLevel");
         
         yield return new WaitForSeconds(clickCooldown);
         isProcessing = false;

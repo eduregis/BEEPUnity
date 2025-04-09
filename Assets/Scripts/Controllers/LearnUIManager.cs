@@ -87,6 +87,8 @@ public class LearnUIManager : MonoBehaviour
 
    public void DisplayLearnData(LearnData data)
     {
+        AudioManager.Instance.Play("defaultButton");
+        
         _learnDisplayPanel.SetActive(true);
         // Preenche os conteúdos
         _titleText.text = data.title;

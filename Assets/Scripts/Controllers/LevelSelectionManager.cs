@@ -16,7 +16,7 @@ public class LevelSelectionManager : MonoBehaviour
     [SerializeField] private ButtonState buttonStates;
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform buttonsContainer;
-    [SerializeField] private int totalLevels = 18;
+    [SerializeField] private int totalLevels = 12;
 
     private void Start()
     {

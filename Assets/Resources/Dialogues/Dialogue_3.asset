@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
+  m_Name: Dialogue_3
+  m_EditorClassIdentifier: 
+  descriptionTexts:
+  - "Olha s\xF3, parece que conseguimos recuperar um novo bloco de comando! Isso
+    gra\xE7as a voc\xEA!"
+  - "\xC9 o bloco de <green>cura</green>. Est\xE1 junto aos outros blocos que t\xEDnhamos
+    antes."
+  - "O v\xEDrus corrompeu muitos dos nossos dados, nesse n\xEDvel podemos ver um
+    deles."
+  - "Felizmente, agora temos o recurso necess\xE1rio para lidar com isso!"
+  - "Deixe o B.O.P. em frente a um <yellow>dado corrompido</yellow> e utlize a <green>cura</green>
+    para aplicar uma <magenta>repara\xE7\xE3o de dados</magenta>."
+  learnIdentifiers:
+  - heal
+  - infectedData
+  - repairingData

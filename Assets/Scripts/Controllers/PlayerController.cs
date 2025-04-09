@@ -61,10 +61,10 @@ public class PlayerController : MonoBehaviour
 
         commandGrid.GenerateCommands(currentPhaseData.availableCommands);
         
-        loopContainer.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Loop);
-        function1Container.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Function1);
-        function2Container.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Function2);
-        conditionalContainer.SetActive(currentPhaseData.availableCommands >= (int)CommandGrid.CommandType.Conditional);
+        function1Container.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Function1);
+        function2Container.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Function2);
+        loopContainer.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Loop);
+        conditionalContainer.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Conditional);
 
         ResetUI();
     }

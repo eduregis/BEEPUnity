@@ -22,9 +22,9 @@ public class CommandGrid : MonoBehaviour
         TurnLeft,
         Grab,
         Heal,
-        Loop,
         Function1,
         Function2,
+        Loop,
         Conditional
     }
 
