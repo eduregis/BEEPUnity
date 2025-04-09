@@ -34,3 +34,16 @@ MonoBehaviour:
     de a\xE7\xE3o</green>"
   - "Ah, se sentir que n\xE3o est\xE1 funcionando, aperte o <green>bot\xE3o de parar</green>,
     que tamb\xE9m est\xE1 na <green>zona de a\xE7\xE3o</green>  e recomece, sem pressa!"
+  learnIdentifiers:
+  - bop
+  - commandBlocks
+  - actionZone
+  - commandWalk
+  - commandTurnLeft
+  - commandTurnRight
+  - commandGrab
+  - dataPackage
+  - fittingSocket
+  - algorithm
+  - playButton
+  - stopButton

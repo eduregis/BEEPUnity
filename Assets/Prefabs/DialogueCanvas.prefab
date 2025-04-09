@@ -446,6 +446,7 @@ MonoBehaviour:
   textDisplay: {fileID: 6267652535624575333}
   instructorController: {fileID: 132170207537888330}
   typingSpeed: 0.05
+  playerProgress: {fileID: 11400000, guid: 3a3ff0905e361ec4db745691e42d52b7, type: 2}
 --- !u!1 &6845316767143939361
 GameObject:
   m_ObjectHideFlags: 0

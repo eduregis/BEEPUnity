@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class TagManager : MonoBehaviour
@@ -6,6 +7,7 @@ public class TagManager : MonoBehaviour
     [Header("Configurações")]
     [SerializeField] private RectTransform boxCentral;
     [SerializeField] private List<LearnTag> tags = new();
+    [SerializeField] private Image line;
     
     [Header("Otimização")]
     [SerializeField] private float clickCooldown = 0.3f;
@@ -24,6 +26,8 @@ public class TagManager : MonoBehaviour
         LearnUIManager.Instance.ShowFilteredItems(
             LearnDataManager.Instance.GetFilteredLearnData(Constants.LearnTag.All.ToString())
         );
+
+        line.color = tags[0].color;
     }
 
     private void OnTagClicked(int index)
@@ -33,6 +37,8 @@ public class TagManager : MonoBehaviour
         LearnUIManager.Instance.ShowFilteredItems(
             LearnDataManager.Instance.GetFilteredLearnData(tags[index].learnTag.ToString())
         );
+
+        line.color = tags[index].color;
 
         StartCoroutine(ProcessTagSelection(index));
     }

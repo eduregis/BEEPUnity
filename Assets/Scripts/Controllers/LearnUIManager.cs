@@ -20,6 +20,7 @@ public class LearnUIManager : MonoBehaviour
     [SerializeField] private RectTransform _descriptionContainer;
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
+    [SerializeField] private ScrollToTop _descriptionScroll;
     [SerializeField] private Image _iconImage;
 
     [Header("Animation Settings")]
@@ -90,6 +91,7 @@ public class LearnUIManager : MonoBehaviour
         // Preenche os conteúdos
         _titleText.text = data.title;
         _descriptionText.text = data.description;
+        _descriptionScroll.ForceToTop();
 
         // Controle de visibilidade da imagem
         bool hasIcon = data.icon != null;

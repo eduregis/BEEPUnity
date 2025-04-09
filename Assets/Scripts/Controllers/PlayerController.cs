@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         AppSettings.IsPlaying = false;
-        AudioManager.Instance.Play("ost1");
         SetupPhase();
     }
 

@@ -6,7 +6,8 @@ public class LearnDataManager : MonoBehaviour
 {
     public static LearnDataManager Instance { get; private set; }
 
-    [SerializeField] private LearnData[] allLearnData;
+    [SerializeField] private List<LearnData> allLearnData;
+    [SerializeField] private PlayerProgressSO playerProgress;
 
     private void Awake()
     {
@@ -23,16 +24,27 @@ public class LearnDataManager : MonoBehaviour
 
     public List<LearnData> GetFilteredLearnData(string filter)
     {
-        if (filter == Constants.LearnTag.All.ToString())
+        // Filtra por conteúdos desbloqueados
+        var filteredData = allLearnData.Where(data => playerProgress.IsContentUnlocked(data.id));
+
+        // Aplica filtro adicional se não for "All"
+        if (filter != Constants.LearnTag.All.ToString())
         {
-            return allLearnData.OrderBy(data => data.title).ToList();
+            Constants.LearnTag selectedTag = (Constants.LearnTag)System.Enum.Parse(typeof(Constants.LearnTag), filter);
+            filteredData = filteredData.Where(data => data.tag == selectedTag);
         }
 
-        Constants.LearnTag selectedTag = (Constants.LearnTag)System.Enum.Parse(typeof(Constants.LearnTag), filter);
-        return allLearnData
-            .Where(data => data.tag == selectedTag)
-            .OrderBy(data => data.title)
-            .ToList();
+        return filteredData.OrderBy(data => data.title).ToList();
+    }
+
+     // Método para debug (opcional)
+    public void LogUnlockedContents()
+    {
+        Debug.Log("Conteúdos desbloqueados:");
+        foreach (var id in playerProgress.GetUnlockedContents())
+        {
+            Debug.Log($"- {id}");
+        }
     }
 
     public List<string> GetAllFilterOptions()

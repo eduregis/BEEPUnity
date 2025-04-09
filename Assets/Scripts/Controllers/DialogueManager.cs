@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     private Dialogue dialogue;
     private Coroutine typingCoroutine;
     private bool isTyping = false;
+    [SerializeField] private PlayerProgressSO playerProgress;
 
     private int index = 0;
     private Dictionary<string, string> customTags = new() 
@@ -45,6 +46,13 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError($"Diálogo não encontrado: Dialogue_{AppSettings.DialogueName}");
             yield break;
         }
+
+        foreach (string learnId in dialogue.learnIdentifiers)
+        {
+            playerProgress.UnlockLearnContent(learnId);
+        }
+
+        playerProgress.SaveProgress();
 
         GoToNextDialogue();
     }

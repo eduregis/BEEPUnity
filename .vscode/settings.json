@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BEEP.sln"
+    "dotnet.defaultSolution": "BEEPUnity.sln"
 }
