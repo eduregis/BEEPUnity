@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class LearnUIManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class LearnUIManager : MonoBehaviour
 
     [Header("Animation Settings")]
     [SerializeField] private float _buttonFadeInDuration = 0.3f;
+    private Coroutine currentAnimation; // Guarda a animação atual
+    private bool isPlayingAnimation; // Flag para controle
 
     private List<LearnButton> _activeButtons = new List<LearnButton>();
 
@@ -33,7 +36,6 @@ public class LearnUIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Opcional: DontDestroyOnLoad(gameObject) se precisar persistir entre cenas
         }
         else
         {
@@ -87,6 +89,12 @@ public class LearnUIManager : MonoBehaviour
 
    public void DisplayLearnData(LearnData data)
     {
+        if (data == null)
+        {
+            Debug.LogError("LearnData is null!");
+            return;
+        }
+
         AudioManager.Instance.Play("defaultButton");
         
         _learnDisplayPanel.SetActive(true);
@@ -95,35 +103,63 @@ public class LearnUIManager : MonoBehaviour
         _descriptionText.text = data.description;
         _descriptionScroll.ForceToTop();
 
-        // Controle de visibilidade da imagem
-        bool hasIcon = data.icon != null;
-        _iconContainer.gameObject.SetActive(hasIcon);
-        
-        if (hasIcon)
+        // Interrompe a animação atual se estiver rodando
+        if (currentAnimation != null)
         {
-            _iconImage.sprite = data.icon;
-            _iconImage.preserveAspect = true;
+            StopCoroutine(currentAnimation);
+            isPlayingAnimation = false;
         }
 
-        // Configuração dinâmica dos layouts
-        ConfigureLayout(hasIcon);
+        // Se não houver sprites, esconde a imagem
+        if (data == null || data.sprites == null || data.sprites.Length == 0)
+        {
+            SetImageAlpha(0f);
+            return;
+        }
+
+        // Mostra a imagem e inicia a animação em loop
+        SetImageAlpha(1f);
+        currentAnimation = StartCoroutine(PlayAnimationLoop(data.sprites));
     }
 
-    private void ConfigureLayout(bool hasIcon)
+    private IEnumerator PlayAnimationLoop(Sprite[] frames)
     {
-        // Ajusta os tamanhos preferidos
-        if (hasIcon)
-        {
-            _iconContainer.GetComponent<LayoutElement>().preferredHeight = 200; // Valor desejado quando visível
-            _descriptionContainer.GetComponent<LayoutElement>().flexibleHeight = 1;
-        }
-        else
-        {
-            _descriptionContainer.GetComponent<LayoutElement>().flexibleHeight = 1;
-        }
+        isPlayingAnimation = true;
+        int currentFrame = 0;
 
-        // Força reconstrução do layout
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_descriptionContainer);
-        Canvas.ForceUpdateCanvases();
+        while (isPlayingAnimation) // Loop infinito controlado
+        {
+            if (frames == null || frames.Length == 0) yield break;
+
+            // Atualiza o sprite
+            _iconImage.sprite = frames[currentFrame];
+            _iconImage.preserveAspect = true;
+
+            // Avança para o próximo frame (ou volta ao início)
+            currentFrame = (currentFrame + 1) % frames.Length;
+
+            // Espera um tempo antes do próximo frame
+            yield return new WaitForSeconds(0.1f); // Ajuste o tempo conforme necessário
+        }
+    }
+
+    private void SetImageAlpha(float alpha)
+    {
+        if (_iconImage != null)
+        {
+            Color newColor = _iconImage.color;
+            newColor.a = alpha;
+            _iconImage.color = newColor;
+        }
+    }
+
+    // Método para parar a animação manualmente (opcional)
+    public void StopAnimation()
+    {
+        if (currentAnimation != null)
+        {
+            StopCoroutine(currentAnimation);
+            isPlayingAnimation = false;
+        }
     }
 }

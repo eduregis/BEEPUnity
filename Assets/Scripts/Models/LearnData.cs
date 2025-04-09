@@ -7,5 +7,5 @@ public class LearnData : ScriptableObject
     public Constants.LearnTag tag;
     public string title;
     [TextArea(3,10)] public string description;
-    public Sprite icon;
+    public Sprite[] sprites;
 }
