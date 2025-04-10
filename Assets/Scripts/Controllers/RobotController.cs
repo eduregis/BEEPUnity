@@ -5,7 +5,6 @@ using UnityEngine;
 public class RobotController : MonoBehaviour
 {
     // Instância única do RobotController
-    public static RobotController Instance { get; private set; }
 
     // Delegate para notificar a conclusão de um passo
     public delegate void StepCompletedHandler(string step, InventoryGrid currentGrid);
@@ -31,18 +30,6 @@ public class RobotController : MonoBehaviour
 
     private void Awake()
     {
-        // Configura a instância única do RobotController
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            // Se já existir uma instância, destrói esta nova instância
-            Debug.LogWarning("Já existe uma instância do RobotController. Destruindo esta nova instância.");
-            Destroy(gameObject);
-        }
-
         // Obtém o componente Animator no Awake para garantir que ele seja atribuído corretamente
         animator = GetComponent<Animator>();
 

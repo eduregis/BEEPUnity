@@ -5,19 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
+    
+    private RobotController playerRobot;
     public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid, loopGrid;
     public LoopBox loopBox;
     public PlayerButton playerButton;
     public CommandGrid commandGrid;
     public GameObject loopContainer, function1Container, function2Container, conditionalContainer;
     [SerializeField] private PhaseData currentPhaseData;
+    [SerializeField] private GameObject robotPrefab;
 
     void Start()
     {
         AppSettings.IsPlaying = false;
         InitialSteps();
-        SetupPhase();
     }
 
     private void InitialSteps()
@@ -69,8 +70,14 @@ public class PlayerController : MonoBehaviour
 
         // Configura o mapa e a posição inicial do robô
         IsometricMapGenerator.Instance.SetMapMatrix(mapMatrix, currentPhaseData.boxesInitialPositions);
-        RobotController.Instance.SetInitialPosition(currentPhaseData.robotInitialPosition);
-        RobotController.Instance.OnStepCompleted += HandleStepCompleted;
+
+        GameObject robotObj = Instantiate(robotPrefab, IsometricMapGenerator.Instance.transform);
+        playerRobot = robotObj.GetComponent<RobotController>();
+
+        Debug.Log("gerando novo robô");
+
+        playerRobot.SetInitialPosition(currentPhaseData.robotInitialPosition);
+        playerRobot.OnStepCompleted += HandleStepCompleted;
 
         commandGrid.GenerateCommands(currentPhaseData.availableCommands);
         
@@ -185,10 +192,10 @@ public class PlayerController : MonoBehaviour
         currentGrid.HighlightCurrentStep();
         
         // Executa um único comando no RobotController, passando o grid atual
-        RobotController.Instance.ExecuteSingleCommand(command, currentGrid);
+        playerRobot.ExecuteSingleCommand(command, currentGrid);
 
         // Espera até que o comando seja concluído
-        while (RobotController.Instance.isMoving)
+        while (playerRobot.isMoving)
         {
             yield return null;
         }
@@ -204,7 +211,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
-            RobotController.Instance.StopExecution();
+            Destroy(playerRobot.gameObject);
             SetupPhase();
         }
     }
@@ -218,7 +225,7 @@ public class PlayerController : MonoBehaviour
         if (CheckObjective())
         {
             Debug.Log("Objetivo concluído! Parando execução.");
-            RobotController.Instance.StopExecution(); // Para a execução dos comandos
+            playerRobot.StopExecution(); // Para a execução dos comandos
 
             StartCoroutine(ConcludedPhase());
         }
@@ -270,6 +277,6 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        RobotController.Instance.OnStepCompleted -= HandleStepCompleted;
+        playerRobot.OnStepCompleted -= HandleStepCompleted;
     }
 }
