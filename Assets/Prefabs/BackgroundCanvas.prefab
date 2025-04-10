@@ -91,7 +91,7 @@ MonoBehaviour:
   gridColor1: {r: 0, g: 1, b: 1, a: 1}
   gridColor2: {r: 1, g: 0, b: 1, a: 1}
   backgroundColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
-  gridDensity: 10
+  gridDensity: 15
   lineWidth: 0.03
   scrollSpeed: {x: 0, y: 0.15}
   reverseAnimation: 1
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 914392281481124168}
   - component: {fileID: 4531069585346900103}
   - component: {fileID: 8611553633355789574}
-  - component: {fileID: 2892130106200021136}
+  - component: {fileID: 1246748629212516164}
   m_Layer: 5
   m_Name: 80S_Sunset
   m_TagString: Untagged
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2892130106200021136
+--- !u!114 &1246748629212516164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,10 +369,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainColor: {r: 1, g: 0.2, b: 0.4, a: 1}
   secondaryColor: {r: 1, g: 0.6, b: 0.2, a: 1}
-  sunSize: 0.51
-  sunEdgeSoftness: 0.01
+  sunSize: 0.37
+  sunEdgeSoftness: 0.005
   stripesColor: {r: 0, g: 0.8, b: 1, a: 1}
-  stripesWidth: 0.03
+  stripesWidth: 0.023
   stripesSoftness: 0
-  stripesSpeed: -0.1
+  stripesSpeed: -0.2
   stripesSpacing: 0.1

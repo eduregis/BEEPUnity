@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_80sSunsetUI
+  m_Name: UI_80sSunset
   m_Shader: {fileID: 4800000, guid: 3b40cfb66ab29924ca03924ac33d1017, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -35,11 +35,11 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _StripesSoftness: 0.05
+    - _StripesSoftness: 0
     - _StripesSpacing: 0.5
     - _StripesSpeed: 1
-    - _StripesWidth: 0.1
-    - _SunEdgeSoftness: 0.2
+    - _StripesWidth: 0.03
+    - _SunEdgeSoftness: 0.01
     - _SunSize: 0.5
     m_Colors:
     - _MainColor: {r: 1, g: 0.2, b: 0.4, a: 1}

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 [RequireComponent(typeof(Image))]
 public class RetroSunsetUIController : MonoBehaviour
 {
@@ -28,39 +28,24 @@ public class RetroSunsetUIController : MonoBehaviour
     private Material materialInstance;
     private Image image;
 
+    private Material sunsetMaterial;
+
     void OnEnable()
     {
-        image = GetComponent<Image>();
-        if (image != null)
-        {
-            // Create material instance if it doesn't exist
-            if (image.material != null && materialInstance == null)
-            {
-                materialInstance = new Material(image.material);
-                image.material = materialInstance;
-            }
-        }
+        CreateMaterialIfNeeded();
+        UpdateMaterialProperties();
     }
 
-    void UpdateMaterialProperties()
+    void Update()
     {
-        if (materialInstance != null)
-        {
-            // Update sun properties
-            materialInstance.SetColor("_MainColor", mainColor);
-            materialInstance.SetColor("_SecondaryColor", secondaryColor);
-            materialInstance.SetFloat("_SunSize", sunSize);
-            materialInstance.SetFloat("_SunEdgeSoftness", sunEdgeSoftness);
+        UpdateMaterialProperties();
+    }
 
-            // Update stripes properties
-            materialInstance.SetColor("_StripesColor", stripesColor);
-            materialInstance.SetFloat("_StripesWidth", stripesWidth);
-            materialInstance.SetFloat("_StripesSoftness", stripesSoftness);
-            materialInstance.SetFloat("_StripesSpeed", stripesSpeed);
-            materialInstance.SetFloat("_StripesSpacing", stripesSpacing);
-            
-            // Force the image to update
-            image.SetMaterialDirty();
+    void OnDisable()
+    {
+        if (sunsetMaterial != null && !Application.isPlaying)
+        {
+            DestroyImmediate(sunsetMaterial);
         }
     }
 
@@ -69,27 +54,38 @@ public class RetroSunsetUIController : MonoBehaviour
         UpdateMaterialProperties();
     }
 
-    void Update()
+    private void CreateMaterialIfNeeded()
     {
-        // Only needed if you want runtime changes
-        #if UNITY_EDITOR
-        if (!Application.isPlaying)
+        if (sunsetMaterial == null)
         {
-            UpdateMaterialProperties();
+            image = GetComponent<Image>();
+            sunsetMaterial = new Material(Shader.Find("UI/80sSunset"));
+            image.material = sunsetMaterial;
+            materialInstance = sunsetMaterial;
         }
-        #endif
     }
 
-    void Reset()
+
+    void UpdateMaterialProperties()
     {
-        mainColor = new Color(1f, 0.2f, 0.4f, 1f);
-        secondaryColor = new Color(1f, 0.6f, 0.2f, 1f);
-        sunSize = 0.5f;
-        sunEdgeSoftness = 0.2f;
-        stripesColor = new Color(0f, 0.8f, 1f, 1f);
-        stripesWidth = 0.1f;
-        stripesSoftness = 0.05f;
-        stripesSpeed = 1f;
-        stripesSpacing = 0.5f;
+        CreateMaterialIfNeeded();
+
+        if (materialInstance == null) return;
+
+        // Update sun properties
+        materialInstance.SetColor("_MainColor", mainColor);
+        materialInstance.SetColor("_SecondaryColor", secondaryColor);
+        materialInstance.SetFloat("_SunSize", sunSize);
+        materialInstance.SetFloat("_SunEdgeSoftness", sunEdgeSoftness);
+
+        // Update stripes properties
+        materialInstance.SetColor("_StripesColor", stripesColor);
+        materialInstance.SetFloat("_StripesWidth", stripesWidth);
+        materialInstance.SetFloat("_StripesSoftness", stripesSoftness);
+        materialInstance.SetFloat("_StripesSpeed", stripesSpeed);
+        materialInstance.SetFloat("_StripesSpacing", stripesSpacing);
+
+        image.SetMaterialDirty();
     }
+
 }

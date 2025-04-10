@@ -1,4 +1,4 @@
-Shader "UI/80sSunsetUI"
+Shader "UI/80sSunset"
 {
     Properties
     {
@@ -12,7 +12,7 @@ Shader "UI/80sSunsetUI"
         _StripesSoftness ("Stripes Softness", Range(0, 0.5)) = 0
         _StripesSpeed ("Stripes Speed", Float) = 1.0
         _StripesSpacing ("Stripes Spacing", Float) = 0.5
-        
+
         [HideInInspector] _StencilComp ("Stencil Comparison", Float) = 8
         [HideInInspector] _Stencil ("Stencil ID", Float) = 0
         [HideInInspector] _StencilOp ("Stencil Operation", Float) = 0
@@ -20,7 +20,7 @@ Shader "UI/80sSunsetUI"
         [HideInInspector] _StencilReadMask ("Stencil Read Mask", Float) = 255
         [HideInInspector] _ColorMask ("Color Mask", Float) = 15
     }
-    
+
     SubShader
     {
         Tags
@@ -31,7 +31,7 @@ Shader "UI/80sSunsetUI"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
-        
+
         Stencil
         {
             Ref [_Stencil]
@@ -40,14 +40,14 @@ Shader "UI/80sSunsetUI"
             ReadMask [_StencilReadMask]
             WriteMask [_StencilWriteMask]
         }
-        
+
         Cull Off
         Lighting Off
         ZWrite Off
         ZTest [unity_GUIZTestMode]
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask [_ColorMask]
-        
+
         Pass
         {
             CGPROGRAM
@@ -55,14 +55,14 @@ Shader "UI/80sSunsetUI"
             #pragma fragment frag
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
-            
+
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
                 float4 color : COLOR;
             };
-            
+
             struct v2f
             {
                 float2 uv : TEXCOORD0;
@@ -70,7 +70,7 @@ Shader "UI/80sSunsetUI"
                 float4 color : COLOR;
                 float4 worldPosition : TEXCOORD1;
             };
-            
+
             sampler2D _MainTex;
             fixed4 _MainColor;
             fixed4 _SecondaryColor;
@@ -83,7 +83,7 @@ Shader "UI/80sSunsetUI"
             float _StripesSpacing;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
-            
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -93,35 +93,33 @@ Shader "UI/80sSunsetUI"
                 o.color = v.color;
                 return o;
             }
-            
+
             fixed4 frag (v2f i) : SV_Target
             {
-                // Centered coordinates
                 float2 uv = i.uv - 0.5;
-                float distanceFromCenter = length(uv) * 2;
-                
-                // Sun gradient
-                float sun = smoothstep(_SunSize + _SunEdgeSoftness, _SunSize - _SunEdgeSoftness, distanceFromCenter);
-                fixed4 sunColor = lerp(_SecondaryColor, _MainColor, distanceFromCenter / _SunSize);
-                
+
+                // Linear vertical gradient inside sun
+                float sunMask = smoothstep(_SunSize + _SunEdgeSoftness, _SunSize - _SunEdgeSoftness, length(uv)); // Keep circular shape
+                fixed4 sunColor = lerp(_SecondaryColor, _MainColor, saturate(uv.y + 0.5));
+
                 // Animated stripes
                 float stripePos = (uv.y + 0.5) + _Time.y * _StripesSpeed;
                 float stripe = frac(stripePos / _StripesSpacing);
                 float stripeMask = smoothstep(_StripesWidth + _StripesSoftness, _StripesWidth - _StripesSoftness, abs(stripe - 0.5) * 2);
-                
-                // Combine sun with stripes
-                fixed4 col = sunColor * sun;
+
+                // Combine sun + stripes
+                fixed4 col = sunColor * sunMask;
                 col = lerp(_StripesColor, col, stripeMask);
-                
-                // Apply transparency based on sun
-                col.a = sun;
-                
+
+                // Alpha from sun mask
+                col.a = sunMask;
+
                 // Apply UI masking
                 col.a *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
-                
+
                 // Apply vertex color
                 col *= i.color;
-                
+
                 return col;
             }
             ENDCG
