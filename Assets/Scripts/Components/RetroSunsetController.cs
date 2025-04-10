@@ -1,61 +1,67 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[ExecuteAlways]
+[ExecuteInEditMode]
 [RequireComponent(typeof(Image))]
-public class RetroSunsetController : MonoBehaviour
+public class RetroSunsetUIController : MonoBehaviour
 {
-    [Header("Sun Colors")]
-    public Color sunColor1 = new Color(1, 0.5f, 0, 1);
-    public Color sunColor2 = new Color(1, 0.9f, 0.2f, 1);
-    [Range(0f, 1f)] public float opacity = 1f;
-    
-    [Header("Sun Settings")]
-    [Range(0.1f, 1f)] public float sunSize = 0.3f;
-    [Range(0.1f, 1f)] public float visiblePercentage = 0.7f;
-    
+    [Header("Sun Appearance")]
+    [ColorUsage(true, true)]
+    public Color mainColor = new Color(1f, 0.2f, 0.4f, 1f);
+    [ColorUsage(true, true)]
+    public Color secondaryColor = new Color(1f, 0.6f, 0.2f, 1f);
+    [Range(0, 1)]
+    public float sunSize = 0.5f;
+    [Range(0, 1)]
+    public float sunEdgeSoftness = 0.2f;
+
     [Header("Stripes Settings")]
-    [Range(1f, 20f)] public float stripesDensity = 5f;
-    [MinMaxRange(0.1f, 5f)] public MinMaxVector2 stripesSpeed = new MinMaxVector2(0.5f, 2f);
-    [MinMaxRange(0.01f, 0.2f)] public MinMaxVector2 stripesWidth = new MinMaxVector2(0.02f, 0.05f);
+    [ColorUsage(true, true)]
+    public Color stripesColor = new Color(0f, 0.8f, 1f, 1f);
+    [Range(0, 0.5f)]
+    public float stripesWidth = 0.1f;
+    [Range(0, 0.5f)]
+    public float stripesSoftness = 0.05f;
+    public float stripesSpeed = 1f;
+    public float stripesSpacing = 0.5f;
 
-    private Material sunMaterial;
+    private Material materialInstance;
     private Image image;
-
-    // Custom attribute para UI amigável no Inspector (editor)
-    public class MinMaxRangeAttribute : PropertyAttribute
-    {
-        public float Min;
-        public float Max;
-        
-        public MinMaxRangeAttribute(float min, float max)
-        {
-            Min = min;
-            Max = max;
-        }
-    }
 
     void OnEnable()
     {
         image = GetComponent<Image>();
-        CreateMaterialIfNeeded();
-        UpdateMaterialProperties();
-    }
-
-    void OnDisable()
-    {
-        if (sunMaterial != null)
+        if (image != null)
         {
-            if (Application.isPlaying)
-                Destroy(sunMaterial);
-            else
-                DestroyImmediate(sunMaterial);
+            // Create material instance if it doesn't exist
+            if (image.material != null && materialInstance == null)
+            {
+                materialInstance = new Material(image.material);
+                image.material = materialInstance;
+            }
         }
     }
 
-    void Update()
+    void UpdateMaterialProperties()
     {
-        UpdateMaterialProperties();
+        if (materialInstance != null)
+        {
+            // Update sun properties
+            materialInstance.SetColor("_MainColor", mainColor);
+            materialInstance.SetColor("_SecondaryColor", secondaryColor);
+            materialInstance.SetFloat("_SunSize", sunSize);
+            materialInstance.SetFloat("_SunEdgeSoftness", sunEdgeSoftness);
+
+            // Update stripes properties
+            materialInstance.SetColor("_StripesColor", stripesColor);
+            materialInstance.SetFloat("_StripesWidth", stripesWidth);
+            materialInstance.SetFloat("_StripesSoftness", stripesSoftness);
+            materialInstance.SetFloat("_StripesSpeed", stripesSpeed);
+            materialInstance.SetFloat("_StripesSpacing", stripesSpacing);
+            
+            // Force the image to update
+            image.SetMaterialDirty();
+        }
     }
 
     void OnValidate()
@@ -63,38 +69,27 @@ public class RetroSunsetController : MonoBehaviour
         UpdateMaterialProperties();
     }
 
-    private void CreateMaterialIfNeeded()
+    void Update()
     {
-        if (sunMaterial == null || image.material == null)
+        // Only needed if you want runtime changes
+        #if UNITY_EDITOR
+        if (!Application.isPlaying)
         {
-            sunMaterial = new Material(Shader.Find("UI/80sSunset"));
-            image.material = sunMaterial;
+            UpdateMaterialProperties();
         }
+        #endif
     }
 
-    private void UpdateMaterialProperties()
+    void Reset()
     {
-        if (sunMaterial == null || image.material == null)
-        {
-            CreateMaterialIfNeeded();
-            return;
-        }
-
-        if (image.material != sunMaterial)
-        {
-            sunMaterial = new Material(image.material);
-            image.material = sunMaterial;
-        }
-
-        sunMaterial.SetColor("_SunColor1", sunColor1);
-        sunMaterial.SetColor("_SunColor2", sunColor2);
-        sunMaterial.SetFloat("_Opacity", opacity);
-        sunMaterial.SetFloat("_SunSize", sunSize);
-        sunMaterial.SetFloat("_VisiblePercentage", visiblePercentage);
-        sunMaterial.SetFloat("_StripesDensity", stripesDensity);
-        sunMaterial.SetFloat("_MinStripesSpeed", stripesSpeed.min);
-        sunMaterial.SetFloat("_MaxStripesSpeed", stripesSpeed.max);
-        sunMaterial.SetFloat("_MinStripesWidth", stripesWidth.min);
-        sunMaterial.SetFloat("_MaxStripesWidth", stripesWidth.max);
+        mainColor = new Color(1f, 0.2f, 0.4f, 1f);
+        secondaryColor = new Color(1f, 0.6f, 0.2f, 1f);
+        sunSize = 0.5f;
+        sunEdgeSoftness = 0.2f;
+        stripesColor = new Color(0f, 0.8f, 1f, 1f);
+        stripesWidth = 0.1f;
+        stripesSoftness = 0.05f;
+        stripesSpeed = 1f;
+        stripesSpacing = 0.5f;
     }
 }

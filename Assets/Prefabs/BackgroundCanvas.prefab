@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 914392281481124168}
   - component: {fileID: 4531069585346900103}
   - component: {fileID: 8611553633355789574}
-  - component: {fileID: 3536563691000552109}
+  - component: {fileID: 2892130106200021136}
   m_Layer: 5
   m_Name: 80S_Sunset
   m_TagString: Untagged
@@ -355,7 +355,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3536563691000552109
+--- !u!114 &2892130106200021136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,15 +367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb13e3ba2a115042a1bdd5c217a1a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sunColor1: {r: 1, g: 0.5, b: 0, a: 1}
-  sunColor2: {r: 1, g: 0.9, b: 0.2, a: 1}
-  opacity: 1
-  sunSize: 0.3
-  visiblePercentage: 0.7
-  stripesDensity: 5.32
-  stripesSpeed:
-    min: 0.5
-    max: 2
-  stripesWidth:
-    min: 0.02
-    max: 0.5
+  mainColor: {r: 1, g: 0.2, b: 0.4, a: 1}
+  secondaryColor: {r: 1, g: 0.6, b: 0.2, a: 1}
+  sunSize: 0.51
+  sunEdgeSoftness: 0.01
+  stripesColor: {r: 0, g: 0.8, b: 1, a: 1}
+  stripesWidth: 0.03
+  stripesSoftness: 0
+  stripesSpeed: -0.1
+  stripesSpacing: 0.1

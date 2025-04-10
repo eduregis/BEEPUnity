@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_80sSunset
+  m_Name: UI_80sSunsetUI
   m_Shader: {fileID: 4800000, guid: 3b40cfb66ab29924ca03924ac33d1017, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,19 +29,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MaxStripesCount: 5
-    - _MaxStripesSpeed: 2
-    - _MaxStripesWidth: 0.05
-    - _MinStripesSpeed: 0.5
-    - _MinStripesWidth: 0.02
-    - _Opacity: 1
-    - _StripesDensity: 5
-    - _StripesFade: 0.5
-    - _SunSize: 0.3
-    - _VisiblePercentage: 0.7
+    - _ColorMask: 15
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _StripesSoftness: 0.05
+    - _StripesSpacing: 0.5
+    - _StripesSpeed: 1
+    - _StripesWidth: 0.1
+    - _SunEdgeSoftness: 0.2
+    - _SunSize: 0.5
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _SunColor1: {r: 1, g: 0.5, b: 0, a: 1}
-    - _SunColor2: {r: 1, g: 0.9, b: 0.2, a: 1}
+    - _MainColor: {r: 1, g: 0.2, b: 0.4, a: 1}
+    - _SecondaryColor: {r: 1, g: 0.6, b: 0.2, a: 1}
+    - _StripesColor: {r: 0, g: 0.8, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

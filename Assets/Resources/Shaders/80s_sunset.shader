@@ -1,25 +1,26 @@
-Shader "UI/80sSunset"
+Shader "UI/80sSunsetUI"
 {
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
+        _MainColor ("Main Color", Color) = (1, 0.2, 0.4, 1)
+        _SecondaryColor ("Secondary Color", Color) = (1, 0.6, 0.2, 1)
+        _SunSize ("Sun Size", Range(0, 1)) = 0.5
+        _SunEdgeSoftness ("Sun Edge Softness", Range(0, 1)) = 0.01
+        _StripesColor ("Stripes Color", Color) = (0, 0.8, 1, 1)
+        _StripesWidth ("Stripes Width", Range(0, 0.5)) = 0.03
+        _StripesSoftness ("Stripes Softness", Range(0, 0.5)) = 0
+        _StripesSpeed ("Stripes Speed", Float) = 1.0
+        _StripesSpacing ("Stripes Spacing", Float) = 0.5
         
-        _SunColor1 ("Sun Color 1", Color) = (1, 0.5, 0, 1)
-        _SunColor2 ("Sun Color 2", Color) = (1, 0.9, 0.2, 1)
-        
-        _SunSize ("Sun Size", Range(0.1, 1)) = 0.3
-        _VisiblePercentage ("Visible Percentage", Range(0.1, 1)) = 0.7
-        _Opacity ("Opacity", Range(0, 1)) = 1
-
-        _StripesDensity ("Stripes Density", Float) = 5
-        _MinStripesSpeed ("Min Stripes Speed", Float) = 0.5
-        _MaxStripesSpeed ("Max Stripes Speed", Float) = 2
-        _MinStripesWidth ("Min Stripes Width", Float) = 0.01
-        _MaxStripesWidth ("Max Stripes Width", Float) = 0.05
-        _StripesFade ("Fade Intensity", Range(0, 1)) = 0.5
+        [HideInInspector] _StencilComp ("Stencil Comparison", Float) = 8
+        [HideInInspector] _Stencil ("Stencil ID", Float) = 0
+        [HideInInspector] _StencilOp ("Stencil Operation", Float) = 0
+        [HideInInspector] _StencilWriteMask ("Stencil Write Mask", Float) = 255
+        [HideInInspector] _StencilReadMask ("Stencil Read Mask", Float) = 255
+        [HideInInspector] _ColorMask ("Color Mask", Float) = 15
     }
-
+    
     SubShader
     {
         Tags
@@ -30,102 +31,99 @@ Shader "UI/80sSunset"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
         }
-
+        
+        Stencil
+        {
+            Ref [_Stencil]
+            Comp [_StencilComp]
+            Pass [_StencilOp]
+            ReadMask [_StencilReadMask]
+            WriteMask [_StencilWriteMask]
+        }
+        
         Cull Off
         Lighting Off
         ZWrite Off
         ZTest [unity_GUIZTestMode]
         Blend SrcAlpha OneMinusSrcAlpha
-
+        ColorMask [_ColorMask]
+        
         Pass
         {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma target 2.0
-
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
-
-            struct appdata_t
+            
+            struct appdata
             {
-                float4 vertex   : POSITION;
-                float4 color    : COLOR;
-                float2 texcoord : TEXCOORD0;
-                UNITY_VERTEX_INPUT_INSTANCE_ID
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
             };
-
+            
             struct v2f
             {
-                float4 vertex   : SV_POSITION;
-                fixed4 color    : COLOR;
-                float2 texcoord : TEXCOORD0;
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+                float4 color : COLOR;
                 float4 worldPosition : TEXCOORD1;
-                UNITY_VERTEX_OUTPUT_STEREO
             };
-
-            fixed4 _SunColor1;
-            fixed4 _SunColor2;
+            
+            sampler2D _MainTex;
+            fixed4 _MainColor;
+            fixed4 _SecondaryColor;
             float _SunSize;
-            float _VisiblePercentage;
-            float _Opacity;
-
-            float _StripesDensity;
-            float _MinStripesSpeed;
-            float _MaxStripesSpeed;
-            float _MinStripesWidth;
-            float _MaxStripesWidth;
-            float _StripesFade;
-
-            v2f vert(appdata_t v)
+            float _SunEdgeSoftness;
+            fixed4 _StripesColor;
+            float _StripesWidth;
+            float _StripesSoftness;
+            float _StripesSpeed;
+            float _StripesSpacing;
+            fixed4 _TextureSampleAdd;
+            float4 _ClipRect;
+            
+            v2f vert (appdata v)
             {
-                v2f OUT;
-                UNITY_SETUP_INSTANCE_ID(v);
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
-                OUT.worldPosition = v.vertex;
-                OUT.vertex = UnityObjectToClipPos(OUT.worldPosition);
-                OUT.texcoord = v.texcoord;
-                OUT.color = v.color;
-                return OUT;
+                v2f o;
+                o.worldPosition = v.vertex;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                o.color = v.color;
+                return o;
             }
-
-            fixed4 frag(v2f IN) : SV_Target
+            
+            fixed4 frag (v2f i) : SV_Target
             {
-                float2 center = float2(0.5, 0.5);
-                float distanceToCenter = distance(IN.texcoord, center);
-                float sunCircle = smoothstep(_SunSize, _SunSize * 0.99, distanceToCenter);
-
-                float horizonLine = 0.5 - (_SunSize * (1.0 - _VisiblePercentage));
-                float visibility = step(horizonLine, IN.texcoord.y);
+                // Centered coordinates
+                float2 uv = i.uv - 0.5;
+                float distanceFromCenter = length(uv) * 2;
                 
-                float verticalPos = (IN.texcoord.y - horizonLine) / (_SunSize * 2 * _VisiblePercentage);
-                fixed4 sunColor = lerp(_SunColor1, _SunColor2, verticalPos);
-
-                // Calcula stripeY como base de deslocamento
-                float stripeIndex = floor(IN.texcoord.y * _StripesDensity);
-                float stripeBaseY = stripeIndex / _StripesDensity;
-                float stripeOffset = frac(stripeIndex * 17.17);
-                float stripeSpeed = lerp(_MaxStripesSpeed, _MinStripesSpeed, verticalPos);
-                float stripeWidth = lerp(_MaxStripesWidth, _MinStripesWidth, verticalPos);
-
-                float stripeY = frac(IN.texcoord.y * _StripesDensity - _Time.y * stripeSpeed + stripeOffset);
-
-                // Corte seco da faixa
-                float stripe = step(0.5 - stripeWidth * 0.5, stripeY) * step(stripeY, 0.5 + stripeWidth * 0.5);
-
-                // Máscara do círculo do sol (corte total fora dele)
-                float inSun = step(distanceToCenter, _SunSize); // 1 se dentro do círculo
-
-                // Recorta tudo fora da área visível
-                stripe *= inSun * visibility;
-
-                fixed4 color = sunColor * sunCircle * visibility;
-                color = lerp(color, fixed4(1,1,1,1), stripe);
-                color.a *= _Opacity * IN.color.a;
-
-                return color;
+                // Sun gradient
+                float sun = smoothstep(_SunSize + _SunEdgeSoftness, _SunSize - _SunEdgeSoftness, distanceFromCenter);
+                fixed4 sunColor = lerp(_SecondaryColor, _MainColor, distanceFromCenter / _SunSize);
+                
+                // Animated stripes
+                float stripePos = (uv.y + 0.5) + _Time.y * _StripesSpeed;
+                float stripe = frac(stripePos / _StripesSpacing);
+                float stripeMask = smoothstep(_StripesWidth + _StripesSoftness, _StripesWidth - _StripesSoftness, abs(stripe - 0.5) * 2);
+                
+                // Combine sun with stripes
+                fixed4 col = sunColor * sun;
+                col = lerp(_StripesColor, col, stripeMask);
+                
+                // Apply transparency based on sun
+                col.a = sun;
+                
+                // Apply UI masking
+                col.a *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
+                
+                // Apply vertex color
+                col *= i.color;
+                
+                return col;
             }
-
             ENDCG
         }
     }
