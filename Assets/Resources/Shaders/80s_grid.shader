@@ -17,6 +17,7 @@ Shader "UI/80sObliqueGrid"
         // Controles de Animação
         _ScrollSpeed ("Scroll Speed", Vector) = (0.3, 1, 0, 0)
         _ReverseAnimation ("Reverse Animation", Float) = 0
+        _VerticalSpeedMultiplier ("Vertical Speed Multiplier", Float) = 2.0
         
         // Controles de Perspectiva
         _Perspective ("Perspective Strength", Range(0, 1)) = 0.7
@@ -77,6 +78,7 @@ Shader "UI/80sObliqueGrid"
             float _LineWidth;
             float2 _ScrollSpeed;
             float _ReverseAnimation;
+            float _VerticalSpeedMultiplier;
             float _Perspective;
             float _HorizonPosition;
             float _HorizonDirection;
@@ -109,7 +111,10 @@ Shader "UI/80sObliqueGrid"
                 
                 // Coordenadas com scrolling (centralizadas em [-0.5, 0.5])
                 float2 centeredUV = IN.texcoord - float2(0.5, 0);
-                float2 scrolledUV = IN.texcoord + scrollDirection * _Time.y;
+                
+                // Fator de velocidade baseado na posição Y (quanto mais perto da base, mais rápido)
+                float speedFactor = 1.0 + (1.0 - IN.texcoord.y) * _VerticalSpeedMultiplier;
+                float2 scrolledUV = IN.texcoord + scrollDirection * _Time.y * float2(speedFactor, 1.0);
                 
                 // Linhas horizontais (largura constante)
                 float horizontalLines = abs(frac(scrolledUV.y * _GridDensity) - 0.5);
@@ -119,8 +124,8 @@ Shader "UI/80sObliqueGrid"
                 float perspective = 1.0 - _Perspective * (1.0 - IN.texcoord.y / _HorizonPosition);
                 float verticalPos = centeredUV.x / perspective;
                 
-                // Linhas verticais (centralizadas)
-                float verticalLines = abs(frac((verticalPos + 0.5) * _GridDensity) - 0.5);
+                // Linhas verticais (centralizadas) com velocidade variável
+                float verticalLines = abs(frac((verticalPos + 0.5) * _GridDensity + scrollDirection.x * _Time.y * speedFactor) - 0.5);
                 float verticalGrid = smoothstep(_LineWidth, _LineWidth + 0.01, verticalLines);
                 
                 // Combina as linhas

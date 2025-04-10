@@ -95,6 +95,7 @@ MonoBehaviour:
   lineWidth: 0.03
   scrollSpeed: {x: 0, y: 0.15}
   reverseAnimation: 1
+  verticalSpeedMultiplier: 4.9
   perspectiveStrength: 0.61
   horizonPosition: 0.264
   fadeLength: 0.5
@@ -369,10 +370,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainColor: {r: 1, g: 0.2, b: 0.4, a: 1}
   secondaryColor: {r: 1, g: 0.6, b: 0.2, a: 1}
-  sunSize: 0.37
-  sunEdgeSoftness: 0.005
-  stripesColor: {r: 0, g: 0.8, b: 1, a: 1}
-  stripesWidth: 0.023
+  sunSize: 0.33
+  sunEdgeSoftness: 0.001
+  stripesColor: {r: 1, g: 0.74509805, b: 1, a: 1}
+  stripesWidth: 0.1
   stripesSoftness: 0
-  stripesSpeed: -0.2
+  stripesSpeed: -0.02
   stripesSpacing: 0.1
+  horizonLine: 0.39
+  alphaMultiplier: 0.32

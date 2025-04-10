@@ -25,6 +25,14 @@ public class RetroSunsetUIController : MonoBehaviour
     public float stripesSpeed = 1f;
     public float stripesSpacing = 0.5f;
 
+    [Header("Horizon Line Mask")]
+    [Range(0, 1)]
+    public float horizonLine = 1f;
+
+    [Header("Alpha")]
+    [Range(0f, 1f)]
+    public float alphaMultiplier = 1f;
+
     private Material materialInstance;
     private Image image;
 
@@ -66,6 +74,7 @@ public class RetroSunsetUIController : MonoBehaviour
     }
 
 
+
     void UpdateMaterialProperties()
     {
         CreateMaterialIfNeeded();
@@ -84,6 +93,13 @@ public class RetroSunsetUIController : MonoBehaviour
         materialInstance.SetFloat("_StripesSoftness", stripesSoftness);
         materialInstance.SetFloat("_StripesSpeed", stripesSpeed);
         materialInstance.SetFloat("_StripesSpacing", stripesSpacing);
+
+        // Update horizon mask
+        materialInstance.SetFloat("_HorizonLine", horizonLine);
+
+        // Alpha
+        materialInstance.SetFloat("_AlphaMultiplier", alphaMultiplier);
+
 
         image.SetMaterialDirty();
     }

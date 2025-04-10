@@ -12,6 +12,8 @@ Shader "UI/80sSunset"
         _StripesSoftness ("Stripes Softness", Range(0, 0.5)) = 0
         _StripesSpeed ("Stripes Speed", Float) = 1.0
         _StripesSpacing ("Stripes Spacing", Float) = 0.5
+        _HorizonLine ("Horizon Line (Y cutoff)", Range(0, 1)) = 0.7
+        _AlphaMultiplier ("Alpha Multiplier", Range(0, 1)) = 1
 
         [HideInInspector] _StencilComp ("Stencil Comparison", Float) = 8
         [HideInInspector] _Stencil ("Stencil ID", Float) = 0
@@ -83,6 +85,8 @@ Shader "UI/80sSunset"
             float _StripesSpacing;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
+            float _HorizonLine;
+            float _AlphaMultiplier;
 
             v2f vert (appdata v)
             {
@@ -98,8 +102,15 @@ Shader "UI/80sSunset"
             {
                 float2 uv = i.uv - 0.5;
 
+                // Apply horizon line
+                float horizonY = _HorizonLine - 0.5;
+                float horizonMask = step(horizonY, uv.y);
+
                 // Linear vertical gradient inside sun
                 float sunMask = smoothstep(_SunSize + _SunEdgeSoftness, _SunSize - _SunEdgeSoftness, length(uv)); // Keep circular shape
+                sunMask *= horizonMask;
+
+                // Gradient color
                 fixed4 sunColor = lerp(_SecondaryColor, _MainColor, saturate(uv.y + 0.5));
 
                 // Animated stripes
@@ -108,17 +119,16 @@ Shader "UI/80sSunset"
                 float stripeMask = smoothstep(_StripesWidth + _StripesSoftness, _StripesWidth - _StripesSoftness, abs(stripe - 0.5) * 2);
 
                 // Combine sun + stripes
-                fixed4 col = sunColor * sunMask;
-                col = lerp(_StripesColor, col, stripeMask);
+                fixed4 col = lerp(_StripesColor, sunColor, stripeMask) * sunMask;
 
                 // Alpha from sun mask
                 col.a = sunMask;
 
                 // Apply UI masking
                 col.a *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
-
-                // Apply vertex color
                 col *= i.color;
+                col.a *= _AlphaMultiplier;
+
 
                 return col;
             }
