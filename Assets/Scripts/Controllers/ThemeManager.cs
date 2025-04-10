@@ -5,9 +5,10 @@ public class ThemeManager : MonoBehaviour
 {
     public static ThemeManager Instance { get; private set; }
 
-    public bool IsDarkMode { get; private set; } = false;
+    public bool IsDarkMode { get; private set; }
 
     public event Action OnThemeChanged;
+
 
     private void Awake()
     {
@@ -18,7 +19,10 @@ public class ThemeManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Opcional: se quiser manter entre cenas
+        DontDestroyOnLoad(gameObject);
+
+        // Carrega o estado salvo
+        IsDarkMode = AppSettings.DarkModeEnabled;
     }
 
     public void SetDarkMode(bool darkMode)
@@ -26,6 +30,8 @@ public class ThemeManager : MonoBehaviour
         if (IsDarkMode == darkMode) return;
 
         IsDarkMode = darkMode;
+        AppSettings.DarkModeEnabled = darkMode;
+
         OnThemeChanged?.Invoke();
     }
 

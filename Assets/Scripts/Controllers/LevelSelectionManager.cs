@@ -22,7 +22,7 @@ public class LevelSelectionManager : MonoBehaviour
     {
         if (AppSettings.HighestUnlockedLevel == 0)
         {
-            CanvasFadeController.Instance.ShowDialogue("Intro");
+            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, "Intro");
             AppSettings.HighestUnlockedLevel = 1;
         }
         CreateLevelButtons();
@@ -33,10 +33,10 @@ public class LevelSelectionManager : MonoBehaviour
         for (int i = 1; i <= totalLevels; i++)
         {
             GameObject buttonObj = Instantiate(buttonPrefab, buttonsContainer);
-            
+
             // Certifique-se de pegar o componente TMP_Text corretamente
             TMP_Text levelText = buttonObj.GetComponentInChildren<TMP_Text>(true);
-            
+
             if (levelText != null)
             {
                 levelText.text = i.ToString();

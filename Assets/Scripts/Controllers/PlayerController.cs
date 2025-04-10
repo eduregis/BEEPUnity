@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private void InitialSteps()
     {
         if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
-            CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
+            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, AppSettings.CurrentLevel.ToString());
 
         PhaseData phaseData = Resources.Load<PhaseData>($"PhaseData/Phase_{AppSettings.CurrentLevel}");
 
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         playerRobot.OnStepCompleted += HandleStepCompleted;
 
         commandGrid.GenerateCommands(currentPhaseData.availableCommands);
-        
+
         function1Container.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Function1);
         function2Container.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Function2);
         loopContainer.SetActive(currentPhaseData.availableCommands > (int)CommandGrid.CommandType.Loop);
@@ -109,10 +109,10 @@ public class PlayerController : MonoBehaviour
             position.y >= 0 && position.y < mapMatrix.GetLength(0);
     }
 
-    private void ResetUI() 
+    private void ResetUI()
     {
         playerGrid.ResetHighlights();
-        function1Grid.ResetHighlights(); 
+        function1Grid.ResetHighlights();
         function2Grid.ResetHighlights();
         conditionalIfGrid.ResetHighlights();
         conditionalElseGrid.ResetHighlights();
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
                 function2Grid.ResetHighlights();
                 currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
                 // Executa os comandos da function2, passando o function2Grid como grid atual
-                yield return ExecuteCommandList(function2Commands, function1Commands, function2Commands, function2Grid);               
+                yield return ExecuteCommandList(function2Commands, function1Commands, function2Commands, function2Grid);
                 Debug.Log("Function2 concluída. Retomando main...");
             }
             // Verifica se o comando é "Conditional"
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
             else if (command == "Loop")
             {
                 Debug.Log("Executando Loop...");
-                for (int loopIndex = 1; loopIndex <= loopBox.counter; loopIndex++) 
+                for (int loopIndex = 1; loopIndex <= loopBox.counter; loopIndex++)
                 {
                     loopGrid.ResetHighlights();
                     currentGrid.HighlightCurrentStep(); // Atualiza o highlight da "main"
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     {
         // Ativa o highlight no grid atual
         currentGrid.HighlightCurrentStep();
-        
+
         // Executa um único comando no RobotController, passando o grid atual
         playerRobot.ExecuteSingleCommand(command, currentGrid);
 
@@ -218,12 +218,12 @@ public class PlayerController : MonoBehaviour
     public void OnPlayerPressed()
     {
         playerButton.ToggleButton();
-        
-        if (playerButton.isPlaying) 
+
+        if (playerButton.isPlaying)
         {
-            StartCoroutine(ExecuteCommands());  
+            StartCoroutine(ExecuteCommands());
         }
-        else 
+        else
         {
             Destroy(playerRobot.gameObject);
             SetupPhase();
@@ -251,14 +251,14 @@ public class PlayerController : MonoBehaviour
             AppSettings.HighestUnlockedLevel++;
 
         IsometricMapGenerator.Instance.ConcludedPhase();
-        
+
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("ChooseLevelScene");
     }
 
-    public void ShowInstructorTip() 
+    public void ShowInstructorTip()
     {
-        CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
+        CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, AppSettings.CurrentLevel.ToString());
         AudioManager.Instance.Play("defaultButton");
     }
 
@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
         // Verifica se todas as caixas estão nos encaixes (valores 2)
         int[,] map = IsometricMapGenerator.Instance.mapMatrix;
         Box[,] boxes = IsometricMapGenerator.Instance.boxesMatrix;
-        
+
         for (int y = 0; y < map.GetLength(0); y++)
         {
             for (int x = 0; x < map.GetLength(1); x++)

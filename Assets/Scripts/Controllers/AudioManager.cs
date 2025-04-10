@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
     private void InitializeAudioSources()
     {
         soundDictionary = new Dictionary<string, Sound>();
-        
+
         foreach (Sound sound in globalSounds)
         {
             // Evita duplicação acidental de sons
@@ -57,6 +57,11 @@ public class AudioManager : MonoBehaviour
     {
         if (soundDictionary.TryGetValue(soundName, out Sound sound))
         {
+            float volume = sound.soundType == Constants.SoundType.OST
+                ? AppSettings.OSTVolume
+                : AppSettings.SFXVolume;
+
+            sound.source.volume = volume;
             sound.source.Play();
         }
         else
@@ -64,7 +69,8 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Global sound '{soundName}' not found!");
         }
     }
-    
+
+
     public void Stop(string soundName)
     {
         if (soundDictionary.TryGetValue(soundName, out Sound sound))
@@ -76,7 +82,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Sound: {soundName} not found!");
         }
     }
-    
+
     // Métodos adicionais que você pode precisar
     public bool IsPlaying(string soundName)
     {
@@ -84,20 +90,44 @@ public class AudioManager : MonoBehaviour
         {
             return sound.source.isPlaying;
         }
-        
+
         Debug.LogWarning($"Sound: {soundName} not found!");
         return false;
     }
-    
+
     public void SetVolume(string soundName, float volume)
     {
         if (soundDictionary.TryGetValue(soundName, out Sound sound))
         {
-            sound.source.volume = volume;
+            sound.volume = volume;
+
+            // Se for OST e estiver tocando, aplica em tempo real
+            if (sound.soundType == Constants.SoundType.OST && sound.source.isPlaying)
+            {
+                sound.source.volume = volume;
+            }
         }
         else
         {
             Debug.LogWarning($"Sound: {soundName} not found!");
         }
     }
+
+    public void ApplyOSTVolume(float volume)
+    {
+        foreach (var pair in soundDictionary)
+        {
+            Sound sound = pair.Value;
+            if (sound.soundType == Constants.SoundType.OST)
+            {
+                sound.volume = volume;
+                if (sound.source.isPlaying)
+                {
+                    sound.source.volume = volume;
+                }
+            }
+        }
+    }
+
+
 }
