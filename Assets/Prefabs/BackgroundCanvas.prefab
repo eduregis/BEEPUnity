@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridColor1: {r: 0, g: 1, b: 1, a: 1}
   gridColor2: {r: 1, g: 0, b: 1, a: 1}
-  backgroundColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+  backgroundColor: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 0}
   gridDensity: 15
   lineWidth: 0.03
   scrollSpeed: {x: 0, y: 0.15}
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 648154738721939543}
   - component: {fileID: 8676199131473770902}
   - component: {fileID: 4405215357840598188}
+  - component: {fileID: 8916004505078691400}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -922087431922332556, guid: 8723bf2e091eb0041947741f50410a5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a20d1d8030d587543900eca76b17cfce, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -176,6 +177,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8916004505078691400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548549629150976031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd040523ba4a7449ad9bc798889a8d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightSprite: {fileID: -922087431922332556, guid: 8723bf2e091eb0041947741f50410a5e, type: 3}
+  darkSprite: {fileID: 21300000, guid: a20d1d8030d587543900eca76b17cfce, type: 3}
 --- !u!1 &4220118404089715469
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +203,7 @@ GameObject:
   - component: {fileID: 6323691114117736726}
   - component: {fileID: 2783465733993207368}
   - component: {fileID: 3042189243614464567}
+  - component: {fileID: 5498669347917948727}
   m_Layer: 5
   m_Name: BackgroundCanvas
   m_TagString: Untagged
@@ -280,6 +296,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5498669347917948727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4220118404089715469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55df05a20bfeb7349aa763749e7d1bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7680016464776046001
 GameObject:
   m_ObjectHideFlags: 0
