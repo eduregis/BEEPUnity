@@ -95,6 +95,7 @@ public class RobotController : MonoBehaviour
     public void StopExecution()
     {
         shouldStopExecution = true; // Sinaliza para a corrotina parar
+        animator.Update(0);
     }
 
     // Corrotina para executar os comandos sequencialmente

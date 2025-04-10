@@ -16,10 +16,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         AppSettings.IsPlaying = false;
+        InitialSteps();
         SetupPhase();
     }
 
-    private void SetupPhase()
+    private void InitialSteps()
     {
         if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
             CanvasFadeController.Instance.ShowDialogue(AppSettings.CurrentLevel.ToString());
@@ -34,6 +35,18 @@ public class PlayerController : MonoBehaviour
 
         currentPhaseData = phaseData;
 
+        playerGrid.GenerateSlots(currentPhaseData.mainLength);
+        function1Grid.GenerateSlots(currentPhaseData.function1Length);
+        function2Grid.GenerateSlots(currentPhaseData.function2Length);
+        loopGrid.GenerateSlots(currentPhaseData.loopLength);
+        conditionalIfGrid.GenerateSlots(currentPhaseData.ifLength);
+        conditionalElseGrid.GenerateSlots(currentPhaseData.elseLength);
+
+        SetupPhase();
+    }
+
+    private void SetupPhase()
+    {
         // Obtém a matriz do mapa do ScriptableObject
         int[,] mapMatrix = currentPhaseData.GetMapMatrix();
 
@@ -45,7 +58,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Verifica as posições das caixas
-        foreach (var boxPos in phaseData.boxesInitialPositions)
+        foreach (var boxPos in currentPhaseData.boxesInitialPositions)
         {
             if (!IsPositionValid(boxPos, mapMatrix))
             {
@@ -191,6 +204,7 @@ public class PlayerController : MonoBehaviour
         }
         else 
         {
+            RobotController.Instance.StopExecution();
             SetupPhase();
         }
     }

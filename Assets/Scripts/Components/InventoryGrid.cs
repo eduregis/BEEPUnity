@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode] // Permite visualizar as mudanças no Editor
 public class InventoryGrid : MonoBehaviour
 {
     [Header("Slot Settings")]
@@ -27,15 +26,6 @@ public class InventoryGrid : MonoBehaviour
         Function2,
         Conditional,
     }
-
-    private void Start()
-    {
-        if (Application.isPlaying) // Gera slots apenas durante a execução
-        {
-            GenerateSlots();
-        }
-    }
-
     private void OnDestroy()
     {
         // Limpa os slots ao destruir o objeto (incluindo ao parar o jogo no Editor)
@@ -43,13 +33,16 @@ public class InventoryGrid : MonoBehaviour
     }
 
     // Gera os slots programaticamente
-    public void GenerateSlots()
+    public void GenerateSlots(int? count = null)
     {
         if (slotPrefab == null)
         {
             Debug.LogError("Slot Prefab não foi atribuído.");
             return;
         }
+
+        if (count != null)
+            slotCount = (int)count;
 
         slots = new Slot[slotCount];
 
@@ -69,8 +62,7 @@ public class InventoryGrid : MonoBehaviour
             slot.GetComponent<RectTransform>().sizeDelta = new Vector2(slotWidth, slotHeight);
 
             // Obtém o componente Slot do objeto instanciado
-            Slot slotComponent = slot.GetComponent<Slot>();
-            if (slotComponent != null)
+            if (slot.TryGetComponent<Slot>(out var slotComponent))
             {
                 // Atribui a referência do InventoryGrid ao Slot
                 slotComponent.grid = this;

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: bop
   m_EditorClassIdentifier: 
   id: bop
-  tag: 1
+  tag: 2
   title: B.O.P.
-  description: "Bot Oper\xE1rio de Porgrama\xE7\xE3o, \xE9 o robozinho que recebe
+  description: "Bot Oper\xE1rio de Programa\xE7\xE3o, \xE9 o robozinho que recebe
     e executa os comandos do jogador.\n"
   sprites:
   - {fileID: 7798593883137561189, guid: d15a1e8b01f2cb24cb4efccc8e816992, type: 3}
