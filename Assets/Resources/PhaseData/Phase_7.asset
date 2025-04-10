@@ -18,3 +18,9 @@ MonoBehaviour:
   robotInitialPosition: {x: 1, y: 5}
   boxesInitialPositions: []
   availableCommands: 7
+  mainLength: 10
+  function1Length: 5
+  function2Length: 5
+  loopLength: 6
+  ifLength: 6
+  elseLength: 6

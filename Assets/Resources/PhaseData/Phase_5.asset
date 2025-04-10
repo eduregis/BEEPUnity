@@ -19,3 +19,9 @@ MonoBehaviour:
   boxesInitialPositions:
   - {x: 2, y: 0}
   availableCommands: 5
+  mainLength: 12
+  function1Length: 6
+  function2Length: 6
+  loopLength: 6
+  ifLength: 6
+  elseLength: 6

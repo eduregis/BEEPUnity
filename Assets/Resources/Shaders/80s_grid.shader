@@ -1,5 +1,4 @@
-// UI/80sObliqueGridFinal.shader
-Shader "UI/80sObliqueGridFinal"
+Shader "UI/80sObliqueGrid"
 {
     Properties
     {
@@ -7,7 +6,8 @@ Shader "UI/80sObliqueGridFinal"
         _Color ("Tint", Color) = (1,1,1,1)
         
         // Cores
-        _GridColor ("Grid Color", Color) = (0, 1, 1, 1)
+        _GridColor1 ("Grid Color 1", Color) = (0, 1, 1, 1) // Cyan
+        _GridColor2 ("Grid Color 2", Color) = (1, 0, 1, 1) // Magenta
         _BackgroundColor ("Background Color", Color) = (0, 0, 0.1, 1)
         
         // Parâmetros do Grid
@@ -23,6 +23,7 @@ Shader "UI/80sObliqueGridFinal"
         _HorizonPosition ("Horizon Position", Range(0, 1)) = 0.6
         _HorizonDirection ("Horizon Direction", Float) = 1 // 1 para cima, -1 para baixo
         _FadeLength ("Fade Length", Range(0.01, 0.5)) = 0.2
+        _MinFadeAlpha ("Min Fade Alpha", Range(0, 0.5)) = 0.15
     }
 
     SubShader
@@ -69,7 +70,8 @@ Shader "UI/80sObliqueGridFinal"
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            fixed4 _GridColor;
+            fixed4 _GridColor1;
+            fixed4 _GridColor2;
             fixed4 _BackgroundColor;
             float _GridDensity;
             float _LineWidth;
@@ -79,6 +81,7 @@ Shader "UI/80sObliqueGridFinal"
             float _HorizonPosition;
             float _HorizonDirection;
             float _FadeLength;
+            float _MinFadeAlpha;
 
             v2f vert(appdata_t v)
             {
@@ -123,18 +126,21 @@ Shader "UI/80sObliqueGridFinal"
                 // Combina as linhas
                 float grid = min(horizontalGrid, verticalGrid);
                 
-                // Efeito de fade no horizonte (funciona para ambas as direções)
+                // Interpola entre as duas cores do grid baseado na posição Y
+                fixed4 gridColor = lerp(_GridColor1, _GridColor2, IN.texcoord.y);
+                
+                // Efeito de fade no horizonte com alpha mínimo
                 float fadeStart = _HorizonPosition - _FadeLength;
                 float fadeEnd = _HorizonPosition;
                 float distanceFade;
                 
                 if (_HorizonDirection > 0)
-                    distanceFade = 1.0 - smoothstep(fadeStart, fadeEnd, IN.texcoord.y);
+                    distanceFade = lerp(_MinFadeAlpha, 1.0, 1.0 - smoothstep(fadeStart, fadeEnd, IN.texcoord.y));
                 else
-                    distanceFade = smoothstep(1.0 - fadeEnd, 1.0 - fadeStart, IN.texcoord.y);
+                    distanceFade = lerp(_MinFadeAlpha, 1.0, smoothstep(1.0 - fadeEnd, 1.0 - fadeStart, IN.texcoord.y));
                 
                 // Cor final
-                fixed4 color = lerp(_GridColor, _BackgroundColor, grid);
+                fixed4 color = lerp(gridColor, _BackgroundColor, grid);
                 color.a *= distanceFade * IN.color.a;
                 
                 return color;

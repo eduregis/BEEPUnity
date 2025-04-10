@@ -5,14 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    
     private RobotController playerRobot;
-    public InventoryGrid playerGrid, function1Grid, function2Grid, conditionalIfGrid, conditionalElseGrid, loopGrid;
+    [Header("Grids")]
+    public InventoryGrid playerGrid;
+    public InventoryGrid function1Grid;
+    public InventoryGrid function2Grid;
+    public InventoryGrid conditionalIfGrid;
+    public InventoryGrid conditionalElseGrid;
+    public InventoryGrid loopGrid;
+
+    [Header("Containers")]
+    public GameObject loopContainer;
+    public GameObject function1Container;
+    public GameObject function2Container;
+    public GameObject conditionalContainer;
+
+    [Header("Assets")]
     public LoopBox loopBox;
     public PlayerButton playerButton;
     public CommandGrid commandGrid;
-    public GameObject loopContainer, function1Container, function2Container, conditionalContainer;
+
+    [Header("Phase Data")]
     [SerializeField] private PhaseData currentPhaseData;
+
+    [Header("Prefabs")]
     [SerializeField] private GameObject robotPrefab;
 
     void Start()
@@ -73,8 +89,6 @@ public class PlayerController : MonoBehaviour
 
         GameObject robotObj = Instantiate(robotPrefab, IsometricMapGenerator.Instance.transform);
         playerRobot = robotObj.GetComponent<RobotController>();
-
-        Debug.Log("gerando novo robô");
 
         playerRobot.SetInitialPosition(currentPhaseData.robotInitialPosition);
         playerRobot.OnStepCompleted += HandleStepCompleted;

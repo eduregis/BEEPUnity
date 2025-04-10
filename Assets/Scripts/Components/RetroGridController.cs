@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 [ExecuteAlways]
 [RequireComponent(typeof(Image))]
-public class FinalRetroGridController : MonoBehaviour
+public class RetroGridController : MonoBehaviour
 {
-    [Header("Grid Appearance")]
-    public Color gridColor = new Color(0, 1, 1, 1);
-    public Color backgroundColor = new Color(0, 0, 0.2f, 1);
+    [Header("Grid Colors")]
+    public Color gridColor1 = HexColorUtility.HexToColor("#00FFFF"); // Cyan
+    public Color gridColor2 = HexColorUtility.HexToColor("#FF00FF"); // Magenta
+    public Color backgroundColor = HexColorUtility.HexToColor("#AAAAAA");
+    
+    [Header("Grid Settings")]
     [Range(10, 200)] public float gridDensity = 80f;
     [Range(0.01f, 0.1f)] public float lineWidth = 0.03f;
     
@@ -19,6 +22,7 @@ public class FinalRetroGridController : MonoBehaviour
     [Range(0, 1)] public float perspectiveStrength = 0.7f;
     [Range(0.1f, 0.9f)] public float horizonPosition = 0.6f;
     [Range(0.01f, 0.5f)] public float fadeLength = 0.2f;
+    [Range(0, 0.5f)] public float minFadeAlpha = 0.15f;
     public enum HorizonDirection { Up, Down }
     public HorizonDirection horizonDirection = HorizonDirection.Up;
 
@@ -53,7 +57,7 @@ public class FinalRetroGridController : MonoBehaviour
         if (gridMaterial == null)
         {
             Image image = GetComponent<Image>();
-            gridMaterial = new Material(Shader.Find("UI/80sObliqueGridFinal"));
+            gridMaterial = new Material(Shader.Find("UI/80sObliqueGrid"));
             image.material = gridMaterial;
         }
     }
@@ -63,16 +67,23 @@ public class FinalRetroGridController : MonoBehaviour
         if (gridMaterial == null)
             CreateMaterialIfNeeded();
 
-        gridMaterial.SetColor("_GridColor", gridColor);
+        // Grid properties
+        gridMaterial.SetColor("_GridColor1", gridColor1);
+        gridMaterial.SetColor("_GridColor2", gridColor2);
         gridMaterial.SetColor("_BackgroundColor", backgroundColor);
         gridMaterial.SetFloat("_GridDensity", gridDensity);
         gridMaterial.SetFloat("_LineWidth", lineWidth);
+        
+        // Animation
         gridMaterial.SetVector("_ScrollSpeed", scrollSpeed);
         gridMaterial.SetFloat("_ReverseAnimation", reverseAnimation ? 1 : 0);
+        
+        // Perspective
         gridMaterial.SetFloat("_Perspective", perspectiveStrength);
         gridMaterial.SetFloat("_HorizonPosition", horizonPosition);
         gridMaterial.SetFloat("_HorizonDirection", horizonDirection == HorizonDirection.Up ? 1 : -1);
         gridMaterial.SetFloat("_FadeLength", fadeLength);
+        gridMaterial.SetFloat("_MinFadeAlpha", minFadeAlpha);
     }
 
     public void SetHorizonDirection(bool upwards)
