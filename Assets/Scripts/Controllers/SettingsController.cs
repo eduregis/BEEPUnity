@@ -24,7 +24,6 @@ public class SettingsController : MonoBehaviour
     private void OnSFXSliderChanged(float value)
     {
         AppSettings.SFXVolume = value;
-        // Apenas salva — AudioManager usará esse valor ao dar Play()
     }
 
     private void OnOSTSliderChanged(float value)
@@ -42,6 +41,7 @@ public class SettingsController : MonoBehaviour
 
     private void OnToggleChanged(bool isOn)
     {
+        AudioManager.Instance.Play("defaultButton");
         ThemeManager.Instance.ToggleTheme();
     }
 

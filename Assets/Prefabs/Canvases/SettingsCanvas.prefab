@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7170371810853194033}
   - component: {fileID: 6897435077409011411}
+  - component: {fileID: 8396403115748498412}
   - component: {fileID: 5981561708661400958}
   m_Layer: 5
   m_Name: Handle
@@ -35,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6897435077409011411
 CanvasRenderer:
@@ -45,6 +46,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501466145986899040}
   m_CullTransparentMesh: 1
+--- !u!114 &8396403115748498412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501466145986899040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b6970df1cac4b4e98180d4cc6a27aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5981561708661400958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +78,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bfbacb6340352a446802f3c08fad1606, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e21fd4eb3de1dd648822933cc1889c54, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -664,6 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906518528171618330}
   - component: {fileID: 8949713843808015793}
+  - component: {fileID: 1942007874147223590}
   - component: {fileID: 4241988652886064917}
   m_Layer: 5
   m_Name: Handle
@@ -689,7 +703,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 0}
+  m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8949713843808015793
 CanvasRenderer:
@@ -699,6 +713,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2943915491298727714}
   m_CullTransparentMesh: 1
+--- !u!114 &1942007874147223590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2943915491298727714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b6970df1cac4b4e98180d4cc6a27aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4241988652886064917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,7 +745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bfbacb6340352a446802f3c08fad1606, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e21fd4eb3de1dd648822933cc1889c54, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
