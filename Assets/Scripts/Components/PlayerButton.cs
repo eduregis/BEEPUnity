@@ -12,8 +12,9 @@ public class PlayerButton : MonoBehaviour
 
     public bool isPlaying = false;
 
-    public void ToggleButton() 
+    public void ToggleButton()
     {
+        AppSettings.IsPlaying = !AppSettings.IsPlaying;
         isPlaying = !isPlaying;
         AudioManager.Instance.Play(isPlaying ? "playButton" : "stopButton");
         iconImage.sprite = isPlaying ? stop : play;

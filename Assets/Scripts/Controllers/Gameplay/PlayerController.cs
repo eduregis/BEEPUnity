@@ -208,16 +208,19 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator ExecuteSingleCommand(string command, InventoryGrid currentGrid)
     {
-        // Ativa o highlight no grid atual
-        currentGrid.HighlightCurrentStep();
-
-        // Executa um único comando no RobotController, passando o grid atual
-        playerRobot.ExecuteSingleCommand(command, currentGrid);
-
-        // Espera até que o comando seja concluído
-        while (playerRobot.isMoving)
+        if (AppSettings.IsPlaying)
         {
-            yield return null;
+            // Ativa o highlight no grid atual
+            currentGrid.HighlightCurrentStep();
+
+            // Executa um único comando no RobotController, passando o grid atual
+            playerRobot.ExecuteSingleCommand(command, currentGrid);
+
+            // Espera até que o comando seja concluído
+            while (playerRobot.isMoving)
+            {
+                yield return null;
+            }
         }
     }
 
@@ -231,11 +234,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Destroy(playerRobot.gameObject);
-            SetupPhase();
+            StartCoroutine(StopPlayer());
         }
     }
 
+    private IEnumerator StopPlayer()
+    {
+        playerRobot.StopExecution();
+        Destroy(playerRobot.gameObject);
+        yield return new WaitForSeconds(0.5f);
+        SetupPhase();
+    }
     private void HandleStepCompleted(string step, InventoryGrid currentGrid)
     {
         // Destaca o passo atual no grid correto
