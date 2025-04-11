@@ -11,7 +11,8 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // Implementação do Singleton persistente
+        Debug.Log($"AudioManager instancia ativa: {gameObject.GetInstanceID()}");
+
         if (Instance == null)
         {
             Instance = this;
@@ -20,6 +21,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("AudioManager duplicado e destruído");
             Destroy(gameObject);
         }
     }
@@ -69,7 +71,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning($"Global sound '{soundName}' not found!");
         }
     }
-
 
     public void Stop(string soundName)
     {
@@ -128,6 +129,4 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-
-
 }

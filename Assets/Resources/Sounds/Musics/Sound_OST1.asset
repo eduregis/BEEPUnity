@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundName: ost1
   clip: {fileID: 8300000, guid: d45817363efe4664fa9f2300290d7d42, type: 3}
-  volume: 0.399
+  volume: 0.16266415
   pitch: 1
   loop: 1
+  soundType: 1
   source: {fileID: 0}
