@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Phase_9
   m_EditorClassIdentifier: 
   mapWidth: 5
-  mapHeight: 2
-  mapData: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  mapHeight: 5
+  mapData: 01000000010000000100000001000000020000000000000000000000000000000100000000000000000000000000000000000000010000000000000000000000000000000000000001000000000000000000000000000000000000000200000000000000
   robotInitialPosition: {x: 0, y: 0}
-  boxesInitialPositions: []
-  availableCommands: 9
-  mainLength: 12
-  function1Length: 6
-  function2Length: 6
+  boxesInitialPositions:
+  - {x: 2, y: 0}
+  - {x: 3, y: 2}
+  availableCommands: 8
+  mainLength: 1
+  function1Length: 0
+  function2Length: 0
   loopLength: 6
   ifLength: 6
   elseLength: 6

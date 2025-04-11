@@ -27,3 +27,5 @@ MonoBehaviour:
   - functionBlock
   - function
   - code
+  - slot
+  - functionZone

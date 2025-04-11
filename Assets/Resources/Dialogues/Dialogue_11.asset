@@ -12,5 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
   m_Name: Dialogue_11
   m_EditorClassIdentifier: 
-  descriptionTexts: []
-  learnIdentifiers: []
+  descriptionTexts:
+  - "Excelente! recuperamos o \xFAltimo comando perdido!"
+  - "Mas n\xE3o quer dizer que terminamos! ainda temos bagun\xE7a pra resolver!"
+  - "E esse comando \xE9 bem importante, \xE9 o comando de <green>Condicional <sprite
+    name=\"conditional\"></green>. Ele tem comportamentos diferentes dependendo se
+    alguma condi\xE7\xE3o for atendida."
+  - "Ele possui 2 linhas de comando, uma para caso a condi\xE7\xE3o for atendida,
+    e outra se n\xE3o for."
+  - "Preste bem aten\xE7\xE3o, a condi\xE7\xE3o que deve ser atendida \xE9 se o <yellow>B.O.P.</yellow>
+    estiver <magenta>segurando uma caixa!</magenta>"
+  - "Para a sequ\xEAncia de comandos que voc\xEA queira que execute se o B.O.P. estiver
+    segurando uma caixa, arraste-os para a fileira de slots do lado da palavra <green>\"Se\"</green>.
+    Para os que queira que execute caso ele n\xE3o esteja com a caixa, arraste para
+    os fileira de slots do lado da palavra <green>\"Sen\xE3o\"</green>."
+  - "Ambos est\xE3o na aba do canto inferior direito da tela, chamada de <green>zona
+    de condicional</green>."
+  learnIdentifiers:
+  - if
+  - else
+  - conditional
+  - conditionalZone

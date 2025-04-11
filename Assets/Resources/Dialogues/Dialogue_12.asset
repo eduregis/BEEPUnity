@@ -12,5 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
   m_Name: Dialogue_12
   m_EditorClassIdentifier: 
-  descriptionTexts: []
-  learnIdentifiers: []
+  descriptionTexts:
+  - "Ufa, chegamos ao \xFAltimo n\xEDvel! N\xE3o ter\xEDamos conseguido sem voc\xEA!"
+  - "Mas ainda n\xE3o \xE9 hora de relaxar, esse \xFAltimo \xE9 bem complicadinho..."
+  - "Mas nada que n\xE3o consigamos resolver! Veja, parece que vamos precisar fazer
+    v\xE1rios testes se o B.O.P. est\xE1 ou n\xE3o segurando uma caixa..."
+  - "Voc\xEA pode combinar alguns comandos para resolver isso! Experimente usar uma
+    <green>Condicional <sprite name=\"conditional\"></green> dentro da <green>zona
+    de repeti\xE7\xE3o</green>. Combinar fun\xE7\xF5es \xE9 uma habilidade muito
+    \xFAtil para programadores!"
+  - "Por\xE9m, cuidado! Chamar fun\xE7\xF5es dentro de outras pode gerar uma <magenta>recurs\xE3o
+    infinita</magenta>! Tenha sempre aten\xE7\xE3o em como est\xE1 chamando suas
+    fun\xE7\xF5es!"
+  - "Bom, sei que voc\xEA vai ser cuidadoso, n\xE3o preciso me preocupar! Manda bala!"
+  learnIdentifiers:
+  - infiniteRecursion
