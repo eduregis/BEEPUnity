@@ -40,6 +40,8 @@ public class PlayerProgressSO : ScriptableObject
     public void ResetProgress()
     {
         unlockedLearnIds.Clear();
+        PlayerPrefs.DeleteKey(SAVE_KEY); // Remove do PlayerPrefs
+        PlayerPrefs.Save();
     }
 
     public void SaveProgress()

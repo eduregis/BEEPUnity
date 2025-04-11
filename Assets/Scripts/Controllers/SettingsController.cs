@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
@@ -6,6 +7,7 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider ostSlider;
     [SerializeField] private Toggle darkModeToggle;
+    [SerializeField] private PlayerProgressSO playerProgress;
 
     private void Awake()
     {
@@ -43,6 +45,13 @@ public class SettingsController : MonoBehaviour
     {
         AudioManager.Instance.Play("defaultButton");
         ThemeManager.Instance.ToggleTheme();
+    }
+
+    public void ResetAll()
+    {
+        AppSettings.ResetAllPreferences();
+        playerProgress.ResetProgress();
+        SceneManager.LoadScene("HomeScene");
     }
 
     public void DismissButton()

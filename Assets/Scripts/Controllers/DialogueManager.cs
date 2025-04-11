@@ -16,13 +16,13 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private PlayerProgressSO playerProgress;
 
     private int index = 0;
-    private Dictionary<string, string> customTags = new() 
+    private Dictionary<string, string> customTags = new()
     {
         { "magenta", "#e332aa" },
         { "yellow", "#fe8305" },
         { "green", "#aedb16"}
     };
-    private string[] voices = {"instructorVoice1", "instructorVoice2"};
+    private string[] voices = { "instructorVoice1", "instructorVoice2" };
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Espera um frame para garantir que tudo foi inicializado
         yield return new WaitForSeconds(0.5f);
-        
+
         if (string.IsNullOrEmpty(AppSettings.DialogueName))
         {
             Debug.LogError("Nome do diálogo não definido!");
@@ -57,30 +57,41 @@ public class DialogueManager : MonoBehaviour
         GoToNextDialogue();
     }
 
-    public void TypeText(string text) 
+    public void TypeText(string text)
     {
         // Processar as tags personalizadas antes de começar a digitação
         fullText = ReplaceCustomTags(text);
         isTyping = true;
-        if (typingCoroutine != null) {
+        if (typingCoroutine != null)
+        {
             StopCoroutine(typingCoroutine);
         }
         typingCoroutine = StartCoroutine(TypeRoutine(fullText));
     }
 
-    public void CompleteTyping() {
-        if (isTyping) {
+    public void CompleteTyping()
+    {
+        if (isTyping)
+        {
             StopCoroutine(typingCoroutine);
             textDisplay.text = fullText; // Exibir o texto completo com formatação
             isTyping = false;
             typingCoroutine = null;
-        } else {
+        }
+        else
+        {
             index++;
             instructorController.ChangeArmAnimation();
             GoToNextDialogue();
         }
     }
-    private void GoToNextDialogue() 
+
+    public void SkipDialogue()
+    {
+        CanvasFadeController.Instance.HideCanvas();
+    }
+
+    private void GoToNextDialogue()
     {
         if (dialogue == null || dialogue.descriptionTexts == null || dialogue.descriptionTexts.Count == 0)
         {
@@ -89,23 +100,24 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (dialogue.descriptionTexts.Count > index) 
+        if (dialogue.descriptionTexts.Count > index)
         {
             TypeText(dialogue.descriptionTexts[index]);
         }
-        else 
+        else
         {
             CanvasFadeController.Instance.HideCanvas();
         }
     }
 
-    private IEnumerator TypeRoutine(string text) 
+    private IEnumerator TypeRoutine(string text)
     {
         textDisplay.text = "";
         int charIndex = 0;
         bool insideTag = false;
 
-        while (charIndex < text.Length) {
+        while (charIndex < text.Length)
+        {
             // Detectar início e fim de tags
             if (text[charIndex] == '<') insideTag = true;
             if (text[charIndex] == '>') insideTag = false;
@@ -114,11 +126,13 @@ public class DialogueManager : MonoBehaviour
             textDisplay.text += text[charIndex];
             charIndex++;
 
-            if (text[charIndex - 1] == '\n') {
+            if (text[charIndex - 1] == '\n')
+            {
                 yield return new WaitForSeconds(0.25f);
             }
 
-            if (!insideTag) {
+            if (!insideTag)
+            {
                 int voiceIndex = Random.Range(0, voices.Length);
                 AudioManager.Instance.Play(voices[voiceIndex]);
                 yield return new WaitForSeconds(typingSpeed);  // Aguarda o tempo de digitação para o próximo caractere
@@ -129,10 +143,12 @@ public class DialogueManager : MonoBehaviour
         typingCoroutine = null;
     }
 
-    private string ReplaceCustomTags(string text) {
+    private string ReplaceCustomTags(string text)
+    {
         string processedText = text;
 
-        foreach (var tag in customTags) {
+        foreach (var tag in customTags)
+        {
             // Substituir abertura da tag personalizada
             string openingTag = $"<{tag.Key}>";
             string richOpeningTag = $"<color={tag.Value}>";
