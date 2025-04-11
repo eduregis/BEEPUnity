@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log($"AudioManager instancia ativa: {gameObject.GetInstanceID()}");
 
         if (Instance == null)
         {

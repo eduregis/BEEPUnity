@@ -17,8 +17,8 @@ MonoBehaviour:
   - "Colocar uma chamada de uma fun\xE7\xE3o dentro dela mesma pode ser um problema!"
   - "Geraria uma situa\xE7\xE3o chamada <magenta>recurs\xE3o infinita</magenta>.
     A fun\xE7\xE3o chamaria ela mesma infinitamente!"
-  - "Se quiser um comportamento do tipo, podemos usar a fun\xE7\xE3o de Loop, que
-    \xE9 feita pra isso!"
+  - "Se quiser um comportamento do tipo, podemos usar a fun\xE7\xE3o de Loop <sprite
+    name=\"loop\">, que \xE9 feita pra isso!"
   - "Fora desse sistema, pode at\xE9 ser que precise de uma recurs\xE3o desse tipo,
     mas ainda assim lembre-se de sempre criar regras para evitar um loop infinito!
     A mem\xF3ria do seu computador agradece!"

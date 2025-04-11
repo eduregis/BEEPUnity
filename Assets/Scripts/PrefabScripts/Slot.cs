@@ -30,17 +30,9 @@ public class Slot : MonoBehaviour, IDropHandler
         if (grid.gridType != InventoryGrid.GridType.Main)
         {
             CommandGrid.CommandType commandType = draggableItem.commandItem.commandType;
-            switch (commandType)
-            {
-                case CommandGrid.CommandType.Loop:
-                case CommandGrid.CommandType.Function1:
-                case CommandGrid.CommandType.Function2:
-                case CommandGrid.CommandType.Conditional:
-                    validCommand = false;
-                    break;
-                default:
-                    break;
-            }
+
+            validCommand = commandType.ToString() != grid.gridType.ToString();
+
             Debug.Log("Command Type: " + commandType.ToString() + ", Grid Type: " + grid.gridType.ToString());
         }
 

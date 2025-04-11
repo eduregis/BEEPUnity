@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class PlayerController : MonoBehaviour
     [Header("Phase Data")]
     [SerializeField] private PhaseData currentPhaseData;
 
+    [Header("Buttons")]
+    [SerializeField] private Button helpButton;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject robotPrefab;
 
@@ -40,7 +44,9 @@ public class PlayerController : MonoBehaviour
     private void InitialSteps()
     {
         if (AppSettings.CurrentLevel == AppSettings.HighestUnlockedLevel)
-            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, AppSettings.CurrentLevel.ToString());
+        {
+            ShowInstructorTip();
+        }
 
         PhaseData phaseData = Resources.Load<PhaseData>($"PhaseData/Phase_{AppSettings.CurrentLevel}");
 
@@ -258,7 +264,12 @@ public class PlayerController : MonoBehaviour
 
     public void ShowInstructorTip()
     {
-        CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, AppSettings.CurrentLevel.ToString());
+        Dialogue dialogue = Resources.Load<Dialogue>($"Dialogues/Dialogue_{AppSettings.CurrentLevel}");
+        if (dialogue != null)
+        {
+            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, AppSettings.CurrentLevel.ToString());
+        }
+        helpButton.interactable = dialogue != null;
         AudioManager.Instance.Play("defaultButton");
     }
 
@@ -286,7 +297,7 @@ public class PlayerController : MonoBehaviour
 
     private bool CheckCondition()
     {
-        return true;
+        return playerRobot.isHoldingBox;
     }
 
     void OnDestroy()

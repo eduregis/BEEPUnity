@@ -109,8 +109,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4388234873163600107}
   - {fileID: 8557830887088447961}
+  - {fileID: 4388234873163600107}
   m_Father: {fileID: 434169936985927333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -580,6 +580,7 @@ MonoBehaviour:
   instructorController: {fileID: 132170207537888330}
   typingSpeed: 0.05
   playerProgress: {fileID: 11400000, guid: 3a3ff0905e361ec4db745691e42d52b7, type: 2}
+  spriteAsset: {fileID: 11400000, guid: bff44a50195929546aff9605015989a1, type: 2}
 --- !u!1 &6845316767143939361
 GameObject:
   m_ObjectHideFlags: 0

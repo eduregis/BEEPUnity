@@ -1500,6 +1500,7 @@ MonoBehaviour:
   playerButton: {fileID: 2107353112}
   commandGrid: {fileID: 819225423}
   currentPhaseData: {fileID: 11400000, guid: 14137e952617233448cf67c948772746, type: 2}
+  helpButton: {fileID: 508114244}
   robotPrefab: {fileID: 7290667730972053995, guid: a1a7413c655440141ba9fbce9b658f84, type: 3}
 --- !u!1001 &1905747452
 PrefabInstance:

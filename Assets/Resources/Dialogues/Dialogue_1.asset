@@ -20,8 +20,9 @@ MonoBehaviour:
     \xE0 esquerda da sua tela."
   - "Voc\xEA s\xF3 precisa arrast\xE1-los para a <green>zona de a\xE7\xE3o</green>
     do B.O.P, que est\xE1 na parte de cima da tela. Simples. n\xE3o?"
-  - "Por agora, temos os seguintes comandos:  <green>Andar</green>, <green>Virar
-    \xE0 direita</green>, <green>Virar \xE0 esquerda</green> e <green>Agarrar</green>."
+  - "Por agora, temos os seguintes comandos:  <green>Andar <sprite name=\"run\"></green>,
+    <green>Virar \xE0 direita <sprite name=\"turnRight\"></green>, <green>Virar \xE0
+    esquerda <sprite name=\"turnLeft\"></green>e <green>Agarrar <sprite name=\"grab\"></green>."
   - "Perdemos alguns blocos de comando por causa da bagun\xE7a do v\xEDrus, mas n\xE3o
     criemos p\xE2nico! Podemos recuper\xE1-los a medida que formos consertando o
     sistema."
@@ -29,7 +30,8 @@ MonoBehaviour:
     de encaixe</green>. Use os comandos para fazer o B.O.P. chegar a at\xE9 o pacote
     e coloc\xE1-lo no lugar correto!"
   - "Dessa maneira, constru\xEDmos nosso <magenta>algoritmo</magenta>!"
-  - "Use o <green>Agarrar</green> para pegar os pacotes e solt\xE1-los nos soquetes."
+  - "Use o <green>Agarrar <sprite name=\"grab\"></green> para pegar os pacotes e
+    solt\xE1-los nos soquetes."
   - "Para testar, aperte  <green>bot\xE3o de a\xE7\xE3o</green>, que est\xE1 na <green>zona
     de a\xE7\xE3o</green>."
   - "Ah, se sentir que n\xE3o est\xE1 funcionando, aperte o <green>bot\xE3o de parar</green>,

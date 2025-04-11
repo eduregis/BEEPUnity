@@ -21,7 +21,7 @@ MonoBehaviour:
     de fun\xE7\xE3o que recuperamos anteriormente?"
   - "Na programa\xE7\xE3o, podemos criar quantas fun\xE7\xF5es precisarmos. Aqui
     no nosso sistema, temos algumas limita\xE7\xF5es, ent\xE3o s\xF3 temos 2 fun\xE7\xF5es,
-    e o novo bloco de comando recuperado \xE9 a <green>fun\xE7\xE3o 2<green>."
+    e o novo bloco de comando recuperado \xE9 a <green>fun\xE7\xE3o 2 <sprite name=\"function2\"><green>."
   - "Com ela, podemos encapsular outra sequ\xEAncia de comando, e cham\xE1-las quando
     precisarmos."
   - "Vamos pensar! Precisamos de uma sequencia para chegar e curar um <yellow>dado

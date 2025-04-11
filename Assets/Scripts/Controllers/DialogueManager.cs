@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
     [SerializeField] private PlayerProgressSO playerProgress;
+    [SerializeField] private TMP_SpriteAsset spriteAsset;
 
     private int index = 0;
     private Dictionary<string, string> customTags = new()
@@ -22,7 +24,7 @@ public class DialogueManager : MonoBehaviour
         { "yellow", "#fe8305" },
         { "green", "#aedb16"}
     };
-    private string[] voices = { "instructorVoice1", "instructorVoice2" };
+    private readonly string[] voices = { "instructorVoice1", "instructorVoice2" };
 
     void Start()
     {
@@ -53,6 +55,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         playerProgress.SaveProgress();
+
+        textDisplay.spriteAsset = spriteAsset;
 
         GoToNextDialogue();
     }

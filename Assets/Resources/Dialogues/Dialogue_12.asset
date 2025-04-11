@@ -10,13 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
-  m_Name: Dialogue_2
+  m_Name: Dialogue_12
   m_EditorClassIdentifier: 
-  descriptionTexts:
-  - Hey, nada mal!
-  - "Nesse pr\xF3ximo, vamos precisar virar o B.O.P. algumas vezes, para isso, use
-    o <green>Virar \xE0 esquerda <sprite name=\"turnLeft\"></green> e <green>Virar
-    \xE0 direita <sprite name=\"turnRight\"></green>. O objetivo continua sendo colocar
-    o pacote no lugar certo."
-  - "Conto com voc\xEA!"
+  descriptionTexts: []
   learnIdentifiers: []

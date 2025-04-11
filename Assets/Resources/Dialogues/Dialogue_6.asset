@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptionTexts:
   - "Olha s\xF3, conseguimos recuperar mais um bloco de comando!"
-  - "Esse \xE9 um bem importante, \xE9 o <green>bloco de fun\xE7\xE3o</green>. Com
-    ele, podemos dividir a reponsabilidade do <magenta>c\xF3digo</magenta>."
+  - "Esse \xE9 um bem importante, \xE9 o <green>bloco de fun\xE7\xE3o <sprite name=\"function1\"></green>.
+    Com ele, podemos dividir a reponsabilidade do <magenta>c\xF3digo</magenta>."
   - "Se voc\xEA reparar bem, existe um limite de 12 <green>slots</green> na <green>zona
     de a\xE7\xE3o</green>. Se precisarmos de mais espa\xE7o, vamos ter problemas!"
   - "Mas agora, temos a <magenta>fun\xE7\xE3o</magenta> para resolver isso! Bastar

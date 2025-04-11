@@ -15,13 +15,13 @@ MonoBehaviour:
   descriptionTexts:
   - "Olha s\xF3, parece que conseguimos recuperar um novo bloco de comando! Isso
     gra\xE7as a voc\xEA!"
-  - "\xC9 o bloco de <green>cura</green>. Est\xE1 junto aos outros blocos que t\xEDnhamos
-    antes."
+  - "\xC9 o bloco de <green>cura <sprite name=\"heal\"></green>. Est\xE1 junto aos
+    outros blocos que t\xEDnhamos antes."
   - "O v\xEDrus corrompeu muitos dos nossos dados, nesse n\xEDvel podemos ver um
     deles."
   - "Felizmente, agora temos o recurso necess\xE1rio para lidar com isso!"
-  - "Deixe o B.O.P. em frente a um <yellow>dado corrompido</yellow> e utlize a <green>cura</green>
-    para aplicar uma <magenta>repara\xE7\xE3o de dados</magenta>."
+  - "Deixe o B.O.P. em frente a um <yellow>dado corrompido</yellow> e utlize a <green>cura
+    <sprite name=\"heal\"></green> para aplicar uma <magenta>repara\xE7\xE3o de dados</magenta>."
   learnIdentifiers:
   - heal
   - infectedData
