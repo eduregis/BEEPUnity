@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: conditionalZone
+  m_EditorClassIdentifier: 
+  id: functionZone
+  tag: 0
+  title: Zona de condicional
+  description: "Elemento retr\xE1til que ficam na parte de baixo da tela, onde ficam
+    as fun\xE7\xF5es. Possui 2 sequ\xEAncias de slots, uma para caso a condi\xE7\xE3o
+    seja verdadeira, e outra para caso a condi\xE7\xE3o seja falsa. Voc\xEA pode
+    colocar comandos que ser\xE3o executados, caso tenha blocos referentes a estas
+    fun\xE7\xF5es na zona de a\xE7\xE3o."
+  sprites: []

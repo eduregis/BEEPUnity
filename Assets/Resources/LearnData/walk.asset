@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
-  m_Name: beep
+  m_Name: walk
   m_EditorClassIdentifier: 
-  id: beep
-  tag: 2
-  title: B.E.E.P.
-  description: "Bot de Ensino e Estudo de Programa\xE7\xE3o, seu instrutor para resolver
-    os enigmas desse sistema."
-  sprites: []
+  id: walk
+  tag: 0
+  title: Andar
+  description: "Comando para fazer o B.O.P. andar para frente. Caso algo obstrua
+    seu caminho, como um pacote de dados, um dado infectado ou o limite da \xE0rea,
+    ele n\xE3o executar\xE1 essa a\xE7\xE3o."
+  sprites:
+  - {fileID: 21300000, guid: 912bae5a606376149955a19af377ceba, type: 3}

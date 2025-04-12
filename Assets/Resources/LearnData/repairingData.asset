@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: repairingData
+  m_EditorClassIdentifier: 
+  id: repairingData
+  tag: 2
+  title: Dado reparado
+  description: "Dado reparado \xE9 um dado que foi recuperado ou corrigido ap\xF3s
+    ter sofrido algum tipo de corrup\xE7\xE3o ou perda. A repara\xE7\xE3o pode ocorrer
+    automaticamente, por meio de algoritmos de detec\xE7\xE3o e corre\xE7\xE3o de
+    erros (como c\xF3digos de paridade, ECC ou checksums), ou manualmente, atrav\xE9s
+    de ferramentas de recupera\xE7\xE3o de dados. O objetivo \xE9 restaurar o conte\xFAdo
+    original ou torn\xE1-lo utiliz\xE1vel novamente. Esse processo \xE9 comum em
+    sistemas de armazenamento, redes e bancos de dados para garantir integridade
+    e continuidade da informa\xE7\xE3o."
+  sprites:
+  - {fileID: -1936331858, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}
+  - {fileID: -1936331858, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}
+  - {fileID: -1936331858, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}
+  - {fileID: 1654364426, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}
+  - {fileID: 1654364426, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}
+  - {fileID: 1654364426, guid: e2ded2765c7ee3d4faa14c359925ac3a, type: 3}

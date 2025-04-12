@@ -30,4 +30,4 @@ MonoBehaviour:
   - "N\xE3o ter\xEDamos slots de comandos o suficiente se tivessemos apenas uma fun\xE7\xE3o,
     mas agora com 2, a conversa fica diferente!"
   learnIdentifiers:
-  - function2
+  - functionBlock2

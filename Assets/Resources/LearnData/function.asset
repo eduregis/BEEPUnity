@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: function
+  m_EditorClassIdentifier: 
+  id: function
+  tag: 1
+  title: "Fun\xE7\xE3o"
+  description: "Em programa\xE7\xE3o, uma fun\xE7\xE3o \xE9 um bloco de c\xF3digo
+    reutiliz\xE1vel que executa uma tarefa espec\xEDfica. Ela pode receber par\xE2metros
+    (entradas) e retornar um valor (sa\xEDda). Fun\xE7\xF5es ajudam a organizar o
+    c\xF3digo, evitar repeti\xE7\xF5es e facilitar a manuten\xE7\xE3o. Geralmente,
+    seguem a estrutura: nome, par\xE2metros, corpo (instru\xE7\xF5es) e retorno.
+    Por exemplo, uma fun\xE7\xE3o somar(a, b) pode retornar a soma de dois n\xFAmeros.
+    Elas s\xE3o fundamentais na maioria das linguagens de programa\xE7\xE3o, tanto
+    para l\xF3gica simples quanto para sistemas complexos."
+  sprites: []

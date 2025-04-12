@@ -85,7 +85,7 @@ public class LevelSelectionManager : MonoBehaviour
 
     private void OnLevelSelected(int levelIndex)
     {
-        AudioManager.Instance.Play("chooseLevel");
+        // AudioManager.Instance.Play("chooseLevel");
         AppSettings.CurrentLevel = levelIndex;
         SceneManager.LoadScene("GameplayScene");
     }

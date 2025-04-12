@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: fittingSocket
+  m_EditorClassIdentifier: 
+  id: fittingSocket
+  tag: 1
+  title: Soquete de encaixe
+  description: "Um soquete de encaixe \xE9 uma interface de comunica\xE7\xE3o entre
+    dois dispositivos em uma rede. Ele funciona como um ponto de extremidade para
+    enviar e receber dados. Um soquete combina um **endere\xE7o IP** e um **n\xFAmero
+    de porta**, identificando de forma \xFAnica uma conex\xE3o. No lado do software,
+    os soquetes permitem que programas se comuniquem via protocolos como TCP ou UDP.
+    J\xE1 fora do contexto de redes, \u201Csoquete de encaixe\u201D pode se referir
+    fisicamente a uma pe\xE7a usada para conectar componentes \u2014 por exemplo,
+    o soquete de um processador na placa-m\xE3e."
+  sprites:
+  - {fileID: 6271059662743814170, guid: 9a4021f186847e945a46d5a29110ec6b, type: 3}

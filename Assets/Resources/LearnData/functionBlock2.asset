@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
-  m_Name: beep
+  m_Name: functionBlock2
   m_EditorClassIdentifier: 
-  id: beep
-  tag: 2
-  title: B.E.E.P.
-  description: "Bot de Ensino e Estudo de Programa\xE7\xE3o, seu instrutor para resolver
-    os enigmas desse sistema."
-  sprites: []
+  id: functionBlock2
+  tag: 0
+  title: "Bloco de fun\xE7\xE3o"
+  description: "Comando para fazer o B.O.P. executar os comandos contidos na zona
+    de fun\xE7\xE3o 2. Ao terminar os comandos dessa zona, ele volta a executar de
+    onde parou."
+  sprites:
+  - {fileID: 21300000, guid: 7c390a8c3de844247a675422740299f6, type: 3}

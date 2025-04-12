@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: commandBlocks
+  m_EditorClassIdentifier: 
+  id: commandBlocks
+  tag: 0
+  title: Bloco de Comando
+  description: "Bloco arrast\xE1vel que serve para representar instru\xE7\xF5es para
+    o B.O.P. executar"
+  sprites:
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 7596a959a9575c245bf3a7d5e1abbfc0, type: 3}
+  - {fileID: 21300000, guid: 4c3d597232a76354188e89ee50c84819, type: 3}
+  - {fileID: 21300000, guid: 4c3d597232a76354188e89ee50c84819, type: 3}

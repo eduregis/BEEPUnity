@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: codeReadability
+  m_EditorClassIdentifier: 
+  id: codeReadability
+  tag: 1
+  title: "Legibilidade de C\xF3digo"
+  description: "Legibilidade de c\xF3digo \xE9 a facilidade com que uma pessoa consegue
+    ler, entender e manter um trecho de c\xF3digo. Um c\xF3digo leg\xEDvel \xE9 claro,
+    organizado e usa nomes descritivos para vari\xE1veis e fun\xE7\xF5es, al\xE9m
+    de seguir boas pr\xE1ticas como indenta\xE7\xE3o, coment\xE1rios \xFAteis e estrutura
+    l\xF3gica. A legibilidade \xE9 essencial para trabalho em equipe, manuten\xE7\xE3o
+    a longo prazo e redu\xE7\xE3o de bugs. Um c\xF3digo leg\xEDvel n\xE3o precisa
+    ser \"bonito\", mas deve ser intuitivo e f\xE1cil de seguir, mesmo por quem n\xE3o
+    o escreveu originalmente."
+  sprites: []

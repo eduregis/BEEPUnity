@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: memory
+  m_EditorClassIdentifier: 
+  id: memory
+  tag: 1
+  title: "Mem\xF3ria"
+  description: "Mem\xF3ria em um computador \xE9 o componente respons\xE1vel por
+    armazenar dados tempor\xE1ria ou permanentemente. Ela se divide em:\n\n- RAM
+    (mem\xF3ria vol\xE1til): usada para armazenar dados tempor\xE1rios enquanto programas
+    est\xE3o em execu\xE7\xE3o. \xC9 r\xE1pida, mas apaga tudo ao desligar o computador.\n\n-
+    ROM (mem\xF3ria somente leitura): armazena dados permanentes essenciais, como
+    o firmware.\n\n- Mem\xF3ria de armazenamento: como HDs ou SSDs, usada para guardar
+    arquivos e programas de forma permanente.\n\nA mem\xF3ria \xE9 fundamental para
+    o desempenho do sistema, pois permite acesso r\xE1pido \xE0s informa\xE7\xF5es
+    necess\xE1rias para o funcionamento dos programas."
+  sprites: []

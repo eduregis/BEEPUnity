@@ -23,13 +23,12 @@ MonoBehaviour:
   - "Preste bem aten\xE7\xE3o, a condi\xE7\xE3o que deve ser atendida \xE9 se o <yellow>B.O.P.</yellow>
     estiver <magenta>segurando uma caixa!</magenta>"
   - "Para a sequ\xEAncia de comandos que voc\xEA queira que execute se o B.O.P. estiver
-    segurando uma caixa, arraste-os para a fileira de slots do lado da palavra <green>\"Se\"</green>.
-    Para os que queira que execute caso ele n\xE3o esteja com a caixa, arraste para
+    segurando uma caixa, arraste-os para a fileira de slots do lado da palavra <green>\"Se\"</green>. "
+  - "Para os que queira que execute caso ele n\xE3o esteja com a caixa, arraste para
     os fileira de slots do lado da palavra <green>\"Sen\xE3o\"</green>."
   - "Ambos est\xE3o na aba do canto inferior direito da tela, chamada de <green>zona
     de condicional</green>."
   learnIdentifiers:
-  - if
-  - else
   - conditional
   - conditionalZone
+  - conditionalBlock

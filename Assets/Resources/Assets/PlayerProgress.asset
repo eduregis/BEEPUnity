@@ -20,12 +20,30 @@ MonoBehaviour:
   - bop
   - commandBlocks
   - actionZone
-  - commandWalk
-  - commandTurnLeft
-  - commandTurnRight
-  - commandGrab
+  - walk
+  - turnLeft
+  - turnRight
+  - grab
   - dataPackage
   - fittingSocket
   - algorithm
   - playButton
   - stopButton
+  - heal
+  - infectedData
+  - repairingData
+  - functionBlock
+  - function
+  - code
+  - slot
+  - functionZone
+  - function2
+  - loop
+  - codeReadability
+  - memory
+  - loopZone
+  - if
+  - else
+  - conditional
+  - conditionalZone
+  - infiniteRecursion

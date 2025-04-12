@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: code
+  m_EditorClassIdentifier: 
+  id: code
+  tag: 1
+  title: "C\xF3digo"
+  description: "Em programa\xE7\xE3o, c\xF3digo (ou c\xF3digo-fonte) \xE9 o conjunto
+    de instru\xE7\xF5es escritas por um programador em uma linguagem de programa\xE7\xE3o.
+    Ele define o que um programa deve fazer, como executar tarefas, processar dados
+    e interagir com o usu\xE1rio ou outros sistemas. O c\xF3digo pode ser interpretado
+    ou compilado para virar um programa execut\xE1vel. Um bom c\xF3digo \xE9 claro,
+    organizado e f\xE1cil de manter."
+  sprites: []

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: dataPackage
+  m_EditorClassIdentifier: 
+  id: dataPackage
+  tag: 1
+  title: Pacote de dados
+  description: "Um pacote de dados \xE9 uma unidade de informa\xE7\xE3o transmitida
+    em redes de computadores.\n Os dados s\xE3o a informa\xE7\xE3o real a ser transmitida.
+    Pacotes permitem que arquivos grandes sejam divididos e enviados em partes menores,
+    otimizando o tr\xE1fego de rede. Ao chegar no destino, os pacotes s\xE3o reorganizados
+    para reconstruir a mensagem original. Eles s\xE3o essenciais para o funcionamento
+    da internet e redes em geral."
+  sprites:
+  - {fileID: -6574988893402376451, guid: 6c960adc9ebc3ce479ff72be7a7d4637, type: 3}

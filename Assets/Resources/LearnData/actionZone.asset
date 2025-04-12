@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
-  m_Name: beep
+  m_Name: actionZone
   m_EditorClassIdentifier: 
-  id: beep
-  tag: 2
-  title: B.E.E.P.
-  description: "Bot de Ensino e Estudo de Programa\xE7\xE3o, seu instrutor para resolver
-    os enigmas desse sistema."
+  id: actionZone
+  tag: 0
+  title: "Zona de A\xE7\xE3o"
+  description: "Elemento que fica na parte de cima da tela, onde executar\xE1 as
+    instru\xE7\xF5es para o B.O.P."
   sprites: []
