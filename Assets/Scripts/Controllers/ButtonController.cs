@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class ButtonController : MonoBehaviour
 {
     public enum ActionType { LoadScene, CustomAction }
-    
+
     [Header("Configuration")]
     public ActionType actionType = ActionType.LoadScene;
     public string sceneName;
@@ -23,8 +23,8 @@ public class ButtonController : MonoBehaviour
     {
         GetComponent<Button>().interactable = false;
         AudioManager.Instance.Play("defaultButton");
-        
-        switch(actionType)
+
+        switch (actionType)
         {
             case ActionType.LoadScene:
                 if (!string.IsNullOrEmpty(sceneName))
@@ -36,10 +36,16 @@ public class ButtonController : MonoBehaviour
                     Debug.LogError("Scene name not set!");
                 }
                 break;
-                
+
             case ActionType.CustomAction:
                 customAction.Invoke();
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Button button = GetComponent<Button>();
+        button.onClick.RemoveListener(OnButtonClicked);
     }
 }

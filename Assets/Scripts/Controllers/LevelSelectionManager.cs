@@ -16,13 +16,13 @@ public class LevelSelectionManager : MonoBehaviour
     [SerializeField] private ButtonState buttonStates;
     [SerializeField] private GameObject buttonPrefab;
     [SerializeField] private Transform buttonsContainer;
-    [SerializeField] private int totalLevels = 18;
+    [SerializeField] private int totalLevels = 12;
 
     private void Start()
     {
         if (AppSettings.HighestUnlockedLevel == 0)
         {
-            CanvasFadeController.Instance.ShowDialogue("Intro");
+            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, "Intro");
             AppSettings.HighestUnlockedLevel = 1;
         }
         CreateLevelButtons();
@@ -33,10 +33,10 @@ public class LevelSelectionManager : MonoBehaviour
         for (int i = 1; i <= totalLevels; i++)
         {
             GameObject buttonObj = Instantiate(buttonPrefab, buttonsContainer);
-            
+
             // Certifique-se de pegar o componente TMP_Text corretamente
             TMP_Text levelText = buttonObj.GetComponentInChildren<TMP_Text>(true);
-            
+
             if (levelText != null)
             {
                 levelText.text = i.ToString();

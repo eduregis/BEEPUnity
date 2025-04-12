@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b14676682aefb244a3d89ccfdf9fed9, type: 3}
+  m_Name: Phase_12
+  m_EditorClassIdentifier: 
+  mapWidth: 3
+  mapHeight: 6
+  mapData: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000020000000200000002000000010000000000000000000000
+  robotInitialPosition: {x: 0, y: 5}
+  boxesInitialPositions:
+  - {x: 0, y: 0}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
+  availableCommands: 9
+  mainLength: 8
+  function1Length: 6
+  function2Length: 6
+  loopLength: 3
+  ifLength: 6
+  elseLength: 6

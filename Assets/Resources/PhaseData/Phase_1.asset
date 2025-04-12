@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b14676682aefb244a3d89ccfdf9fed9, type: 3}
   m_Name: Phase_1
   m_EditorClassIdentifier: 
-  mapWidth: 3
-  mapHeight: 2
-  mapData: 010000000100000002000000010000000000000001000000
+  mapWidth: 4
+  mapHeight: 1
+  mapData: 01000000010000000100000002000000
   robotInitialPosition: {x: 0, y: 0}
   boxesInitialPositions:
   - {x: 1, y: 0}
   availableCommands: 4
+  mainLength: 6
+  function1Length: 6
+  function2Length: 6
+  loopLength: 6
+  ifLength: 6
+  elseLength: 6

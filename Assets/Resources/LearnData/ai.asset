@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2140b81f360898408145e4ffc872afc, type: 3}
+  m_Name: ai
+  m_EditorClassIdentifier: 
+  id: ai
+  tag: 1
+  title: "Intelig\xEAncia Artificial"
+  description: "A Intelig\xEAncia Artificial (IA) \xE9 uma \xE1rea da tecnologia
+    que busca criar m\xE1quinas capazes de realizar tarefas que normalmente exigiriam
+    intelig\xEAncia humana, como aprender, raciocinar e tomar decis\xF5es. Ela funciona
+    atrav\xE9s de algoritmos e modelos matem\xE1ticos que processam grandes quantidades
+    de dados para identificar padr\xF5es e fazer previs\xF5es. A IA est\xE1 presente
+    em assistentes virtuais, carros aut\xF4nomos, recomenda\xE7\xF5es de filmes e
+    at\xE9 diagn\xF3sticos m\xE9dicos.  \r"
+  icon: {fileID: 0}

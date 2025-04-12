@@ -22,7 +22,7 @@ public class AuxiliarBox : MonoBehaviour
     {
         // Configura as posições inicial e final baseadas na direção escolhida
         hiddenPosition = panelRectTransform.anchoredPosition;
-        
+
         if (direction == AnimationDirection.Vertical)
         {
             visiblePosition = hiddenPosition + new Vector2(0, panelRectTransform.rect.height);
@@ -71,5 +71,10 @@ public class AuxiliarBox : MonoBehaviour
 
         // Garante que o painel termine exatamente na posição desejada
         panelRectTransform.anchoredPosition = targetPosition;
+    }
+
+    private void OnDestroy()
+    {
+        toggleButton.onClick.RemoveListener(TogglePanel);
     }
 }

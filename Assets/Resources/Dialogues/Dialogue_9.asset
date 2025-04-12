@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
+  m_Name: Dialogue_9
+  m_EditorClassIdentifier: 
+  descriptionTexts:
+  - "Isso a\xED, voc\xEA est\xE1 fazendo um \xF3timo trabalho!"
+  - "E conseguimos um novo comando, o de <green>repeti\xE7\xE3o <sprite name=\"loop\"></green>.
+    Com ele, podemos executar uma mesma a\xE7\xE3o v\xE1rias vezes! "
+  - "Claro que poder\xEDamos fazer chamando a  <green>fun\xE7\xE3o <sprite name=\"function1\">
+    </green> v\xE1rias vezes, mas isso deixaria a sequ\xEAncia muito enfadonha! Eleg\xE2ncia
+    tamb\xE9m \xE9 importante na hora de programar!"
+  - "Brincadeiras \xE0 parte, usar esse tipo de recurso \xE9 \xF3timo para deixar
+    o c\xF3digo mais <magenta>leg\xEDvel</magenta>, ficando mais f\xE1cil de outras
+    pessoas entenderem a l\xF3gica."
+  - "Esse n\xEDvel \xE9 um \xF3timo exemplo pra aprendermos sobre isso! Veja que
+    temos apenas um slot de <magenta>mem\xF3ria</magenta> pra usarmos."
+  - "Vamos usar o novo comando  <green>repeti\xE7\xE3o <sprite name=\"loop\"></green>,
+    e na <green>zona de repeti\xE7\xE3o</green> ao lado, selecionamos quantas itera\xE7\xF5es
+    vamos querer."
+  - Manda ver!
+  learnIdentifiers:
+  - loop
+  - codeReadability
+  - memory
+  - loopZone

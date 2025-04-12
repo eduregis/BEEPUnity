@@ -16,10 +16,15 @@ MonoBehaviour:
   - "Ah, que bom que voc\xEA est\xE1 aqui!"
   - "Nosso sistema foi invadido por um <magenta>v\xEDrus</magenta>. Ele causou a
     maior bagun\xE7a..."
-  - "Perd\xE3o, esqueci de me apresentar! Me chamo <blue>B.E.E.P. (Bot de Estudo
-    e Ensino de Programa\xE7\xE3o)</blue>. Poderia nos ajudar?"
+  - "Perd\xE3o, esqueci de me apresentar! Me chamo <yellow>B.E.E.P. (Bot de Estudo
+    e Ensino de Programa\xE7\xE3o)</yellow>. Poderia nos ajudar?"
   - "Como sou apenas uma <magenta>I.A. (Intelig\xEAncia Artificial)</magenta>, n\xE3o
     consigo interagir diretamente com o sistema, mas posso te guiar sobre o que fazer."
   - "Podemos aprender praticando! Esse primeiro <green>n\xEDvel de repara\xE7\xE3o</green>
     \xE9 um bom ponto de partida."
   - "Selecione o n\xEDvel dispon\xEDvel e vamos come\xE7ar!"
+  learnIdentifiers:
+  - virus
+  - beep
+  - ai
+  - repairLevel

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8de15b4c4c2c841ac8c8a19a1fafcc, type: 3}
+  m_Name: Dialogue_7
+  m_EditorClassIdentifier: 
+  descriptionTexts:
+  - "Eita, agora t\xE1 ficando mais complicado!"
+  - "\xC9 o que eu diria, mas voc\xEA est\xE1 tirando de letra! E gra\xE7as aos seus
+    esfor\xE7os, conseguimos mais um comando!"
+  - "N\xE3o \xE9 exatamente um novo comando, apenas temos mais uma op\xE7\xE3o de
+    <magenta>fun\xE7\xE3o</magenta> agora! Reparou no n\xFAmero 1 dentro do \xEDcone
+    de fun\xE7\xE3o que recuperamos anteriormente?"
+  - "Na programa\xE7\xE3o, podemos criar quantas fun\xE7\xF5es precisarmos. Aqui
+    no nosso sistema, temos algumas limita\xE7\xF5es, ent\xE3o s\xF3 temos 2 fun\xE7\xF5es,
+    e o novo bloco de comando recuperado \xE9 a <green>fun\xE7\xE3o 2 <sprite name=\"function2\"><green>."
+  - "Com ela, podemos encapsular outra sequ\xEAncia de comando, e cham\xE1-las quando
+    precisarmos."
+  - "Vamos pensar! Precisamos de uma sequencia para chegar e curar um <yellow>dado
+    corrompido</yellow>, e outra sequ\xEAncia para control\xE1-lo e deixar o <yellow>B.O.P.</yellow>
+    pronto para o pr\xF3ximo."
+  - "N\xE3o ter\xEDamos slots de comandos o suficiente se tivessemos apenas uma fun\xE7\xE3o,
+    mas agora com 2, a conversa fica diferente!"
+  learnIdentifiers:
+  - function2

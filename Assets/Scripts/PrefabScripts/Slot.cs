@@ -14,24 +14,41 @@ public class Slot : MonoBehaviour, IDropHandler
         grid.CheckAvailableSlot(dropped);
     }
 
-    public bool IsEmpty() 
+    public bool IsEmpty()
     {
         return transform.childCount == 0;
     }
 
-    public void FillSlot(GameObject dropped) 
+    public void FillSlot(GameObject dropped)
     {
         GeneratedDraggableItem draggableItem = dropped.GetComponent<GeneratedDraggableItem>();
-        if (draggableItem == null) return; // Verifica se o componente é nulo
+
+        if (draggableItem == null) return;
+
+        bool validCommand = true;
+
+        if (grid.gridType != InventoryGrid.GridType.Main)
+        {
+            CommandGrid.CommandType commandType = draggableItem.commandItem.commandType;
+
+            validCommand = commandType.ToString() != grid.gridType.ToString();
+
+            Debug.Log("Command Type: " + commandType.ToString() + ", Grid Type: " + grid.gridType.ToString());
+        }
+
+        if (!validCommand)
+        {
+            Destroy(draggableItem.gameObject);
+            CanvasFadeController.Instance.ShowCanvas(Constants.MenuType.Dialogue, "InfiniteRecursion");
+            return;
+        }
 
         if (IsEmpty())
         {
-            // Se o slot estiver vazio, aceita o bloco
             draggableItem.parentToReturnTo = transform;
         }
         else
         {
-            // Se o slot já contém um bloco, troca os blocos de lugar
             Transform existingBlock = transform.GetChild(0);
             existingBlock.SetParent(draggableItem.parentToReturnTo);
             existingBlock.localPosition = Vector3.zero;

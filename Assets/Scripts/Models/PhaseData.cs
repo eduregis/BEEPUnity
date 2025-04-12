@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NewPhase", menuName = "MyPhases/Phase Data")]
+[CreateAssetMenu(fileName = "Phase", menuName = "MyPhases/Phase Data")]
 public class PhaseData : ScriptableObject
 {
     [Header("Map Configuration")]
@@ -12,7 +12,14 @@ public class PhaseData : ScriptableObject
     [Header("Initial Positions")]
     public Vector2Int robotInitialPosition;
     public List<Vector2Int> boxesInitialPositions = new List<Vector2Int>();
-    public int availableCommands = 9;
+    public int 
+    availableCommands = 9, 
+    mainLength = 12, 
+    function1Length = 6, 
+    function2Length = 6, 
+    loopLength = 6, 
+    ifLength = 6,
+    elseLength = 6;
 
     // Método para validar e ajustar os dados
     public void ValidateData()

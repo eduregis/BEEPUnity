@@ -15,6 +15,8 @@ MonoBehaviour:
   descriptionTexts:
   - Hey, nada mal!
   - "Nesse pr\xF3ximo, vamos precisar virar o B.O.P. algumas vezes, para isso, use
-    o <green>Virar \xE0 esquerda</green> e <green>Virar \xE0 direita</green>. O objetivo
-    continua sendo colocar o pacote no lugar certo."
+    o <green>Virar \xE0 esquerda <sprite name=\"turnLeft\"></green> e <green>Virar
+    \xE0 direita <sprite name=\"turnRight\"></green>. O objetivo continua sendo colocar
+    o pacote no lugar certo."
   - "Conto com voc\xEA!"
+  learnIdentifiers: []

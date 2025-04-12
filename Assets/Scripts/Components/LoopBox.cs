@@ -19,6 +19,7 @@ public class LoopBox : MonoBehaviour
 
     public void TrashPressed() 
     {
+        AudioManager.Instance.Play("dump");
         inventoryGrid.ResetSlots();
     }
 

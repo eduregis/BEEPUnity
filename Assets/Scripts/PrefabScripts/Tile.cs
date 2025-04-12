@@ -17,9 +17,9 @@ public class Tile : MonoBehaviour
     public bool concluded = false;
 
     // Cores para a pulsação
-    private Color color1 = new Color(0.89f, 0.20f, 0.67f); // #e332aa
-    private Color color2 = new Color(0.08f, 0.47f, 0.85f); // #1479da
-    private Color colorConcluded = new Color(0.68f, 0.86f, 0.086f); // #aedb16
+    private Color color1 = HexColorUtility.HexToColor("#e332aa");
+    private Color color2 = HexColorUtility.HexToColor("#1479da");
+    private Color colorConcluded = HexColorUtility.HexToColor("#aedb16");
 
     private float pulseSpeed = 2f; // Velocidade da pulsação
     private float timeOffset;      // Offset de tempo para variar o efeito entre os tiles
