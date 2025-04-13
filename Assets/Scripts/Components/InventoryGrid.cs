@@ -89,7 +89,7 @@ public class InventoryGrid : MonoBehaviour
     {
         for (int i = 0; i < slotCount; i++)
         {
-           for (int j = slots[i].transform.childCount - 1; j >= 0; j--)
+            for (int j = slots[i].transform.childCount - 1; j >= 0; j--)
             {
                 DestroyImmediate(slots[i].transform.GetChild(j).gameObject);
             }
@@ -123,8 +123,8 @@ public class InventoryGrid : MonoBehaviour
             {
                 slots[i].Highlight(enabled);
                 firstEnabled = true;
-            } 
-            else 
+            }
+            else
             {
                 slots[i].Highlight(false);
             }
@@ -135,7 +135,7 @@ public class InventoryGrid : MonoBehaviour
     {
         for (int i = 0; i + 1 < slotCount; i++)
         {
-            if (slots[i].IsEmpty() && !slots[i + 1].IsEmpty()) 
+            if (slots[i].IsEmpty() && !slots[i + 1].IsEmpty())
             {
                 Transform child = slots[i + 1].transform.GetChild(0);
                 child.SetParent(slots[i].transform);
@@ -144,7 +144,7 @@ public class InventoryGrid : MonoBehaviour
         }
     }
 
-    public List<string> GetCommandList() 
+    public List<string> GetCommandList()
     {
         List<string> commandList = new List<string>();
         commandItems.Clear();
@@ -171,19 +171,19 @@ public class InventoryGrid : MonoBehaviour
         return commandList;
     }
 
-    public void ResetHighlights() 
+    public void ResetHighlights()
     {
         currentItem = -1;
-        for (int i = 0; i < commandItems.Count; i++) 
+        for (int i = 0; i < commandItems.Count; i++)
         {
             commandItems[i].HighlightItem(false);
         }
     }
 
-    public void HighlightCurrentStep() 
+    public void HighlightCurrentStep()
     {
         currentItem++;
-        for (int i = 0; i < commandItems.Count; i++) 
+        for (int i = 0; i < commandItems.Count; i++)
         {
             commandItems[i].HighlightItem(i == currentItem);
         }

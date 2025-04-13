@@ -18,7 +18,7 @@ public class GeneratedDraggableItem : MonoBehaviour, IPointerDownHandler, IBegin
         commandItem = GetComponent<CommandItem>(); // Obtém o CommandItem
     }
 
-    
+
     public void OnPointerDown(PointerEventData eventData)
     {
         AudioManager.Instance.Play("grabBlock");
@@ -45,15 +45,15 @@ public class GeneratedDraggableItem : MonoBehaviour, IPointerDownHandler, IBegin
 
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         InventoryGrid grid = eventData.pointerEnter.GetComponentInParent<InventoryGrid>();
-        
+
         if (grid != null)
         {
             currentGrid = grid;
             grid.HighlightAvailableSlot(true);
-        } 
-        else 
+        }
+        else
         {
-            if (currentGrid != null) 
+            if (currentGrid != null)
             {
                 currentGrid.HighlightAvailableSlot(false);
                 currentGrid.ShiftItems();

@@ -65,7 +65,7 @@ public class OriginalDraggableItem : MonoBehaviour, IPointerDownHandler, IBeginD
         if (draggedItem != null)
         {
             GeneratedDraggableItem draggableItem = draggedItem.GetComponent<GeneratedDraggableItem>();
-            
+
             // Verifica se a cópia foi solta em um slot válido
             if (eventData.pointerEnter != null && eventData.pointerEnter.CompareTag("Slot"))
             {
@@ -77,7 +77,7 @@ public class OriginalDraggableItem : MonoBehaviour, IPointerDownHandler, IBeginD
                     grid.CheckAvailableSlot(draggedItem);
                 }
             }
-            
+
             draggableItem.OnEndDrag(eventData);
 
             // Verifica se a cópia foi solta em um slot válido

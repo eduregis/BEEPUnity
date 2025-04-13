@@ -12,12 +12,12 @@ public class PhaseData : ScriptableObject
     [Header("Initial Positions")]
     public Vector2Int robotInitialPosition;
     public List<Vector2Int> boxesInitialPositions = new List<Vector2Int>();
-    public int 
-    availableCommands = 9, 
-    mainLength = 12, 
-    function1Length = 6, 
-    function2Length = 6, 
-    loopLength = 6, 
+    public int
+    availableCommands = 9,
+    mainLength = 12,
+    function1Length = 6,
+    function2Length = 6,
+    loopLength = 6,
     ifLength = 6,
     elseLength = 6;
 
@@ -30,7 +30,7 @@ public class PhaseData : ScriptableObject
         {
             mapData.Add(0); // Preenche com 0 (espaço vazio) se faltar dados
         }
-        
+
         // Remove dados excedentes
         while (mapData.Count > requiredSize)
         {
@@ -42,9 +42,9 @@ public class PhaseData : ScriptableObject
     public int[,] GetMapMatrix()
     {
         ValidateData(); // Garante que os dados estão corretos
-        
+
         int[,] matrix = new int[mapHeight, mapWidth];
-        
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
@@ -53,7 +53,7 @@ public class PhaseData : ScriptableObject
                 matrix[y, x] = mapData[index];
             }
         }
-        
+
         return matrix;
     }
 

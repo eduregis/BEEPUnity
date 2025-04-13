@@ -34,7 +34,7 @@ public static class Utils
         return tilePosition;
     }
 
-    public static int CalculateIsoDepth(Vector2Int position, int layerOffset = 0) 
+    public static int CalculateIsoDepth(Vector2Int position, int layerOffset = 0)
     {
         return -(position.x + position.y) * 10 + layerOffset;
     }

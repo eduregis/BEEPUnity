@@ -16,7 +16,7 @@ public class BackgroundGenerator : MonoBehaviour
 
         // 1. Obtém ou adiciona o componente Canvas
         Canvas bgCanvas = background.GetComponent<Canvas>();
-        if (bgCanvas == null) 
+        if (bgCanvas == null)
         {
             bgCanvas = background.AddComponent<Canvas>();
         }

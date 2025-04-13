@@ -22,8 +22,8 @@ public class CommandItem : MonoBehaviour
         }
     }
 
-    public void HighlightItem(bool active) 
+    public void HighlightItem(bool active)
     {
         bkgImage.sprite = active ? bkgHighlighted : bkgNormal;
-    } 
+    }
 }

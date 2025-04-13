@@ -8,10 +8,10 @@ public class TagManager : MonoBehaviour
     [SerializeField] private RectTransform boxCentral;
     [SerializeField] private List<LearnTag> tags = new();
     [SerializeField] private Image line;
-    
+
     [Header("Otimização")]
     [SerializeField] private float clickCooldown = 0.3f;
-    
+
     private int currentSelectedIndex = -1;
     private bool isProcessing = false;
 
@@ -33,7 +33,7 @@ public class TagManager : MonoBehaviour
     private void OnTagClicked(int index)
     {
         if (isProcessing || currentSelectedIndex == index) return;
-        
+
         LearnUIManager.Instance.ShowFilteredItems(
             LearnDataManager.Instance.GetFilteredLearnData(tags[index].learnTag.ToString())
         );
@@ -46,15 +46,15 @@ public class TagManager : MonoBehaviour
     private System.Collections.IEnumerator ProcessTagSelection(int index)
     {
         isProcessing = true;
-        
+
         // Seleciona a nova tag
         currentSelectedIndex = index;
-        
+
         // Ajusta a ordem hierárquica
         UpdateHierarchyOrder(index);
 
         AudioManager.Instance.Play("chooseLevel");
-        
+
         yield return new WaitForSeconds(clickCooldown);
         isProcessing = false;
     }
@@ -65,16 +65,16 @@ public class TagManager : MonoBehaviour
         // 1. Tags não selecionadas
         // 2. Box Central
         // 3. Tag selecionada
-        
+
         // Primeiro coloca todas as tags atrás
         foreach (var tag in tags)
         {
             tag.transform.SetSiblingIndex(boxCentral.GetSiblingIndex() - 1);
         }
-        
+
         // Depois traz a tag selecionada para frente
         tags[selectedIndex].transform.SetAsLastSibling();
-        
+
         // Garante que a box fique atrás da tag selecionada
         boxCentral.SetSiblingIndex(tags[selectedIndex].transform.GetSiblingIndex() - 1);
     }

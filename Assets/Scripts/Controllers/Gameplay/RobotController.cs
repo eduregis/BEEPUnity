@@ -39,7 +39,7 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    void Start() 
+    void Start()
     {
         ResetStages();
     }
@@ -53,7 +53,7 @@ public class RobotController : MonoBehaviour
         UpdatePositionInWorld();
     }
 
-    private void UpdateDepth() 
+    private void UpdateDepth()
     {
         int depth = Utils.CalculateIsoDepth(currentPosition, 2);
         transform.SetSiblingIndex(depth);
@@ -94,7 +94,7 @@ public class RobotController : MonoBehaviour
         }
     }
 
-   private IEnumerator RunSingleCommand(string command, InventoryGrid currentGrid)
+    private IEnumerator RunSingleCommand(string command, InventoryGrid currentGrid)
     {
         isMoving = true;
 
@@ -102,7 +102,7 @@ public class RobotController : MonoBehaviour
         {
             OnStepCompleted?.Invoke("Concluded", currentGrid);
         }
-        else 
+        else
         {
             switch (command)
             {
@@ -139,7 +139,7 @@ public class RobotController : MonoBehaviour
                     break;
             }
             OnStepCompleted?.Invoke(command, currentGrid);
-        isMoving = false;
+            isMoving = false;
         }
     }
 
@@ -153,8 +153,8 @@ public class RobotController : MonoBehaviour
         // Verifica se a nova posição está dentro dos limites da matriz e é um tile válido (1)
         return newPosition.x >= 0 && newPosition.x < mapMatrix.GetLength(1) &&
                newPosition.y >= 0 && newPosition.y < mapMatrix.GetLength(0) &&
-               mapMatrix[newPosition.y, newPosition.x] != (int)Constants.TileType.Empty && 
-               mapMatrix[newPosition.y, newPosition.x] != (int)Constants.TileType.InfectedData && 
+               mapMatrix[newPosition.y, newPosition.x] != (int)Constants.TileType.Empty &&
+               mapMatrix[newPosition.y, newPosition.x] != (int)Constants.TileType.InfectedData &&
                !IsometricMapGenerator.Instance.HasBoxAt(newPosition);
     }
 
@@ -224,22 +224,22 @@ public class RobotController : MonoBehaviour
     private IEnumerator Turn(string turnDirection)
     {
         int currentIndex = directionOrder.IndexOf(currentDirection);
-        int newIndex = turnDirection == "Left" 
+        int newIndex = turnDirection == "Left"
             ? (currentIndex - 1 + directionOrder.Count) % directionOrder.Count
             : (currentIndex + 1) % directionOrder.Count;
 
         string newDirection = directionOrder[newIndex];
         currentDirection = newDirection; // Atualiza primeiro a direção
-        
+
         UpdateAnimator(newDirection);
-        
+
         yield return new WaitForSeconds(1.0f / commandSpeed);
     }
 
     private IEnumerator Grab()
     {
         Vector2Int frontPosition = currentPosition + DirectionToVector(currentDirection);
-        
+
         if (isHoldingBox)
         {
             // SOLTAR CAIXA (Drop)
@@ -264,7 +264,7 @@ public class RobotController : MonoBehaviour
                 UpdateAnimator(currentDirection);
             }
         }
-        
+
         yield return new WaitForSeconds(1.0f / commandSpeed);
     }
 
@@ -288,11 +288,11 @@ public class RobotController : MonoBehaviour
         // Verifica se a posição está dentro dos limites e é um tile válido
         if (!IsometricMapGenerator.Instance.IsValidPosition(position))
             return false;
-        
+
         // Verifica se já tem uma caixa no destino
         if (IsometricMapGenerator.Instance.HasBoxAt(position))
             return false;
-        
+
         return true;
     }
 
@@ -301,33 +301,35 @@ public class RobotController : MonoBehaviour
         // Verifica se a posição está dentro dos limites e é um tile válido
         if (!IsometricMapGenerator.Instance.IsValidPosition(position))
             return false;
-        
+
         // Verifica se tem um dado infectado
         if (IsometricMapGenerator.Instance.HasInfectedDataAt(position))
             return true;
-        
+
         return false;
     }
 
     // Atualiza os parâmetros do Animator com base na direção
-    private void UpdateAnimator(string direction) {
-        Vector2 dir = direction switch {
+    private void UpdateAnimator(string direction)
+    {
+        Vector2 dir = direction switch
+        {
             "Right" => new Vector2(1, 0),
-            "Left"  => new Vector2(-1, 0),
-            "Up"    => new Vector2(0, 1),
-            "Down"  => new Vector2(0, -1),
+            "Left" => new Vector2(-1, 0),
+            "Up" => new Vector2(0, 1),
+            "Down" => new Vector2(0, -1),
             _ => Vector2.zero
         };
 
         animator.SetFloat("DirectionX", dir.x);
         animator.SetFloat("DirectionY", dir.y);
         animator.SetBool("IsHoldingBox", isHoldingBox);
-        
+
         // Força atualização imediata (opcional, mas recomendado para viradas)
         animator.Update(0);
     }
 
-    public void ResetStages() 
+    public void ResetStages()
     {
         isHoldingBox = false;
         UpdateAnimator("Right");

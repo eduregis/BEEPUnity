@@ -17,7 +17,7 @@ public class LoopBox : MonoBehaviour
         UpdateUI();
     }
 
-    public void TrashPressed() 
+    public void TrashPressed()
     {
         AudioManager.Instance.Play("dump");
         inventoryGrid.ResetSlots();
@@ -28,7 +28,7 @@ public class LoopBox : MonoBehaviour
         if (counter < upperLimit)
         {
             counter++;
-            UpdateUI(); 
+            UpdateUI();
         }
     }
 
@@ -37,7 +37,7 @@ public class LoopBox : MonoBehaviour
         if (counter > lowerLimit)
         {
             counter--;
-            UpdateUI(); 
+            UpdateUI();
         }
     }
 

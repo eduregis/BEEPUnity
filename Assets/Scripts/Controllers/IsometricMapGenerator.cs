@@ -62,7 +62,7 @@ public class IsometricMapGenerator : MonoBehaviour
         // Limpa o mapa anterior (se houver)
         foreach (Transform child in transform)
         {
-            if (child.GetComponent<RobotController>() == null) 
+            if (child.GetComponent<RobotController>() == null)
             {
                 Destroy(child.gameObject);
             }
@@ -75,7 +75,7 @@ public class IsometricMapGenerator : MonoBehaviour
         int mapWidth = mapMatrix.GetLength(1);
         int mapHeight = mapMatrix.GetLength(0);
         Vector3 offset = Utils.CalculateOffset();
-        
+
         tiles = new List<Tile>();
 
         for (int y = 0; y < mapHeight; y++)
@@ -145,7 +145,7 @@ public class IsometricMapGenerator : MonoBehaviour
         foreach (Tile tile in tiles)
         {
             tile.concluded = true;
-        } 
+        }
     }
 
     private Tile GetTileAtPosition(int x, int y)
@@ -172,7 +172,7 @@ public class IsometricMapGenerator : MonoBehaviour
             Box box = boxObj.GetComponent<Box>();
             box.Initialize(position);
             boxesMatrix[position.y, position.x] = box;
-            
+
             // Posiciona corretamente
             RectTransform boxRect = boxObj.GetComponent<RectTransform>();
             RectTransform tileRect = GetTileRect(position);
@@ -212,7 +212,7 @@ public class IsometricMapGenerator : MonoBehaviour
     {
         return mapMatrix[position.y, position.x] == (int)Constants.TileType.InfectedData;
     }
-    
+
 
     public bool CanPlaceBoxAt(Vector2Int position)
     {

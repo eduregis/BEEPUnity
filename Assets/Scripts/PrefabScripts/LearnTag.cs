@@ -9,12 +9,12 @@ public class LearnTag : MonoBehaviour
     public Button button;
     public Image lightLine;
     public Color color;
-    
+
     void Start()
     {
         lightLine.color = color;
     }
-  
+
     public void SetColor(Color newColor)
     {
         color = newColor;

@@ -40,7 +40,7 @@ public class PhaseDataEditor : Editor
                     phaseData.mapData.Add(matrix[y, x]);
                 }
             }
-            
+
             EditorUtility.SetDirty(phaseData);
         }
     }
