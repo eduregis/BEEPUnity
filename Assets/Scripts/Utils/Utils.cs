@@ -36,6 +36,18 @@ public static class Utils
 
     public static int CalculateIsoDepth(Vector2Int position, int layerOffset = 0)
     {
-        return -(position.x + position.y) * 10 + layerOffset;
+        return position.x + position.y + layerOffset;
+    }
+
+    public static void ApplyIsoDepth(GameObject obj, Vector2Int position, int layerOffset = 0)
+    {
+        Canvas canvas = obj.GetComponent<Canvas>();
+        if (canvas == null)
+        {
+            canvas = obj.AddComponent<Canvas>();
+        }
+
+        canvas.overrideSorting = true;
+        canvas.sortingOrder = CalculateIsoDepth(position, layerOffset);
     }
 }

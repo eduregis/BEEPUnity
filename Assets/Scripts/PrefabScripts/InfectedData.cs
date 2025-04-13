@@ -20,8 +20,7 @@ public class InfectedData : MonoBehaviour
     {
         gridPosition = position;
 
-        int depth = Utils.CalculateIsoDepth(position, 1);
-        transform.SetSiblingIndex(depth);
+        Utils.ApplyIsoDepth(gameObject, position, 1);
 
         GetComponent<RectTransform>().anchoredPosition =
         IsometricMapGenerator.Instance.GetTileRect(position)?.anchoredPosition +

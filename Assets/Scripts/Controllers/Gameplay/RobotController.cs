@@ -55,9 +55,7 @@ public class RobotController : MonoBehaviour
 
     private void UpdateDepth()
     {
-        int depth = Utils.CalculateIsoDepth(currentPosition, 2);
-        transform.SetSiblingIndex(depth);
-        Canvas.ForceUpdateCanvases();
+        Utils.ApplyIsoDepth(gameObject, currentPosition, 2);
     }
 
     // Atualiza a posição do robô no mundo isométrico com base na posição na matriz
@@ -184,6 +182,10 @@ public class RobotController : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = CalculateWorldPosition(newPosition);
 
+        // Atualiza a posição atual na matriz
+        currentPosition = newPosition;
+        UpdateDepth();
+
         // Move o robô suavemente até a posição de destino
         float elapsedTime = 0f;
         float duration = 1.0f / commandSpeed; // Ajusta a duração com base na velocidade
@@ -197,10 +199,6 @@ public class RobotController : MonoBehaviour
 
         // Garante que o robô chegue exatamente na posição de destino
         transform.position = targetPosition;
-
-        // Atualiza a posição atual na matriz
-        currentPosition = newPosition;
-        UpdateDepth();
     }
 
     // Calcula a posição no mundo isométrico com base na posição na matriz
