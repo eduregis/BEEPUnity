@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalSounds:
   - {fileID: 11400000, guid: e1b8dc5243bf9d347923d3163a77e7cf, type: 2}
+  - {fileID: 11400000, guid: 8b8e4d52037d5134596f130c7c40ba42, type: 2}
   - {fileID: 11400000, guid: abf7c3c41e2480e428cefd178084a4ff, type: 2}
   - {fileID: 11400000, guid: 10fc782a8e9c3c9469d8beec1dae496d, type: 2}
   - {fileID: 11400000, guid: 0b5cfda1d02e3d24fb0da51d1e6f5258, type: 2}
@@ -56,3 +57,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a701f95e0f895cf42bfdaf9f7c3cecef, type: 2}
   - {fileID: 11400000, guid: b5c347ee5bfa3624faa9a94b050598f6, type: 2}
   - {fileID: 11400000, guid: 4aa47f687013ba84ab829a89e06c166f, type: 2}
+  - {fileID: 11400000, guid: 709f943802fb239438eb1de451b51577, type: 2}
+  - {fileID: 11400000, guid: 3a2ca43db589f024cb19268aa4482b64, type: 2}

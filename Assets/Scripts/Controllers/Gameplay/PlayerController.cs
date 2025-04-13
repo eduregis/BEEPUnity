@@ -266,7 +266,7 @@ public class PlayerController : MonoBehaviour
             AppSettings.HighestUnlockedLevel++;
 
         IsometricMapGenerator.Instance.ConcludedPhase();
-
+        AudioManager.Instance.Play("concludedPhase");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("ChooseLevelScene");
     }

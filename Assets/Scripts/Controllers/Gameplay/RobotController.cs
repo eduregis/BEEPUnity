@@ -274,6 +274,7 @@ public class RobotController : MonoBehaviour
         {
             IsometricMapGenerator.Instance.RecoveringData(frontPosition);
             animator.SetBool("IsHealing", true);
+            AudioManager.Instance.Play("heal");
             UpdateAnimator(currentDirection);
         }
         yield return new WaitForSeconds(1.0f / commandSpeed);

@@ -10,6 +10,7 @@ public class Box : MonoBehaviour
         gridPosition = position;
         GetComponent<RectTransform>().anchoredPosition =
             IsometricMapGenerator.Instance.GetTileRect(position)?.anchoredPosition ?? Vector2.zero;
+        Utils.ApplyIsoDepth(gameObject, position, 1);
     }
 
     public void MoveTo(Vector2Int newPosition)
