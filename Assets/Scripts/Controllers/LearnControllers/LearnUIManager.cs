@@ -47,7 +47,7 @@ public class LearnUIManager : MonoBehaviour
     public void ShowFilteredItems(List<LearnData> items)
     {
         ClearContent();
-        
+
         foreach (var item in items)
         {
             var button = Instantiate(_learnButtonPrefab, _contentParent);
@@ -67,7 +67,7 @@ public class LearnUIManager : MonoBehaviour
         {
             canvasGroup = button.gameObject.AddComponent<CanvasGroup>();
         }
-        
+
         canvasGroup.alpha = 0;
         canvasGroup.DOFade(1, _buttonFadeInDuration).SetEase(Ease.OutQuad);
     }
@@ -87,7 +87,7 @@ public class LearnUIManager : MonoBehaviour
         _scrollRect.verticalNormalizedPosition = 1;
     }
 
-   public void DisplayLearnData(LearnData data)
+    public void DisplayLearnData(LearnData data)
     {
         if (data == null)
         {
@@ -96,7 +96,7 @@ public class LearnUIManager : MonoBehaviour
         }
 
         AudioManager.Instance.Play("defaultButton");
-        
+
         _learnDisplayPanel.SetActive(true);
         // Preenche os conteúdos
         _titleText.text = data.title;
@@ -113,12 +113,12 @@ public class LearnUIManager : MonoBehaviour
         // Se não houver sprites, esconde a imagem
         if (data == null || data.sprites == null || data.sprites.Length == 0)
         {
-            SetImageAlpha(0f);
+            ToggleIcon(false);
             return;
         }
 
         // Mostra a imagem e inicia a animação em loop
-        SetImageAlpha(1f);
+        ToggleIcon(true);
         currentAnimation = StartCoroutine(PlayAnimationLoop(data.sprites));
     }
 
@@ -143,14 +143,9 @@ public class LearnUIManager : MonoBehaviour
         }
     }
 
-    private void SetImageAlpha(float alpha)
+    private void ToggleIcon(bool hasIcon)
     {
-        if (_iconImage != null)
-        {
-            Color newColor = _iconImage.color;
-            newColor.a = alpha;
-            _iconImage.color = newColor;
-        }
+        _iconContainer.gameObject.SetActive(hasIcon);
     }
 
     // Método para parar a animação manualmente (opcional)
